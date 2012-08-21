@@ -7,9 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		495805B914C57683002AC459 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495805B814C57683002AC459 /* SenTestingKit.framework */; };
+		495805BB14C57683002AC459 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495805BA14C57683002AC459 /* Cocoa.framework */; };
+		495805C514C57683002AC459 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 495805C314C57683002AC459 /* InfoPlist.strings */; };
+		495805C814C57683002AC459 /* RendererTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 495805C714C57683002AC459 /* RendererTests.m */; };
+		4969251114E3C88D00FB3BCB /* FrameBufferTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4969250D14E3C88D00FB3BCB /* FrameBufferTest.m */; };
+		4969251214E3C88D00FB3BCB /* MathTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4969251014E3C88D00FB3BCB /* MathTest.m */; };
 		498BCE271471073700B4ED2C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498BCE261471073700B4ED2C /* Foundation.framework */; };
-		498BCE2A1471073700B4ED2C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE291471073700B4ED2C /* main.m */; };
+		498BCE2A1471073700B4ED2C /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE291471073700B4ED2C /* main.mm */; };
 		498BCE2E1471073700B4ED2C /* Renderer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 498BCE2D1471073700B4ED2C /* Renderer.1 */; };
+		498BCE37147107B000B4ED2C /* SceneObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE36147107B000B4ED2C /* SceneObject.cpp */; };
+		498BCE3E1471091C00B4ED2C /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE3D1471091C00B4ED2C /* Renderer.mm */; };
+		498BCE421472505500B4ED2C /* SceneParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE411472505500B4ED2C /* SceneParser.m */; };
+		498BCE451472569400B4ED2C /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE441472569400B4ED2C /* Camera.m */; };
+		498BCE471476651000B4ED2C /* BasicTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE461476651000B4ED2C /* BasicTypes.cpp */; };
+		498BCE4D14766B4500B4ED2C /* FrameBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE4C14766B4500B4ED2C /* FrameBuffer.m */; };
+		49C5E1D614C6C76500E6D655 /* BasicTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C5E1D114C6C76500E6D655 /* BasicTypes.cpp */; };
+		49C5E1D714C6C76500E6D655 /* SceneObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C5E1D414C6C76500E6D655 /* SceneObject.cpp */; };
+		49C5E1E114C6C7B700E6D655 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5E1DA14C6C7B700E6D655 /* Camera.m */; };
+		49C5E1E214C6C7B700E6D655 /* FrameBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5E1DC14C6C7B700E6D655 /* FrameBuffer.m */; };
+		49C5E1E314C6C7B700E6D655 /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49C5E1DE14C6C7B700E6D655 /* Renderer.mm */; };
+		49C5E1E414C6C7B700E6D655 /* SceneParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5E1E014C6C7B700E6D655 /* SceneParser.m */; };
+		49D5135B1595A24B00C0ECAF /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49D5135A1595A24B00C0ECAF /* Sphere.cpp */; };
+		49D5135C1595A24B00C0ECAF /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49D5135A1595A24B00C0ECAF /* Sphere.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,14 +46,66 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		495805B714C57683002AC459 /* RendererTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RendererTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		495805B814C57683002AC459 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		495805BA14C57683002AC459 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		495805BD14C57683002AC459 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		495805BE14C57683002AC459 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		495805BF14C57683002AC459 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		495805C214C57683002AC459 /* RendererTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RendererTests-Info.plist"; sourceTree = "<group>"; };
+		495805C414C57683002AC459 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		495805C614C57683002AC459 /* RendererTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RendererTests.h; sourceTree = "<group>"; };
+		495805C714C57683002AC459 /* RendererTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RendererTests.m; sourceTree = "<group>"; };
+		495805C914C57683002AC459 /* RendererTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RendererTests-Prefix.pch"; sourceTree = "<group>"; };
+		4969250C14E3C88D00FB3BCB /* FrameBufferTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameBufferTest.h; sourceTree = "<group>"; };
+		4969250D14E3C88D00FB3BCB /* FrameBufferTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameBufferTest.m; sourceTree = "<group>"; };
+		4969250F14E3C88D00FB3BCB /* MathTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathTest.h; sourceTree = "<group>"; };
+		4969251014E3C88D00FB3BCB /* MathTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MathTest.m; sourceTree = "<group>"; };
 		498BCE221471073700B4ED2C /* Renderer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Renderer; sourceTree = BUILT_PRODUCTS_DIR; };
 		498BCE261471073700B4ED2C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		498BCE291471073700B4ED2C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		498BCE2C1471073700B4ED2C /* Renderer-Prefix.pch */ = {isa = PBXFileReference; path = "Renderer-Prefix.pch"; sourceTree = "<group>"; };
+		498BCE291471073700B4ED2C /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		498BCE2C1471073700B4ED2C /* Renderer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Renderer-Prefix.pch"; sourceTree = "<group>"; };
 		498BCE2D1471073700B4ED2C /* Renderer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Renderer.1; sourceTree = "<group>"; };
+		498BCE36147107B000B4ED2C /* SceneObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneObject.cpp; sourceTree = "<group>"; };
+		498BCE38147107BD00B4ED2C /* SceneObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneObject.h; sourceTree = "<group>"; };
+		498BCE3C1471091C00B4ED2C /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		498BCE3D1471091C00B4ED2C /* Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Renderer.mm; sourceTree = "<group>"; };
+		498BCE3F1472450900B4ED2C /* BasicTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTypes.h; sourceTree = "<group>"; };
+		498BCE401472505500B4ED2C /* SceneParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneParser.h; sourceTree = "<group>"; };
+		498BCE411472505500B4ED2C /* SceneParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneParser.m; sourceTree = "<group>"; };
+		498BCE431472569400B4ED2C /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		498BCE441472569400B4ED2C /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
+		498BCE461476651000B4ED2C /* BasicTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicTypes.cpp; sourceTree = "<group>"; };
+		498BCE4B14766B4500B4ED2C /* FrameBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameBuffer.h; sourceTree = "<group>"; };
+		498BCE4C14766B4500B4ED2C /* FrameBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameBuffer.m; sourceTree = "<group>"; };
+		498BCE4E14766C6100B4ED2C /* BasicTypesImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTypesImpl.h; sourceTree = "<group>"; };
+		49C5E1D114C6C76500E6D655 /* BasicTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicTypes.cpp; sourceTree = "<group>"; };
+		49C5E1D214C6C76500E6D655 /* BasicTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTypes.h; sourceTree = "<group>"; };
+		49C5E1D314C6C76500E6D655 /* BasicTypesImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTypesImpl.h; sourceTree = "<group>"; };
+		49C5E1D414C6C76500E6D655 /* SceneObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneObject.cpp; sourceTree = "<group>"; };
+		49C5E1D514C6C76500E6D655 /* SceneObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneObject.h; sourceTree = "<group>"; };
+		49C5E1D914C6C7B700E6D655 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		49C5E1DA14C6C7B700E6D655 /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
+		49C5E1DB14C6C7B700E6D655 /* FrameBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameBuffer.h; sourceTree = "<group>"; };
+		49C5E1DC14C6C7B700E6D655 /* FrameBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameBuffer.m; sourceTree = "<group>"; };
+		49C5E1DD14C6C7B700E6D655 /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		49C5E1DE14C6C7B700E6D655 /* Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Renderer.mm; sourceTree = "<group>"; };
+		49C5E1DF14C6C7B700E6D655 /* SceneParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneParser.h; sourceTree = "<group>"; };
+		49C5E1E014C6C7B700E6D655 /* SceneParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneParser.m; sourceTree = "<group>"; };
+		49D513581595A23E00C0ECAF /* Sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sphere.h; sourceTree = "<group>"; };
+		49D5135A1595A24B00C0ECAF /* Sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sphere.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		495805B314C57683002AC459 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				495805B914C57683002AC459 /* SenTestingKit.framework in Frameworks */,
+				495805BB14C57683002AC459 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		498BCE1F1471073700B4ED2C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -45,10 +117,73 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		495805BC14C57683002AC459 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				495805BD14C57683002AC459 /* AppKit.framework */,
+				495805BE14C57683002AC459 /* CoreData.framework */,
+				495805BF14C57683002AC459 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		495805C014C57683002AC459 /* RendererTests */ = {
+			isa = PBXGroup;
+			children = (
+				4969250A14E3C88D00FB3BCB /* UnitTest */,
+				49C5E1D814C6C7B700E6D655 /* Framework */,
+				49C5E1D014C6C76500E6D655 /* Common */,
+				495805C614C57683002AC459 /* RendererTests.h */,
+				495805C714C57683002AC459 /* RendererTests.m */,
+				495805C114C57683002AC459 /* Supporting Files */,
+			);
+			path = RendererTests;
+			sourceTree = "<group>";
+		};
+		495805C114C57683002AC459 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				495805C214C57683002AC459 /* RendererTests-Info.plist */,
+				495805C314C57683002AC459 /* InfoPlist.strings */,
+				495805C914C57683002AC459 /* RendererTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4969250A14E3C88D00FB3BCB /* UnitTest */ = {
+			isa = PBXGroup;
+			children = (
+				4969250B14E3C88D00FB3BCB /* Framework */,
+				4969250E14E3C88D00FB3BCB /* Math */,
+			);
+			path = UnitTest;
+			sourceTree = SOURCE_ROOT;
+		};
+		4969250B14E3C88D00FB3BCB /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				4969250C14E3C88D00FB3BCB /* FrameBufferTest.h */,
+				4969250D14E3C88D00FB3BCB /* FrameBufferTest.m */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		4969250E14E3C88D00FB3BCB /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				4969250F14E3C88D00FB3BCB /* MathTest.h */,
+				4969251014E3C88D00FB3BCB /* MathTest.m */,
+			);
+			path = Math;
+			sourceTree = "<group>";
+		};
 		498BCE171471073700B4ED2C = {
 			isa = PBXGroup;
 			children = (
+				498BCE341471078500B4ED2C /* Common */,
+				498BCE351471078500B4ED2C /* Framework */,
 				498BCE281471073700B4ED2C /* Renderer */,
+				495805C014C57683002AC459 /* RendererTests */,
 				498BCE251471073700B4ED2C /* Frameworks */,
 				498BCE231471073700B4ED2C /* Products */,
 			);
@@ -58,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				498BCE221471073700B4ED2C /* Renderer */,
+				495805B714C57683002AC459 /* RendererTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,6 +202,9 @@
 			isa = PBXGroup;
 			children = (
 				498BCE261471073700B4ED2C /* Foundation.framework */,
+				495805B814C57683002AC459 /* SenTestingKit.framework */,
+				495805BA14C57683002AC459 /* Cocoa.framework */,
+				495805BC14C57683002AC459 /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -73,7 +212,7 @@
 		498BCE281471073700B4ED2C /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
-				498BCE291471073700B4ED2C /* main.m */,
+				498BCE291471073700B4ED2C /* main.mm */,
 				498BCE2D1471073700B4ED2C /* Renderer.1 */,
 				498BCE2B1471073700B4ED2C /* Supporting Files */,
 			);
@@ -88,9 +227,107 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		498BCE341471078500B4ED2C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				498BCE4A147669CA00B4ED2C /* SceneObjects */,
+				498BCE49147669C200B4ED2C /* Math */,
+				498BCE3F1472450900B4ED2C /* BasicTypes.h */,
+				498BCE461476651000B4ED2C /* BasicTypes.cpp */,
+				498BCE4E14766C6100B4ED2C /* BasicTypesImpl.h */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		498BCE351471078500B4ED2C /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				498BCE48147668FE00B4ED2C /* FrameBuffer */,
+				498BCE3C1471091C00B4ED2C /* Renderer.h */,
+				498BCE3D1471091C00B4ED2C /* Renderer.mm */,
+				498BCE401472505500B4ED2C /* SceneParser.h */,
+				498BCE411472505500B4ED2C /* SceneParser.m */,
+				498BCE431472569400B4ED2C /* Camera.h */,
+				498BCE441472569400B4ED2C /* Camera.m */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		498BCE48147668FE00B4ED2C /* FrameBuffer */ = {
+			isa = PBXGroup;
+			children = (
+				498BCE4B14766B4500B4ED2C /* FrameBuffer.h */,
+				498BCE4C14766B4500B4ED2C /* FrameBuffer.m */,
+			);
+			name = FrameBuffer;
+			sourceTree = "<group>";
+		};
+		498BCE49147669C200B4ED2C /* Math */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Math;
+			sourceTree = "<group>";
+		};
+		498BCE4A147669CA00B4ED2C /* SceneObjects */ = {
+			isa = PBXGroup;
+			children = (
+				498BCE36147107B000B4ED2C /* SceneObject.cpp */,
+				498BCE38147107BD00B4ED2C /* SceneObject.h */,
+				49D513581595A23E00C0ECAF /* Sphere.h */,
+				49D5135A1595A24B00C0ECAF /* Sphere.cpp */,
+			);
+			name = SceneObjects;
+			sourceTree = "<group>";
+		};
+		49C5E1D014C6C76500E6D655 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				49C5E1D114C6C76500E6D655 /* BasicTypes.cpp */,
+				49C5E1D214C6C76500E6D655 /* BasicTypes.h */,
+				49C5E1D314C6C76500E6D655 /* BasicTypesImpl.h */,
+				49C5E1D414C6C76500E6D655 /* SceneObject.cpp */,
+				49C5E1D514C6C76500E6D655 /* SceneObject.h */,
+			);
+			path = Common;
+			sourceTree = SOURCE_ROOT;
+		};
+		49C5E1D814C6C7B700E6D655 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				49C5E1D914C6C7B700E6D655 /* Camera.h */,
+				49C5E1DA14C6C7B700E6D655 /* Camera.m */,
+				49C5E1DB14C6C7B700E6D655 /* FrameBuffer.h */,
+				49C5E1DC14C6C7B700E6D655 /* FrameBuffer.m */,
+				49C5E1DD14C6C7B700E6D655 /* Renderer.h */,
+				49C5E1DE14C6C7B700E6D655 /* Renderer.mm */,
+				49C5E1DF14C6C7B700E6D655 /* SceneParser.h */,
+				49C5E1E014C6C7B700E6D655 /* SceneParser.m */,
+			);
+			path = Framework;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		495805B614C57683002AC459 /* RendererTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 495805CA14C57683002AC459 /* Build configuration list for PBXNativeTarget "RendererTests" */;
+			buildPhases = (
+				495805B214C57683002AC459 /* Sources */,
+				495805B314C57683002AC459 /* Frameworks */,
+				495805B414C57683002AC459 /* Resources */,
+				495805B514C57683002AC459 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RendererTests;
+			productName = RendererTests;
+			productReference = 495805B714C57683002AC459 /* RendererTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		498BCE211471073700B4ED2C /* Renderer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 498BCE311471073700B4ED2C /* Build configuration list for PBXNativeTarget "Renderer" */;
@@ -129,22 +366,109 @@
 			projectRoot = "";
 			targets = (
 				498BCE211471073700B4ED2C /* Renderer */,
+				495805B614C57683002AC459 /* RendererTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		495805B414C57683002AC459 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				495805C514C57683002AC459 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		495805B514C57683002AC459 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		495805B214C57683002AC459 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				495805C814C57683002AC459 /* RendererTests.m in Sources */,
+				49C5E1D614C6C76500E6D655 /* BasicTypes.cpp in Sources */,
+				49C5E1D714C6C76500E6D655 /* SceneObject.cpp in Sources */,
+				49C5E1E114C6C7B700E6D655 /* Camera.m in Sources */,
+				49C5E1E214C6C7B700E6D655 /* FrameBuffer.m in Sources */,
+				49C5E1E314C6C7B700E6D655 /* Renderer.mm in Sources */,
+				49C5E1E414C6C7B700E6D655 /* SceneParser.m in Sources */,
+				4969251114E3C88D00FB3BCB /* FrameBufferTest.m in Sources */,
+				4969251214E3C88D00FB3BCB /* MathTest.m in Sources */,
+				49D5135C1595A24B00C0ECAF /* Sphere.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		498BCE1E1471073700B4ED2C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				498BCE2A1471073700B4ED2C /* main.m in Sources */,
+				498BCE2A1471073700B4ED2C /* main.mm in Sources */,
+				498BCE37147107B000B4ED2C /* SceneObject.cpp in Sources */,
+				498BCE3E1471091C00B4ED2C /* Renderer.mm in Sources */,
+				498BCE421472505500B4ED2C /* SceneParser.m in Sources */,
+				498BCE451472569400B4ED2C /* Camera.m in Sources */,
+				498BCE471476651000B4ED2C /* BasicTypes.cpp in Sources */,
+				498BCE4D14766B4500B4ED2C /* FrameBuffer.m in Sources */,
+				49D5135B1595A24B00C0ECAF /* Sphere.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		495805C314C57683002AC459 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				495805C414C57683002AC459 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		495805CB14C57683002AC459 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RendererTests/RendererTests-Prefix.pch";
+				INFOPLIST_FILE = "RendererTests/RendererTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		495805CC14C57683002AC459 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RendererTests/RendererTests-Prefix.pch";
+				INFOPLIST_FILE = "RendererTests/RendererTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		498BCE2F1471073700B4ED2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -195,7 +519,9 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Renderer/Renderer-Prefix.pch";
+				"HEADER_SEARCH_PATHS[arch=*]" = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = "../Framework;../Common";
 			};
 			name = Debug;
 		};
@@ -205,12 +531,22 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Renderer/Renderer-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = "../Framework;../Common";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		495805CA14C57683002AC459 /* Build configuration list for PBXNativeTarget "RendererTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				495805CB14C57683002AC459 /* Debug */,
+				495805CC14C57683002AC459 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		498BCE1C1471073700B4ED2C /* Build configuration list for PBXProject "Renderer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -227,6 +563,7 @@
 				498BCE331471073700B4ED2C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
