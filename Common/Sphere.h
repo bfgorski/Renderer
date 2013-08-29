@@ -28,6 +28,11 @@ public:
     }
     
     float getRadius() const { return m_radius; }
+    const vec3& center() const { return m_pos;}
+    
+    virtual SOIntersectionType intersect(const Ray& r, SOIntersection* intersectionInfo);
+    
+    virtual bool intersect(const Ray& r, PointF& intersectionPoint);
     
 private:
     float m_radius;

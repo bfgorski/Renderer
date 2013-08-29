@@ -28,7 +28,7 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testFrameBuffer
 {
     //STFail(@"Unit tests are not implemented yet in RendererTests");
     //FrameBufferTest * fbt = [FrameBufferTest alloc];

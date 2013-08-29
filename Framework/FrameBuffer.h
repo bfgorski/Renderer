@@ -14,13 +14,24 @@
  */
 @interface FrameBuffer : NSObject
 {
-    int m_width;
-    int m_height;
 }
 
--(void) init: (unsigned int) width height: (unsigned int) height;
--(void) setPixel: (unsigned int) w height: (unsigned int) h pixel: (Pixel) p;
--(Pixel*) getPixel: (const unsigned int) w height: (const unsigned int) h;
--(Pixel*) getPixelPtr;
+@property (readonly) unsigned int width;
+@property (readonly) unsigned int height;
+
+-(FrameBuffer*) init: (unsigned int) width height: (unsigned int) height;
+-(void) setPixel: (unsigned int) w height: (unsigned int) h pixel: (Framework::Pixel) p;
+-(Framework::Pixel*) getPixel: (const unsigned int) w height: (const unsigned int) h;
+-(Framework::Pixel*) getPixelPtr;
+
+/**
+ * Save the framebuffer to a file.
+ *
+ * @param fileName -
+ * @param format -
+ * @param width -
+ * @param height -
+ */
+-(BOOL)exportToFile:(NSString*)fileName format:(NSString*)format width:(NSUInteger)width height:(NSUInteger)height;
 
 @end

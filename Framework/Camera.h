@@ -8,18 +8,39 @@
 
 #import <Foundation/Foundation.h>
 #import "BasicTypes.h"
+#import "Rectangle.h"
+
+using namespace Framework;
 
 @interface Camera : NSObject
 {
 }
 
-@property(readwrite, assign) float fov, aspectRatio, width, height;
+// Near clipping plane distance from camera point.
+@property(readwrite, assign) float nearPlane;
 
+// Field of view in degrees
+@property(readwrite, assign) float fov;
+
+// Aspect ratio of camera sceen with/height
+@property(readwrite, assign) float aspectRatio;
+
+// Position and look at direction
 @property(readwrite, assign) Ray posDir;
+
+// The up direction for the camera
+@property(readwrite, assign) VectorF up;
+
+// Focal point
 @property(readwrite, assign) PointF focalPoint;
 
 -(Camera*) init;
--(Camera*) init: (Ray) r Fov: (float) fov AspectRatio: (float) ar;
+
+/**
+ * Init camera with position, direction, up vector, field of view, aspect ratio and near plane.
+ *
+ */
+-(Camera*) init:(Ray) r upV:(VectorF)upV Fov:(float) fov AspectRatio:(float) ar nearPlane:(float)nearPlane;
 
 -(void) setPos: (PointF) p;
 -(PointF) getPos;
@@ -28,5 +49,10 @@
 -(VectorF) getDir;
 
 -(void) setPosDir: (PointF) p Dir: (VectorF) v;
+
+/**
+ * Return a Quad that describes the near plane.
+ */
+-(Rectangle) getNearPlane;
 
 @end

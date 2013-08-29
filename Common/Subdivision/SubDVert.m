@@ -10,6 +10,51 @@
 
 @implementation SubDVert
 
+@synthesize Index=m_index;
+
+
+-(float) getX {
+    return [self getComp:SUB_D_VERT_X];
+}
+
+-(void) setX:(float)X {
+    m_pos[SUB_D_VERT_X] = X;
+}
+
+-(float) getY {
+    return [self getComp:SUB_D_VERT_Y];
+}
+
+-(void) setY:(float)Y {
+    m_pos[SUB_D_VERT_Y] = Y;
+}
+
+-(float) getZ {
+    return [self getComp:SUB_D_VERT_Z];
+}
+
+-(void) setZ:(float)Z {
+    m_pos[SUB_D_VERT_Z] = Z;
+}
+
+-(float) getW {
+    return [self getComp:SUB_D_VERT_W];
+}
+
+-(void) setW:(float)W {
+    m_pos[SUB_D_VERT_W] = W;
+}
+
+-(float) getComp:(const unsigned int) compIndex
+{
+    return m_pos[compIndex];
+}
+
+-(void) setComp:(const unsigned int)compIndex value:(float)v
+{
+    m_pos[compIndex] = v;
+}
+
 -(float*) getPos
 {
     return m_pos;
@@ -42,4 +87,9 @@
     m_pos[3] = w;
 }
 
+-(void) print {
+    NSLog(@"V %d %.2f %.2f %.2f %.2f\n",
+          self->m_index, m_pos[0], m_pos[1], m_pos[2], m_pos[3]
+    );
+}
 @end
