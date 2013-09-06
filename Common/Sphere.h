@@ -22,6 +22,8 @@ public:
     Sphere& operator=(const Sphere&);
     virtual ~Sphere();
     
+    
+    
     void setRadius(const float r) { m_radius = r; }
     void setPos(const vec3& v) { 
         m_pos = v;
@@ -30,9 +32,9 @@ public:
     float getRadius() const { return m_radius; }
     const vec3& center() const { return m_pos;}
     
-    virtual SOIntersectionType intersect(const Ray& r, SOIntersection* intersectionInfo);
+    virtual SOIntersectionType intersect(const Ray& r, SOIntersection* intersectionInfo) const ;
     
-    virtual bool intersect(const Ray& r, PointF& intersectionPoint);
+    virtual SOIntersectionType intersect(const Ray& r, PointF& intersectionPoint) const;
     
 private:
     float m_radius;

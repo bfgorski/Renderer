@@ -8,32 +8,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "Framework/Renderer.h"
-         timestampString = "342954700.025637"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "8"
-         endingLineNumber = "8">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Framework/Renderer.h"
-         timestampString = "342955412.215577"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "16"
-         endingLineNumber = "16"
-         landmarkName = "name"
-         landmarkType = "19">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "Framework/Camera.m"
          timestampString = "343043328.26007"
          startingColumnNumber = "9223372036854775807"
@@ -126,19 +100,6 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Common/SOIntersection.cpp"
-         timestampString = "395987569.192427"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "16"
-         endingLineNumber = "16"
-         landmarkName = "SOIntersection::set(SceneObject *so, const PointF &amp;i, const VectorF &amp;n, SOIntersectionType type)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "UnitTest/Common:SceneObjects/SceneObjectTests.m"
          timestampString = "396084808.45291"
          startingColumnNumber = "9223372036854775807"
@@ -179,11 +140,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UnitTest/Common:SceneObjects/SceneObjectTests.mm"
-         timestampString = "396861709.437266"
+         timestampString = "399975053.448322"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
+         startingLineNumber = "69"
+         endingLineNumber = "69"
          landmarkName = "-testPointLight"
          landmarkType = "5">
       </FileBreakpoint>
@@ -203,11 +164,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Framework/Renderer.mm"
-         timestampString = "399283020.167285"
+         timestampString = "400142499.562524"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "84"
-         endingLineNumber = "84"
+         startingLineNumber = "94"
+         endingLineNumber = "94"
          landmarkName = "-render:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -229,7 +190,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UnitTest/Framework/FrameBufferTest.mm"
-         timestampString = "399282605.88742"
+         timestampString = "399459008.01727"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "57"
@@ -238,16 +199,94 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Framework/Renderer.mm"
-         timestampString = "399457809.868666"
+         filePath = "Common/Scene.cpp"
+         timestampString = "400138952.099288"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "116"
-         endingLineNumber = "116"
-         landmarkName = "-render:"
+         startingLineNumber = "61"
+         endingLineNumber = "61"
+         landmarkName = "Scene::traceRay(const Framework::Ray&amp; r)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Common/Scene.cpp"
+         timestampString = "400145555.290632"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "46"
+         endingLineNumber = "46"
+         landmarkName = "Scene::traceRay(const Framework::Ray&amp; r)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Common/Scene.cpp"
+         timestampString = "400138952.099288"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "52"
+         endingLineNumber = "52"
+         landmarkName = "Scene::traceRay(const Framework::Ray&amp; r)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Framework/FrameBuffer.mm"
+         timestampString = "400141695.140473"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "98"
+         endingLineNumber = "98"
+         landmarkName = "-exportToFile:format:width:height:options:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Common/SceneObjects/Plane.cpp"
+         timestampString = "400132629.336816"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "92"
+         endingLineNumber = "92"
+         landmarkName = "Plane::planeIntersect(const Ray &amp;r, PointF &amp;intersectionPoint)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Common/SceneObjects/Plane.cpp"
+         timestampString = "400143802.705354"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "93"
+         endingLineNumber = "93"
+         landmarkName = "Plane::planeIntersect(const Ray &amp;r, PointF &amp;intersectionPoint)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Common/Scene.cpp"
+         timestampString = "400143904.082681"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "58"
+         endingLineNumber = "58"
+         landmarkName = "Scene::traceRay(const Framework::Ray&amp; r)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

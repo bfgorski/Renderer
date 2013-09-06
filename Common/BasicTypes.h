@@ -49,17 +49,27 @@ enum {
     A = 3
 };
 
+struct vec2 {
+    float v[2];
+};
+    
+typedef struct vec2 vec2;
+    
 struct vec4 {
     float v[4];
 };
 
 typedef struct vec4 vec4;
-
-typedef struct vec4 ProjPointF;
+    
+typedef vec4 ProjPointF;
 typedef vec3 PointF;
 typedef vec3 VectorF;
 typedef vec3 Normal;
-
+typedef vec3 Tangent;
+typedef vec2 TexCoord2;
+typedef vec3 TexCoord3;
+typedef vec4 TexCoord4;
+    
 /**
  * RGBA color
  */
@@ -84,8 +94,13 @@ struct Color {
         return (*this);
     }
     
-    void scale(const float s) {
-        c[0] *= s; c[1] *= 2; c[2] *= s; c[3] *= s;
+    /**
+     * Scale RGB not A.
+     * 
+     * @param float s Scale factor for RGB components.
+     */
+    void scale(const float scale) {
+        c[0] *= scale; c[1] *= scale; c[2] *= scale;
     }
     
     /**

@@ -12,10 +12,6 @@
 int main (int argc, const char * argv[])
 {
     @autoreleasepool {
-        
-        // insert code here...
-        NSLog(@"Hello, World!");
-        
         Renderer * myRenderer = [Renderer alloc];
         [myRenderer init: @"Bens Renderer"];
         [myRenderer render: NULL];

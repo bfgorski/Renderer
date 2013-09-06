@@ -41,9 +41,9 @@ public:
     /**
      * Determine if the indicated Ray "sees" the light.
      */
-    virtual SOIntersectionType intersect(const Ray& r, SOIntersection* intersectionInfo) { return SOIntersectionNone; }
+    virtual SOIntersectionType intersect(const Ray& r, SOIntersection* intersectionInfo) const { return SOIntersectionNone; }
     
-    virtual bool intersect(const Ray& r, PointF& intersectionPoint) { return false; }
+    virtual SOIntersectionType intersect(const Ray& r, PointF& intersectionPoint) const { return SOIntersectionNone; }
     
     /**
      * Compute the intensity of the light.
@@ -57,7 +57,7 @@ public:
      *
      * @return bool true/false indicating whether or not the result can be ignored.
      */
-    virtual bool illuminate(const PointF& p, const VectorF& n, const PointF& eye, const float pToLVisibility, const SceneObject* obj, IlluminateResult& result) = 0;
+    virtual bool illuminate(const PointF& p, const VectorF& n, const PointF& eye, const float pToLVisibility, const SceneObject* obj, IlluminateResult& result) const = 0;
 private:
     
     Color m_ambient;

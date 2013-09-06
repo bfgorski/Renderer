@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		495805B914C57683002AC459 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495805B814C57683002AC459 /* SenTestingKit.framework */; };
-		495805BB14C57683002AC459 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495805BA14C57683002AC459 /* Cocoa.framework */; };
 		495805C514C57683002AC459 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 495805C314C57683002AC459 /* InfoPlist.strings */; };
 		495805C814C57683002AC459 /* RendererTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 495805C714C57683002AC459 /* RendererTests.mm */; };
 		4969251114E3C88D00FB3BCB /* FrameBufferTest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4969250D14E3C88D00FB3BCB /* FrameBufferTest.mm */; };
@@ -29,8 +28,14 @@
 		498954E117A10EFC0036F5AE /* PointLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954DE17A10EFB0036F5AE /* PointLightSource.cpp */; };
 		498954E417C8A16E0036F5AE /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498954E317C8A16C0036F5AE /* ImageIO.framework */; };
 		498954E517C8A17E0036F5AE /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498954E317C8A16C0036F5AE /* ImageIO.framework */; };
-		498954E717CC92530036F5AE /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498954E617CC92520036F5AE /* AppKit.framework */; };
 		498954E817CC92770036F5AE /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495805BD14C57683002AC459 /* AppKit.framework */; };
+		498954EA17CF41590036F5AE /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495805BD14C57683002AC459 /* AppKit.framework */; };
+		498954EC17CF42990036F5AE /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498954E617CC92520036F5AE /* AppKit.framework */; };
+		498954ED17CF429A0036F5AE /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498954E617CC92520036F5AE /* AppKit.framework */; };
+		498954F017D1B3DB0036F5AE /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954EE17D1B3D90036F5AE /* Plane.cpp */; };
+		498954F117D1B3DB0036F5AE /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954EE17D1B3D90036F5AE /* Plane.cpp */; };
+		498954F417D9AF750036F5AE /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954F217D9AF720036F5AE /* Material.cpp */; };
+		498954F517D9AF750036F5AE /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954F217D9AF720036F5AE /* Material.cpp */; };
 		498BCE271471073700B4ED2C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498BCE261471073700B4ED2C /* Foundation.framework */; };
 		498BCE2A1471073700B4ED2C /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE291471073700B4ED2C /* main.mm */; };
 		498BCE2E1471073700B4ED2C /* Renderer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 498BCE2D1471073700B4ED2C /* Renderer.1 */; };
@@ -91,6 +96,10 @@
 		498954E217AA3B3B0036F5AE /* Rectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rectangle.h; sourceTree = "<group>"; };
 		498954E317C8A16C0036F5AE /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		498954E617CC92520036F5AE /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		498954EE17D1B3D90036F5AE /* Plane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Plane.cpp; path = SceneObjects/Plane.cpp; sourceTree = "<group>"; };
+		498954EF17D1B3DB0036F5AE /* Plane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Plane.h; path = SceneObjects/Plane.h; sourceTree = "<group>"; };
+		498954F217D9AF720036F5AE /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Material.cpp; path = Materials/Material.cpp; sourceTree = "<group>"; };
+		498954F317D9AF740036F5AE /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Material.h; path = Materials/Material.h; sourceTree = "<group>"; };
 		498BCE221471073700B4ED2C /* Renderer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Renderer; sourceTree = BUILT_PRODUCTS_DIR; };
 		498BCE261471073700B4ED2C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		498BCE291471073700B4ED2C /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -128,11 +137,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				498954E717CC92530036F5AE /* AppKit.framework in Frameworks */,
 				498954E417C8A16E0036F5AE /* ImageIO.framework in Frameworks */,
 				495805B914C57683002AC459 /* SenTestingKit.framework in Frameworks */,
-				495805BB14C57683002AC459 /* Cocoa.framework in Frameworks */,
 				498954E817CC92770036F5AE /* AppKit.framework in Frameworks */,
+				498954ED17CF429A0036F5AE /* AppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +150,8 @@
 			files = (
 				498954E517C8A17E0036F5AE /* ImageIO.framework in Frameworks */,
 				498BCE271471073700B4ED2C /* Foundation.framework in Frameworks */,
+				498954EA17CF41590036F5AE /* AppKit.framework in Frameworks */,
+				498954EC17CF42990036F5AE /* AppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,10 +249,27 @@
 			name = Lights;
 			sourceTree = "<group>";
 		};
+		498954F617D9AF970036F5AE /* Materials */ = {
+			isa = PBXGroup;
+			children = (
+				498954F217D9AF720036F5AE /* Material.cpp */,
+				498954F317D9AF740036F5AE /* Material.h */,
+			);
+			name = Materials;
+			sourceTree = "<group>";
+		};
+		498954F717D9B0C20036F5AE /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				498BCE431472569400B4ED2C /* Camera.h */,
+				498BCE441472569400B4ED2C /* Camera.mm */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
 		498BCE171471073700B4ED2C = {
 			isa = PBXGroup;
 			children = (
-				498954E617CC92520036F5AE /* AppKit.framework */,
 				498BCE341471078500B4ED2C /* Common */,
 				498BCE351471078500B4ED2C /* Framework */,
 				498BCE281471073700B4ED2C /* Renderer */,
@@ -264,6 +291,7 @@
 		498BCE251471073700B4ED2C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				498954E617CC92520036F5AE /* AppKit.framework */,
 				498954E317C8A16C0036F5AE /* ImageIO.framework */,
 				498BCE261471073700B4ED2C /* Foundation.framework */,
 				495805B814C57683002AC459 /* SenTestingKit.framework */,
@@ -294,12 +322,14 @@
 		498BCE341471078500B4ED2C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				498954D9179E62130036F5AE /* Lights */,
 				498BCE4A147669CA00B4ED2C /* SceneObjects */,
 				498BCE49147669C200B4ED2C /* Math */,
 				498BCE3F1472450900B4ED2C /* BasicTypes.h */,
 				498BCE461476651000B4ED2C /* BasicTypesImpl.cpp */,
 				498BCE4E14766C6100B4ED2C /* BasicTypesImpl.h */,
 				498954E217AA3B3B0036F5AE /* Rectangle.h */,
+				498954F617D9AF970036F5AE /* Materials */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -307,13 +337,12 @@
 		498BCE351471078500B4ED2C /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				498954F717D9B0C20036F5AE /* Camera */,
 				498BCE48147668FE00B4ED2C /* FrameBuffer */,
 				498BCE3C1471091C00B4ED2C /* Renderer.h */,
 				498BCE3D1471091C00B4ED2C /* Renderer.mm */,
 				498BCE401472505500B4ED2C /* SceneParser.h */,
 				498BCE411472505500B4ED2C /* SceneParser.m */,
-				498BCE431472569400B4ED2C /* Camera.h */,
-				498BCE441472569400B4ED2C /* Camera.mm */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -345,7 +374,8 @@
 				49D5135A1595A24B00C0ECAF /* Sphere.cpp */,
 				498954C817952ACA0036F5AE /* SOIntersection.cpp */,
 				498954C917952ACA0036F5AE /* SOIntersection.h */,
-				498954D9179E62130036F5AE /* Lights */,
+				498954EE17D1B3D90036F5AE /* Plane.cpp */,
+				498954EF17D1B3DB0036F5AE /* Plane.h */,
 			);
 			name = SceneObjects;
 			sourceTree = "<group>";
@@ -486,6 +516,8 @@
 				498954D8179E61F60036F5AE /* LightSource.cpp in Sources */,
 				498954DD179E6F730036F5AE /* IlluminateResult.cpp in Sources */,
 				498954E117A10EFC0036F5AE /* PointLightSource.cpp in Sources */,
+				498954F117D1B3DB0036F5AE /* Plane.cpp in Sources */,
+				498954F517D9AF750036F5AE /* Material.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +538,8 @@
 				498954D7179E61F60036F5AE /* LightSource.cpp in Sources */,
 				498954DC179E6F730036F5AE /* IlluminateResult.cpp in Sources */,
 				498954E017A10EFC0036F5AE /* PointLightSource.cpp in Sources */,
+				498954F017D1B3DB0036F5AE /* Plane.cpp in Sources */,
+				498954F417D9AF750036F5AE /* Material.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +629,10 @@
 		498BCE321471073700B4ED2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Renderer/Renderer-Prefix.pch";
 				"HEADER_SEARCH_PATHS[arch=*]" = "";
@@ -607,6 +645,10 @@
 		498BCE331471073700B4ED2C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Renderer/Renderer-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";

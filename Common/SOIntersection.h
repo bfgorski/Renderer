@@ -12,8 +12,6 @@
 #include <iostream>
 #include "BasicTypes.h"
 
-class SceneObject;
-
 enum SOIntersectionType {
     SOIntersectionNone = 0,
     SOIntersectionEntering = 1,
@@ -21,19 +19,19 @@ enum SOIntersectionType {
 };
 
 namespace Framework {
+    class SceneObject;
+    
     class SOIntersection {
         
     public:
         SOIntersection() : m_so(NULL), m_intersection(), m_normal(), m_type(SOIntersectionNone){};
         ~SOIntersection() {};
-        //SOIntersection(const SOIntersection&);
-        //SOIntersection& operator=(const SOIntersection&);
         
-        void setObject(SceneObject *so) { m_so = so; }
+        void setObject(const SceneObject *so) { m_so = so; }
         void setPoint(const PointF& p) { m_intersection = p; }
         void setNormal(const VectorF& v) { m_normal = v; }
         void setType(const SOIntersectionType t) { m_type = t; }
-        void set(SceneObject *so, const PointF& i, const VectorF& n, SOIntersectionType type);
+        void set(const SceneObject *so, const PointF& i, const VectorF& n, SOIntersectionType type);
         
         const SceneObject * getObject() const { return m_so; }
         const PointF& getPoint() const { return m_intersection; }
@@ -41,7 +39,7 @@ namespace Framework {
         SOIntersectionType getType() const { return m_type; }
         
     private:
-        SceneObject * m_so;
+        const SceneObject * m_so;
         PointF m_intersection;
         VectorF m_normal;
         SOIntersectionType m_type;

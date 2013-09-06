@@ -38,7 +38,7 @@ Sphere::~Sphere()
 {
 }
 
-SOIntersectionType Sphere::intersect(const Ray& r, SOIntersection *intersectionInfo) {
+SOIntersectionType Sphere::intersect(const Ray& r, SOIntersection *intersectionInfo) const {
     PointF rayPos = r.pos;
     
     // if the ray starts inside the sphere move it outside
@@ -67,7 +67,6 @@ SOIntersectionType Sphere::intersect(const Ray& r, SOIntersection *intersectionI
     
     // determine which intersection point if any to take
     PointF nearInt = Math::vec3AXPlusB(r.getDir(), (rayLength - offsetLength), r.getPos());
-    //ray_position + r.direction() * (ray_length - offset_length) ;
     
     // first check to see if the near intesection is not behind the ray
     // this requires that we use the ray's original position
@@ -129,7 +128,7 @@ SOIntersectionType Sphere::intersect(const Ray& r, SOIntersection *intersectionI
     return (SOIntersectionNone) ;
 }
 
-bool Sphere::intersect(const Ray& r, PointF& intersectionPoint) {
+SOIntersectionType Sphere::intersect(const Ray& r, PointF& intersectionPoint) const {
     PointF rayPos = r.pos;
     
     // if the ray starts inside the sphere move it outside
@@ -142,14 +141,14 @@ bool Sphere::intersect(const Ray& r, PointF& intersectionPoint) {
     float d = Math::dot3(r.dir,v) ;
     
     if (d <= 0) {
-        return false;
+        return SOIntersectionNone;
     }
     
     float length = Math::vec3Len(v);
     float angle = asin(d/length);
     float distance = cos(angle)*length ;
     if (distance > getRadius()) {
-        return false;
+        return SOIntersectionNone;
     }
     
     float rayLength = sqrt(length*length - distance*distance) ;
@@ -162,7 +161,7 @@ bool Sphere::intersect(const Ray& r, PointF& intersectionPoint) {
     // this requires that we use the ray's original position
     if (Math::dot3(Math::vec3AMinusB(nearInt,r.pos), r.dir) >= 0) {
         intersectionPoint = nearInt;
-        return true;
+        return SOIntersectionEntering;
     }
     
     PointF farInt = Math::vec3AXPlusB(r.dir, (rayLength + offsetLength), rayPos);
@@ -170,9 +169,9 @@ bool Sphere::intersect(const Ray& r, PointF& intersectionPoint) {
     // check to se if the far intersection is valid
     if (Math::dot3(Math::vec3AMinusB(farInt, r.pos), r.dir) >= 0) {
         intersectionPoint = farInt;
-        return true;
+        return SOIntersectionLeaving;
     }
-    return false;
+    return SOIntersectionNone;
 }
 
 

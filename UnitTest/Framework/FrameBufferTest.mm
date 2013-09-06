@@ -8,7 +8,7 @@
 
 #import "FrameBufferTest.h"
 #import <Cocoa/Cocoa.h>
-//#import <NSBitmapImageRep.h>
+#import <AppKit/NSBitmapImageRep.h>
 
 using namespace Framework;
 

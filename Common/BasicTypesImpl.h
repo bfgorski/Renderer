@@ -12,7 +12,14 @@
 #include "BasicTypes.h"
 
 namespace Framework { namespace Math {
- 
+
+/**
+ * Return a*(1-t) * b*t
+ */
+float lerp(const float a, const float b, const float t);
+
+float clamp(const float value, const float min, const float max);
+    
 float min(const float a, const float b);
 float max(const float a, const float b);
     
@@ -20,6 +27,11 @@ float vec3Len(const vec3& v);
 float vec3Len(const vec4& v);
 float vec4Len(const vec4& v);
 
+/**
+ * Return the length squared.
+ */
+float vec3FastLen(const vec3& v);
+    
 void vec3Normalize(vec3& v);
 void vec4Normalize3(vec4& v);
 

@@ -32,7 +32,10 @@ using namespace Framework;
     SOIntersectionType t = so->intersect(r, &i);
     
     STAssertEquals(SOIntersectionEntering, t, @"Wrong Intersection Type");
-    
+}
+
+- (void)testPlane {
+    // test plane intersection
 }
 
 - (void)testPointLight {
@@ -64,7 +67,8 @@ using namespace Framework;
     bool b = pl.illuminate(testPoint, normal, eye, 1.0f, so, r);
     
     STAssertEquals(true, b, @"Bad Lighting Calculation");
-    
 }
+
+- 
 
 @end

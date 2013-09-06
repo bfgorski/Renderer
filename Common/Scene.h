@@ -19,6 +19,7 @@ namespace Framework {
 struct Ray;
 class LightSource;
 class SceneObject;
+class SOIntersection;
     
 typedef std::vector<LightSource*> LightList;
     
@@ -36,12 +37,26 @@ public :
     /**
      * Trace a ray through the scene and return a color.
      */
-    Color traceRay(const Ray&);
+    Color traceRay(const Ray& r) const;
+    
+    /**
+     * Trace a shadow ray from the given point to the indicated light source.
+     *
+     * @return The fraction of the light visible from the ray's position.
+     */
+    float traceShadowRay(const PointF& p, const LightSource& l) const;
     
     /**
      * Find the object that the ray intersects first.
+     * and recursively trace until the indicated depth is met.
+     * 
+     * @param intersectionInfo  Store intersected object and intersection point.
+     * @param depth
+     *
+     * @return Pointer to the closest object or NULL
      */
-    SceneObject* intersect(const Ray& r);
+    SceneObject* intersect(const Ray& r, SOIntersection* intersectionInfo = NULL, const unsigned int depth = 0) const;
+    
     
 private:
     PointF m_viewPoint;

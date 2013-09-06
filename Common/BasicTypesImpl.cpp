@@ -10,6 +10,17 @@
 
 namespace Framework { namespace Math {
     
+/**
+ * Return a*(1-t) * b*t
+ */
+float lerp(const float a, const float b, const float t) {
+    return (a + t*(b - a));
+}
+
+float clamp(const float value, const float min, const float max) {
+    return ((value > max) ? max : ((value < min) ? min : value));
+}
+    
 float min(const float a, const float b) {
     return ((a > b) ? b : a);
 }
@@ -28,6 +39,10 @@ float vec3Len(const vec4& v) {
 
 float vec4Len(const vec4& v) {
     return sqrt(dot4(v ,v));
+}
+
+float vec3FastLen(const vec3& v) {
+    return dot3(v,v);
 }
 
 void vec3Normalize(vec3& v) {

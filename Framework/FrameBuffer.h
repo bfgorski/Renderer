@@ -10,7 +10,7 @@
 #include "BasicTypes.h"
 
 /**
-    2D Framebuffer where top left is 0,0 and bottom right is (width-1), (height-1).
+    2D Framebuffer where bottom left is 0,0 and top right is (width-1), (height-1).
  */
 @interface FrameBuffer : NSObject
 {
@@ -31,7 +31,12 @@
  * @param format -
  * @param width -
  * @param height -
+ * @param options NSDictionary with save options
  */
--(BOOL)exportToFile:(NSString*)fileName format:(NSString*)format width:(NSUInteger)width height:(NSUInteger)height;
+-(BOOL)exportToFile:(NSString*)fileName
+             format:(NSString*)format
+              width:(NSUInteger)width
+             height:(NSUInteger)height
+            options:(NSDictionary*)options;
 
 @end

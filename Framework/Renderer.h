@@ -8,13 +8,8 @@
 
 
 @interface Renderer : NSObject
-{
-    NSString * m_name;
-    void * m_so;
-}
 
 @property(retain,atomic) NSString* name;
-
 
 -(void) init: (NSString*) name;
 -(void) render: (NSString **) options;

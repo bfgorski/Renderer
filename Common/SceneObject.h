@@ -33,19 +33,20 @@ public:
     void setPos(const PointF& p) { m_pos = p; }
     
     const std::string& getName() const { return m_name; }
-    const int getType() const { return 0; }
     const PointF& getPos() const { return m_pos; }
     
     /**
      * Determine if the indicated Ray intersects the object.
      */
-    virtual SOIntersectionType intersect(const Ray& r, SOIntersection* intersectionInfo) = 0;
+    virtual SOIntersectionType intersect(const Ray& r, SOIntersection* intersectionInfo) const = 0;
     
     /**
      * Determine if the indicated Ray intersects the object
      * and get the intersection point only.
+     *
+     * This is intended to be a fast check for intersection.
      */
-    virtual bool intersect(const Ray& r, PointF& intersectionPoint) = 0;
+    virtual SOIntersectionType intersect(const Ray& r, PointF& intersectionPoint) const = 0;
     
 protected:
     std::string m_name;

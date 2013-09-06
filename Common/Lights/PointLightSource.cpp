@@ -24,7 +24,7 @@ PointLightSource& PointLightSource::operator=(Framework::PointLightSource & p) {
     return (*this);
 }
     
-bool PointLightSource::illuminate(const PointF &p, const VectorF &n, const PointF &eye, const float pToLVisibility, const Framework::SceneObject *obj, Framework::IlluminateResult &r) {
+bool PointLightSource::illuminate(const PointF &p, const VectorF &n, const PointF &eye, const float pToLVisibility, const Framework::SceneObject *obj, Framework::IlluminateResult &r) const {
     
     // Diffuse N dot L
     vec3 L = Math::vec3AMinusB(this->getPos(), p);
