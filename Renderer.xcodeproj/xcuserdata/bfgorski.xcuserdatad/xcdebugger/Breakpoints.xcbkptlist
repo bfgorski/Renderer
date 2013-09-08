@@ -164,11 +164,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Framework/Renderer.mm"
-         timestampString = "400142499.562524"
+         timestampString = "400233007.499473"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "94"
-         endingLineNumber = "94"
+         startingLineNumber = "96"
+         endingLineNumber = "96"
          landmarkName = "-render:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -287,6 +287,32 @@
          startingLineNumber = "58"
          endingLineNumber = "58"
          landmarkName = "Scene::traceRay(const Framework::Ray&amp; r)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Trinidad/AppDelegate.mm"
+         timestampString = "400236188.087282"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "31"
+         endingLineNumber = "31"
+         landmarkName = "-renderScene:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Trinidad/AppDelegate.mm"
+         timestampString = "400236103.121644"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "31"
+         endingLineNumber = "31"
+         landmarkName = "-renderScene:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

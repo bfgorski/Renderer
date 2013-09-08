@@ -14,7 +14,10 @@ int main (int argc, const char * argv[])
     @autoreleasepool {
         Renderer * myRenderer = [Renderer alloc];
         [myRenderer init: @"Bens Renderer"];
-        [myRenderer render: NULL];
+        NSDictionary *options = @{
+            @"saveFile" : @"/Users/bfgorski/image.png"
+        };
+        [myRenderer render:options];
         [myRenderer release];
     }
     return 0;

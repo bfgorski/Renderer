@@ -24,13 +24,13 @@ using namespace Framework;
 @implementation Renderer
 {
     Camera * m_cam;
-    FrameBuffer * m_fb;
     Scene * m_scene;
 }
 
 @synthesize name;
+@synthesize frameBuffer = m_fb;
 
--(void) init: (NSString*) n
+-(Renderer*) init: (NSString*) n
 {
     /*
      Camera (0,0,10) looking at 0,0,0
@@ -71,9 +71,11 @@ using namespace Framework;
     
     m_scene->addSceneObject(so);
     m_scene->addSceneObject(plane);
+    
+    return self;
 }
 
--(void) render: (NSString**) options
+-(void) render: (NSDictionary*) options
 {
     // Grab view screen from camera and cast rays
     // thrrough pixel centers.
@@ -103,28 +105,22 @@ using namespace Framework;
             p->c = c;
         }
     }
-       
-    // Save Pixel buffer to file
-    [m_fb exportToFile:@"/Users/bfgorski/image.png"
-                format:@""
-                 width:100
-                height:100
-               options:@{ @"topRowFirst" : [NSNumber numberWithBool:YES] }
-     ];
-}
-
--(void) parseOptions
-{
     
-}
-
-+(int) numInstances
-{
-    return 1;
-}
-
--(void) runUnitTests
-{
+    NSString *saveFile = options[@"saveFile"];
     
+    if (saveFile) {
+        // Save Pixel buffer to file
+        [m_fb exportToFile:saveFile
+                    format:@""
+                     width:100
+                    height:100
+                   options:@{ @"topRowFirst" : [NSNumber numberWithBool:YES] }
+         ];
+    }
 }
+
+-(const FrameBuffer*) getFrameBuffer {
+    return self->m_fb;
+}
+
 @end

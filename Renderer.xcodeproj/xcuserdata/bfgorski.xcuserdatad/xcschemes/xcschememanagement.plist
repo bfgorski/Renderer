@@ -14,10 +14,45 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>SanAntonio.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>Trinidad.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>TrinidadTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>495805B614C57683002AC459</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>498954FB17D9CF590036F5AE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4989551417D9CF5B0036F5AE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4989554517DB259E0036F5AE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4989557317DB25A10036F5AE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

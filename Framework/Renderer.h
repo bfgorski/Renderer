@@ -6,14 +6,21 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "FrameBuffer.h"
 
 @interface Renderer : NSObject
 
 @property(retain,atomic) NSString* name;
+@property(readonly, getter = getFrameBuffer) const FrameBuffer* frameBuffer;
 
--(void) init: (NSString*) name;
--(void) render: (NSString **) options;
--(void) parseOptions;
--(void) runUnitTests;
+-(Renderer*) init: (NSString*) name;
+
+/**
+ * Render the scene.
+ *
+ * @param options:
+ *          @"saveFile" : Save image to this file
+ */
+-(void) render: (NSDictionary*) options;
 
 @end
