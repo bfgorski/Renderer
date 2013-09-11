@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/NSData.h>
-#import <AppKit/NSBitmapImageRep.h>
+
+#if !(TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
+    #import <AppKit/NSBitmapImageRep.h>
+#else
+
+#endif
+
 #import "FrameBuffer.h"
 #import "BasicTypesImpl.h"
 
@@ -56,6 +62,56 @@ using namespace Framework;
     return (Pixel*)p;
 }
 
+- (NSData*) getPixels:(NSDictionary*)options {
+    unsigned int numPixels = self.width*self.height;
+    unsigned int compPerPixel = 4;
+    unsigned int bytesPerComp = 1;
+    unsigned int outputPixelSize = compPerPixel*bytesPerComp;
+    unsigned int outputBufferSize = numPixels*outputPixelSize;
+    unsigned char *buffer = (unsigned char*)malloc(outputBufferSize);
+    
+    id topRowFirst = options[@"topRowFirst"];
+    id ARGB = options[@"ARGB"];
+    
+    /*
+     Resample the FB to the indicated size.
+     
+     Filmic tone mapping.
+     
+     */
+    Pixel* pixels = [self getPixelPtr];
+    unsigned int outputIndex;
+    for (int i = 0; i < numPixels; ++i) {
+        Pixel *pixel = &pixels[i];
+        
+        if (topRowFirst) {
+            // pixel (row,column) is stored at pixel (self.height - 1 - row) + column;
+            unsigned int currentRow = (i / self.width);
+            unsigned int column = i - (currentRow*self.width);
+            unsigned int newRow = self.height - 1 - currentRow;
+            outputIndex = newRow*self.width + column;
+        } else {
+            outputIndex = i;
+        }
+        
+        unsigned char *finalPixel = buffer + (outputIndex*outputPixelSize);
+        
+        if (ARGB) {
+            finalPixel[0] = 255*Math::clamp(pixel->c.c[3], 0, 1);
+            for (int iComp = 0; iComp < 3; ++iComp) {
+                finalPixel[iComp+1] = 255*Math::clamp(pixel->c.c[iComp], 0, 1);
+            }
+        } else {
+            for (int iComp = 0; iComp < 4; ++iComp) {
+                finalPixel[iComp] = 255*Math::clamp(pixel->c.c[iComp], 0, 1);
+            }        
+        }
+    }
+    
+    NSData *data = [NSData dataWithBytesNoCopy:buffer length:outputBufferSize freeWhenDone:YES];
+    return data;
+}
+
 -(BOOL) exportToFile:(NSString *)fileName
               format:(NSString *)format
                width:(NSUInteger)width
@@ -99,6 +155,7 @@ using namespace Framework;
         }
     }
     
+#if !(TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR)
     NSBitmapImageRep *imageRep =
     [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:(unsigned char **)&buffer
                                             pixelsWide:self.width
@@ -116,6 +173,14 @@ using namespace Framework;
                                              properties:nil];
     
     [pngData writeToFile:fileName atomically:YES];
+#else
+    // Export to camera roll;
+    // Use CIImage
+    
+    //[UIKit UIImageWriteToSavedPhotosAlbum];
+    
+#endif
+    free(buffer);
     return YES;
 }
 

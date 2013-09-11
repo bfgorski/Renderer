@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="dBt-WR-W8x">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -29,20 +29,19 @@
                             <constraint firstAttribute="trailing" secondItem="VBi-j7-PDA" secondAttribute="trailing" constant="8" id="tsl-Bj-58V"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="hdU-ck-UJm"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--Render View Controller-->
+        <!--Render View Controller - Render View-->
         <scene sceneID="iHj-eh-SmZ">
             <objects>
-                <viewController id="dBt-WR-W8x" customClass="RenderViewController" sceneMemberID="viewController">
+                <viewController title="Render View" id="dBt-WR-W8x" customClass="RenderViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zci-1x-22l">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Knv-BH-hMR">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Knv-BH-hMR">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="308" id="eZF-Ks-f0p"/>
                                     <constraint firstAttribute="height" constant="501" id="rBV-C7-Izr"/>
@@ -57,6 +56,10 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="renderScene:" destination="WFc-B8-pWt" eventType="touchUpInside" id="6zv-AX-UzD"/>
+                                    <action selector="renderScene:" destination="dBt-WR-W8x" eventType="touchUpInside" id="b9s-TN-OhN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHd-EI-JcL">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -71,15 +74,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Knv-BH-hMR" firstAttribute="centerX" secondItem="zci-1x-22l" secondAttribute="centerX" type="default" id="8tV-Wo-XN6"/>
+                            <constraint firstItem="Knv-BH-hMR" firstAttribute="top" secondItem="zci-1x-22l" secondAttribute="top" constant="5" id="4jU-0J-aMq"/>
                             <constraint firstItem="ngl-I4-llz" firstAttribute="leading" secondItem="Knv-BH-hMR" secondAttribute="leading" type="default" id="Epw-R1-NXx"/>
                             <constraint firstItem="ngl-I4-llz" firstAttribute="top" secondItem="Knv-BH-hMR" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="FoN-bt-ydQ"/>
                             <constraint firstAttribute="trailing" secondItem="MHd-EI-JcL" secondAttribute="trailing" constant="11" id="QCB-5a-DJN"/>
+                            <constraint firstItem="Knv-BH-hMR" firstAttribute="centerX" secondItem="zci-1x-22l" secondAttribute="centerX" type="default" id="pcS-hy-o9i"/>
                             <constraint firstItem="MHd-EI-JcL" firstAttribute="baseline" secondItem="ngl-I4-llz" secondAttribute="baseline" type="default" id="qde-By-2rp"/>
-                            <constraint firstAttribute="bottom" secondItem="ngl-I4-llz" secondAttribute="bottom" constant="11" id="tyR-1G-jJb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="neJ-uv-QoG"/>
+                    <connections>
+                        <outlet property="imageView" destination="Knv-BH-hMR" id="mM2-YW-xYF"/>
+                        <outlet property="liveViewButton" destination="MHd-EI-JcL" id="M8K-Sb-aEo"/>
+                        <outlet property="renderButton" destination="ngl-I4-llz" id="IIi-up-HhM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WFc-B8-pWt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -92,7 +100,10 @@
         <class className="RenderViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RenderViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="renderButton"/>
+                <relationship kind="action" name="renderScene:"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="liveViewButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="renderButton" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="ViewController" superclassName="GLKViewController">

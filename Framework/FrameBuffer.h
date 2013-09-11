@@ -25,6 +25,16 @@
 -(Framework::Pixel*) getPixelPtr;
 
 /**
+ * Return NSData object with only color information as RGBA8 pixel data.
+ *
+ * @param options NSDictionary with save options
+                    "topRowFirst" : Save row (height - 1) first
+                    "ARGB" : Save as ARGB instead of RGBA
+ * @return NSData
+ */
+- (NSData*) getPixels:(NSDictionary*)options;
+
+/**
  * Save the framebuffer to a file.
  *
  * @param fileName -

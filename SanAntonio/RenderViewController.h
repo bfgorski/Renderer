@@ -7,9 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "Renderer.h"
 
 @interface RenderViewController : UIViewController
 
-@property (nonatomic) IBOutlet id renderButton;
+@property (weak, nonatomic) Renderer* renderer;
+
+@property (weak, nonatomic) IBOutlet UIButton *renderButton;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIButton *liveViewButton;
+
+- (IBAction)renderScene:(id)sender;
+
 
 @end

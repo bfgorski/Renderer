@@ -7,12 +7,18 @@
 //
 
 #import "AppDelegate.h"
+#import "RenderManager.h"
 
 @implementation AppDelegate
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    // Initialize with default renderer
+    [RenderManager instance];
+    
     return YES;
 }
 							

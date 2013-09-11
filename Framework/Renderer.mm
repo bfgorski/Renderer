@@ -21,14 +21,21 @@
 
 using namespace Framework;
 
+@interface Renderer()
+
+@property(strong, nonatomic) Camera* camera;
+@property(strong, setter = setFrameBuffer:, getter = getFrameBuffer) FrameBuffer* frameBuffer;
+
+@end
+
 @implementation Renderer
 {
-    Camera * m_cam;
     Scene * m_scene;
 }
 
 @synthesize name;
 @synthesize frameBuffer = m_fb;
+//@synthesize scene = m_scene;
 
 -(Renderer*) init: (NSString*) n
 {
@@ -43,8 +50,8 @@ using namespace Framework;
     Ray r(camPos, camDir);
     VectorF up(0,1,0);
     
-    m_cam = [[Camera alloc] init:r upV:up Fov:45 AspectRatio:1.0f nearPlane:5.0f];
-    m_fb = [[FrameBuffer alloc] init:100 height:100];
+    self.camera = [[Camera alloc] init:r upV:up Fov:45 AspectRatio:1.0f nearPlane:5.0f];
+    self.frameBuffer = [[FrameBuffer alloc] init:100 height:100];
 
     m_scene = new Scene();
     self.name  = n;
@@ -79,29 +86,29 @@ using namespace Framework;
 {
     // Grab view screen from camera and cast rays
     // thrrough pixel centers.
-    Rectangle viewScreen = [m_cam getNearPlane];
-    m_scene->setViewPoint([m_cam getPos]);
+    Rectangle viewScreen = [self.camera getNearPlane];
+    m_scene->setViewPoint([self.camera getPos]);
     
-    float upStep = viewScreen.upLen / m_fb.height;
-    float rightStep = viewScreen.rightLen / m_fb.width;
+    float upStep = viewScreen.upLen / self.frameBuffer.height;
+    float rightStep = viewScreen.rightLen / self.frameBuffer.width;
     
     float upStartOffset = upStep/2;
     float rightStartOffset = rightStep/2;
     
     // Generate pixels and cast rays
-    for(int h = 0; h < m_fb.height; ++h) {
+    for(int h = 0; h < self.frameBuffer.height; ++h) {
         VectorF pixelOffsetVec = Math::vec3AXPlusBY(viewScreen.upV, (upStep*h + upStartOffset), viewScreen.rightV, rightStartOffset);
         PointF pixelCenter = Math::vec3APlusB(viewScreen.bottomLeft, pixelOffsetVec);
         
         VectorF rightInc = Math::vec3Scale(viewScreen.rightV, rightStep);
-        for (int w = 0; w < m_fb.width; ++w) {
-            VectorF castDir = Math::vec3AMinusB(pixelCenter, [m_cam getPos]);
+        for (int w = 0; w < self.frameBuffer.width; ++w) {
+            VectorF castDir = Math::vec3AMinusB(pixelCenter, [self.camera getPos]);
             Math::vec3Normalize(castDir);
             pixelCenter.increment(rightInc);
             
-            Ray r([m_cam getPos], castDir);
+            Ray r([self.camera getPos], castDir);
             Color c = m_scene->traceRay(r);
-            Pixel * p = [m_fb getPixel:w height:h];
+            Pixel * p = [self.frameBuffer getPixel:w height:h];
             p->c = c;
         }
     }
@@ -110,7 +117,7 @@ using namespace Framework;
     
     if (saveFile) {
         // Save Pixel buffer to file
-        [m_fb exportToFile:saveFile
+        [self.frameBuffer exportToFile:saveFile
                     format:@""
                      width:100
                     height:100
@@ -119,8 +126,25 @@ using namespace Framework;
     }
 }
 
--(const FrameBuffer*) getFrameBuffer {
+- (void) setFrameBuffer:(FrameBuffer *)fb {
+    self->m_fb = fb;
+}
+
+-(FrameBuffer*) getFrameBuffer {
     return self->m_fb;
 }
 
+- (NSDictionary*)getFrameBufferPixels:(NSDictionary*)options {
+    NSData *data = [m_fb getPixels:options];
+    
+    NSDictionary * d = @{
+        @"data" : data,
+        @"rowSize": [NSNumber numberWithUnsignedInt:m_fb.width*4],
+        @"width" : [NSNumber numberWithUnsignedInt:m_fb.width],
+        @"height" : [NSNumber numberWithUnsignedInt:m_fb.height]
+    };
+    return d;
+    
+    
+}
 @end

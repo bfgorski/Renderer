@@ -7,6 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49170FC317DC597B0021A10C /* LightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954D5179E61F50036F5AE /* LightSource.cpp */; };
+		49170FC517DC597B0021A10C /* IlluminateResult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954DA179E6F730036F5AE /* IlluminateResult.cpp */; };
+		49170FC717DC597B0021A10C /* PointLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954DE17A10EFB0036F5AE /* PointLightSource.cpp */; };
+		49170FC917DC597B0021A10C /* SceneObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE36147107B000B4ED2C /* SceneObject.cpp */; };
+		49170FCA17DC597B0021A10C /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954C4179523720036F5AE /* Scene.cpp */; };
+		49170FCC17DC597B0021A10C /* SceneObject.h in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE38147107BD00B4ED2C /* SceneObject.h */; };
+		49170FCE17DC597B0021A10C /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49D5135A1595A24B00C0ECAF /* Sphere.cpp */; };
+		49170FCF17DC597B0021A10C /* SOIntersection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954C817952ACA0036F5AE /* SOIntersection.cpp */; };
+		49170FD117DC597B0021A10C /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954EE17D1B3D90036F5AE /* Plane.cpp */; };
+		49170FD417DC597B0021A10C /* BasicTypesImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE461476651000B4ED2C /* BasicTypesImpl.cpp */; };
+		49170FD717DC597B0021A10C /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954F217D9AF720036F5AE /* Material.cpp */; };
+		49170FDA17DC597B0021A10C /* Camera.mm in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE441472569400B4ED2C /* Camera.mm */; };
+		49170FDC17DC597B0021A10C /* FrameBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE4C14766B4500B4ED2C /* FrameBuffer.mm */; };
+		49170FDE17DC597B0021A10C /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE3D1471091C00B4ED2C /* Renderer.mm */; };
+		49170FE017DC597B0021A10C /* SceneParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE411472505500B4ED2C /* SceneParser.m */; };
+		49170FE817DD9CA70021A10C /* RenderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49170FE717DD9CA60021A10C /* RenderManager.m */; };
+		49170FE917DD9CA70021A10C /* RenderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49170FE717DD9CA60021A10C /* RenderManager.m */; };
+		49170FEA17DD9CA70021A10C /* RenderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49170FE717DD9CA60021A10C /* RenderManager.m */; };
+		49170FEC17DF06780021A10C /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49170FEB17DF06780021A10C /* CoreImage.framework */; };
 		495805B914C57683002AC459 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495805B814C57683002AC459 /* SenTestingKit.framework */; };
 		495805C514C57683002AC459 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 495805C314C57683002AC459 /* InfoPlist.strings */; };
 		495805C814C57683002AC459 /* RendererTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 495805C714C57683002AC459 /* RendererTests.mm */; };
@@ -78,7 +97,7 @@
 		4989554F17DB259E0036F5AE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4989554E17DB259E0036F5AE /* OpenGLES.framework */; };
 		4989555517DB25A00036F5AE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4989555317DB25A00036F5AE /* InfoPlist.strings */; };
 		4989555717DB25A00036F5AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4989555617DB25A00036F5AE /* main.m */; };
-		4989555B17DB25A00036F5AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4989555A17DB25A00036F5AE /* AppDelegate.m */; };
+		4989555B17DB25A00036F5AE /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4989555A17DB25A00036F5AE /* AppDelegate.mm */; };
 		4989555D17DB25A00036F5AE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4989555C17DB25A00036F5AE /* Default.png */; };
 		4989555F17DB25A00036F5AE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4989555E17DB25A00036F5AE /* Default@2x.png */; };
 		4989556117DB25A00036F5AE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4989556017DB25A00036F5AE /* Default-568h@2x.png */; };
@@ -140,6 +159,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		49170FE617DD9CA60021A10C /* RenderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderManager.h; sourceTree = "<group>"; };
+		49170FE717DD9CA60021A10C /* RenderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenderManager.m; sourceTree = "<group>"; };
+		49170FEB17DF06780021A10C /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		495805B714C57683002AC459 /* RendererTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RendererTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		495805B814C57683002AC459 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		495805BA14C57683002AC459 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
@@ -198,7 +220,7 @@
 		4989555617DB25A00036F5AE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4989555817DB25A00036F5AE /* SanAntonio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SanAntonio-Prefix.pch"; sourceTree = "<group>"; };
 		4989555917DB25A00036F5AE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		4989555A17DB25A00036F5AE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4989555A17DB25A00036F5AE /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		4989555C17DB25A00036F5AE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		4989555E17DB25A00036F5AE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		4989556017DB25A00036F5AE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -224,7 +246,7 @@
 		498BCE38147107BD00B4ED2C /* SceneObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneObject.h; sourceTree = "<group>"; };
 		498BCE3C1471091C00B4ED2C /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 		498BCE3D1471091C00B4ED2C /* Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Renderer.mm; sourceTree = "<group>"; };
-		498BCE3F1472450900B4ED2C /* BasicTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTypes.h; sourceTree = "<group>"; };
+		498BCE3F1472450900B4ED2C /* BasicTypes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = BasicTypes.h; sourceTree = "<group>"; };
 		498BCE401472505500B4ED2C /* SceneParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneParser.h; sourceTree = "<group>"; };
 		498BCE411472505500B4ED2C /* SceneParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneParser.m; sourceTree = "<group>"; };
 		498BCE431472569400B4ED2C /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
@@ -232,7 +254,7 @@
 		498BCE461476651000B4ED2C /* BasicTypesImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicTypesImpl.cpp; sourceTree = "<group>"; };
 		498BCE4B14766B4500B4ED2C /* FrameBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameBuffer.h; sourceTree = "<group>"; };
 		498BCE4C14766B4500B4ED2C /* FrameBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FrameBuffer.mm; sourceTree = "<group>"; };
-		498BCE4E14766C6100B4ED2C /* BasicTypesImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTypesImpl.h; sourceTree = "<group>"; };
+		498BCE4E14766C6100B4ED2C /* BasicTypesImpl.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = BasicTypesImpl.h; sourceTree = "<group>"; };
 		49C5E1D214C6C76500E6D655 /* BasicTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTypes.h; sourceTree = "<group>"; };
 		49C5E1D314C6C76500E6D655 /* BasicTypesImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTypesImpl.h; sourceTree = "<group>"; };
 		49C5E1D414C6C76500E6D655 /* SceneObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneObject.cpp; sourceTree = "<group>"; };
@@ -280,6 +302,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49170FEC17DF06780021A10C /* CoreImage.framework in Frameworks */,
 				4989554817DB259E0036F5AE /* UIKit.framework in Frameworks */,
 				4989554917DB259E0036F5AE /* Foundation.framework in Frameworks */,
 				4989554B17DB259E0036F5AE /* CoreGraphics.framework in Frameworks */,
@@ -467,7 +490,7 @@
 			isa = PBXGroup;
 			children = (
 				4989555917DB25A00036F5AE /* AppDelegate.h */,
-				4989555A17DB25A00036F5AE /* AppDelegate.m */,
+				4989555A17DB25A00036F5AE /* AppDelegate.mm */,
 				4989556217DB25A00036F5AE /* MainStoryboard_iPhone.storyboard */,
 				4989556517DB25A00036F5AE /* MainStoryboard_iPad.storyboard */,
 				4989556817DB25A00036F5AE /* Shader.fsh */,
@@ -517,6 +540,7 @@
 		498BCE171471073700B4ED2C = {
 			isa = PBXGroup;
 			children = (
+				49170FEB17DF06780021A10C /* CoreImage.framework */,
 				498BCE341471078500B4ED2C /* Common */,
 				498BCE351471078500B4ED2C /* Framework */,
 				498BCE281471073700B4ED2C /* Renderer */,
@@ -596,6 +620,8 @@
 		498BCE351471078500B4ED2C /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				49170FE617DD9CA60021A10C /* RenderManager.h */,
+				49170FE717DD9CA60021A10C /* RenderManager.m */,
 				498954F717D9B0C20036F5AE /* Camera */,
 				498BCE48147668FE00B4ED2C /* FrameBuffer */,
 				498BCE3C1471091C00B4ED2C /* Renderer.h */,
@@ -779,7 +805,7 @@
 		498BCE191471073700B4ED2C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = 498BCE1C1471073700B4ED2C /* Build configuration list for PBXProject "Renderer" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -954,6 +980,7 @@
 				4989552917DB11380036F5AE /* Renderer.mm in Sources */,
 				4989552A17DB11810036F5AE /* FrameBuffer.mm in Sources */,
 				4989552B17DB11880036F5AE /* Camera.mm in Sources */,
+				49170FE917DD9CA70021A10C /* RenderManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -969,10 +996,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49170FC317DC597B0021A10C /* LightSource.cpp in Sources */,
+				49170FC517DC597B0021A10C /* IlluminateResult.cpp in Sources */,
+				49170FC717DC597B0021A10C /* PointLightSource.cpp in Sources */,
+				49170FC917DC597B0021A10C /* SceneObject.cpp in Sources */,
+				49170FCA17DC597B0021A10C /* Scene.cpp in Sources */,
+				49170FCC17DC597B0021A10C /* SceneObject.h in Sources */,
+				49170FCE17DC597B0021A10C /* Sphere.cpp in Sources */,
+				49170FCF17DC597B0021A10C /* SOIntersection.cpp in Sources */,
+				49170FD117DC597B0021A10C /* Plane.cpp in Sources */,
+				49170FD417DC597B0021A10C /* BasicTypesImpl.cpp in Sources */,
+				49170FD717DC597B0021A10C /* Material.cpp in Sources */,
+				49170FDA17DC597B0021A10C /* Camera.mm in Sources */,
+				49170FDC17DC597B0021A10C /* FrameBuffer.mm in Sources */,
+				49170FDE17DC597B0021A10C /* Renderer.mm in Sources */,
+				49170FE017DC597B0021A10C /* SceneParser.m in Sources */,
 				4989555717DB25A00036F5AE /* main.m in Sources */,
-				4989555B17DB25A00036F5AE /* AppDelegate.m in Sources */,
+				4989555B17DB25A00036F5AE /* AppDelegate.mm in Sources */,
 				4989556E17DB25A00036F5AE /* ViewController.m in Sources */,
 				4989558B17DB30850036F5AE /* RenderViewController.m in Sources */,
+				49170FEA17DD9CA70021A10C /* RenderManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1003,6 +1046,7 @@
 				498954E017A10EFC0036F5AE /* PointLightSource.cpp in Sources */,
 				498954F017D1B3DB0036F5AE /* Plane.cpp in Sources */,
 				498954F417D9AF750036F5AE /* Material.cpp in Sources */,
+				49170FE817DD9CA70021A10C /* RenderManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1100,6 +1144,7 @@
 		495805CB14C57683002AC459 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RendererTests/RendererTests-Prefix.pch";
@@ -1112,6 +1157,7 @@
 		495805CC14C57683002AC459 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RendererTests/RendererTests-Prefix.pch";
@@ -1244,7 +1290,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INFOPLIST_FILE = "SanAntonio/SanAntonio-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				"OTHER_CFLAGS[arch=*]" = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1274,6 +1322,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1343,6 +1392,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1357,6 +1410,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1369,6 +1423,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1377,6 +1435,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
@@ -1432,6 +1491,7 @@
 				4989552517D9CF5C0036F5AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4989552617D9CF5C0036F5AE /* Build configuration list for PBXNativeTarget "TrinidadTests" */ = {
 			isa = XCConfigurationList;
@@ -1440,6 +1500,7 @@
 				4989552817D9CF5C0036F5AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4989558317DB25A20036F5AE /* Build configuration list for PBXNativeTarget "SanAntonio" */ = {
 			isa = XCConfigurationList;
@@ -1448,6 +1509,7 @@
 				4989558517DB25A20036F5AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4989558617DB25A20036F5AE /* Build configuration list for PBXNativeTarget "SanAntonioTests" */ = {
 			isa = XCConfigurationList;
@@ -1456,6 +1518,7 @@
 				4989558817DB25A20036F5AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		498BCE1C1471073700B4ED2C /* Build configuration list for PBXProject "Renderer" */ = {
 			isa = XCConfigurationList;
