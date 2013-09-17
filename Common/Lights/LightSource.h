@@ -12,6 +12,7 @@
 #include <iostream>
 #include "SceneObject.h"
 #include "IlluminateResult.h"
+#include "IlluminateParams.h"
 
 namespace Framework {
 
@@ -48,16 +49,13 @@ public:
     /**
      * Compute the intensity of the light.
      *
-     * @param p     Point to illuminate
-     * @param n     Normal Vector
-     * @param eye   Eye Point
-     * @param pToLVisibility Point to LightSource visibility 1 = no attenuation 0 = completely obscured
-     * @param obj   The SceneObject being illuminated.
-     * @param result    Store the result of the illumination here
+     * @param illuminateParams  Lighting parameters
+     * @param obj               The SceneObject being illuminated.
+     * @param result            Store the result of the illumination here
      *
      * @return bool true/false indicating whether or not the result can be ignored.
      */
-    virtual bool illuminate(const PointF& p, const VectorF& n, const PointF& eye, const float pToLVisibility, const SceneObject* obj, IlluminateResult& result) const = 0;
+    virtual bool illuminate(const IlluminateParams& illuminateParams, const SceneObject* obj, IlluminateResult& result) const = 0;
 private:
     
     Color m_ambient;

@@ -13,8 +13,6 @@
     2D Framebuffer where bottom left is 0,0 and top right is (width-1), (height-1).
  */
 @interface FrameBuffer : NSObject
-{
-}
 
 @property (readonly) unsigned int width;
 @property (readonly) unsigned int height;

@@ -137,7 +137,8 @@ struct Matrix {
 };
 
 typedef struct Matrix Matrix;
-
+typedef Matrix Transform;
+    
 struct Pixel {
     // RGBA
     Color c;
@@ -147,4 +148,6 @@ typedef struct Pixel Pixel;
 
 }
 
+extern const Framework::vec3 VZero;
+ 
 #endif

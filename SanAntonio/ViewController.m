@@ -388,4 +388,6 @@ GLfloat gCubeVertexData[216] =
     return YES;
 }
 
+- (IBAction)renderViewButtonPressed:(id)sender {}
+
 @end

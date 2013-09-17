@@ -24,9 +24,12 @@ public :
     ~IlluminateResult() {};
     
     const Color& getDif() const { return m_diffuse; }
+    const Color& getSpec() const { return m_specular; }
+    const Color& getAmbient() const { return m_ambient; }
     
     void setDiffuse(const Color& c) { m_diffuse = c; }
-    
+    void setSpec(const Color& c) { m_specular = c; }
+    void setAmbient(const Color& c) { m_ambient = c; }
 private :
     Color m_ambient;
     Color m_diffuse;

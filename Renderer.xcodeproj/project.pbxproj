@@ -126,6 +126,26 @@
 		49C5E1E414C6C7B700E6D655 /* SceneParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5E1E014C6C7B700E6D655 /* SceneParser.m */; };
 		49D5135B1595A24B00C0ECAF /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49D5135A1595A24B00C0ECAF /* Sphere.cpp */; };
 		49D5135C1595A24B00C0ECAF /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49D5135A1595A24B00C0ECAF /* Sphere.cpp */; };
+		49DF963E17E5AAB9001C345B /* SimpleMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF963C17E5AAB9001C345B /* SimpleMaterial.cpp */; };
+		49DF963F17E5AAB9001C345B /* SimpleMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF963C17E5AAB9001C345B /* SimpleMaterial.cpp */; };
+		49DF964017E5AAB9001C345B /* SimpleMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF963C17E5AAB9001C345B /* SimpleMaterial.cpp */; };
+		49DF964117E5AAB9001C345B /* SimpleMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF963C17E5AAB9001C345B /* SimpleMaterial.cpp */; };
+		49DF964417E6F6C2001C345B /* IlluminateParams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964217E6F6C2001C345B /* IlluminateParams.cpp */; };
+		49DF964517E6F6C2001C345B /* IlluminateParams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964217E6F6C2001C345B /* IlluminateParams.cpp */; };
+		49DF964617E6F6C2001C345B /* IlluminateParams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964217E6F6C2001C345B /* IlluminateParams.cpp */; };
+		49DF964717E6F6C2001C345B /* IlluminateParams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964217E6F6C2001C345B /* IlluminateParams.cpp */; };
+		49DF964917E850E6001C345B /* Quat.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964817E850E6001C345B /* Quat.c */; };
+		49DF964A17E850E6001C345B /* Quat.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964817E850E6001C345B /* Quat.c */; };
+		49DF964B17E850E6001C345B /* Quat.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964817E850E6001C345B /* Quat.c */; };
+		49DF964C17E850E6001C345B /* Quat.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964817E850E6001C345B /* Quat.c */; };
+		49DF965117E851AA001C345B /* Matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965017E851AA001C345B /* Matrix.c */; };
+		49DF965217E851AA001C345B /* Matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965017E851AA001C345B /* Matrix.c */; };
+		49DF965317E851AA001C345B /* Matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965017E851AA001C345B /* Matrix.c */; };
+		49DF965417E851AA001C345B /* Matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965017E851AA001C345B /* Matrix.c */; };
+		49DF965617E851B9001C345B /* Transform.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965517E851B9001C345B /* Transform.c */; };
+		49DF965717E851B9001C345B /* Transform.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965517E851B9001C345B /* Transform.c */; };
+		49DF965817E851B9001C345B /* Transform.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965517E851B9001C345B /* Transform.c */; };
+		49DF965917E851B9001C345B /* Transform.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965517E851B9001C345B /* Transform.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -267,6 +287,16 @@
 		49C5E1E014C6C7B700E6D655 /* SceneParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneParser.m; sourceTree = "<group>"; };
 		49D513581595A23E00C0ECAF /* Sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sphere.h; sourceTree = "<group>"; };
 		49D5135A1595A24B00C0ECAF /* Sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sphere.cpp; sourceTree = "<group>"; };
+		49DF963C17E5AAB9001C345B /* SimpleMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimpleMaterial.cpp; path = Materials/SimpleMaterial.cpp; sourceTree = "<group>"; };
+		49DF963D17E5AAB9001C345B /* SimpleMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleMaterial.h; path = Materials/SimpleMaterial.h; sourceTree = "<group>"; };
+		49DF964217E6F6C2001C345B /* IlluminateParams.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IlluminateParams.cpp; path = Lights/IlluminateParams.cpp; sourceTree = "<group>"; };
+		49DF964317E6F6C2001C345B /* IlluminateParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IlluminateParams.h; path = Lights/IlluminateParams.h; sourceTree = "<group>"; };
+		49DF964817E850E6001C345B /* Quat.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Quat.c; path = Math/Quat.c; sourceTree = "<group>"; };
+		49DF964D17E850FD001C345B /* Quat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Quat.h; path = Math/Quat.h; sourceTree = "<group>"; };
+		49DF964F17E85196001C345B /* Matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Matrix.h; path = Math/Matrix.h; sourceTree = "<group>"; };
+		49DF965017E851AA001C345B /* Matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Matrix.c; path = Math/Matrix.c; sourceTree = "<group>"; };
+		49DF965517E851B9001C345B /* Transform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Transform.c; path = Math/Transform.c; sourceTree = "<group>"; };
+		49DF965A17E851CC001C345B /* Transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Transform.h; path = Math/Transform.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -422,6 +452,8 @@
 				498954DB179E6F730036F5AE /* IlluminateResult.h */,
 				498954DE17A10EFB0036F5AE /* PointLightSource.cpp */,
 				498954DF17A10EFC0036F5AE /* PointLightSource.h */,
+				49DF964217E6F6C2001C345B /* IlluminateParams.cpp */,
+				49DF964317E6F6C2001C345B /* IlluminateParams.h */,
 			);
 			name = Lights;
 			sourceTree = "<group>";
@@ -431,6 +463,8 @@
 			children = (
 				498954F217D9AF720036F5AE /* Material.cpp */,
 				498954F317D9AF740036F5AE /* Material.h */,
+				49DF963C17E5AAB9001C345B /* SimpleMaterial.cpp */,
+				49DF963D17E5AAB9001C345B /* SimpleMaterial.h */,
 			);
 			name = Materials;
 			sourceTree = "<group>";
@@ -644,6 +678,12 @@
 		498BCE49147669C200B4ED2C /* Math */ = {
 			isa = PBXGroup;
 			children = (
+				49DF964817E850E6001C345B /* Quat.c */,
+				49DF964D17E850FD001C345B /* Quat.h */,
+				49DF964F17E85196001C345B /* Matrix.h */,
+				49DF965017E851AA001C345B /* Matrix.c */,
+				49DF965517E851B9001C345B /* Transform.c */,
+				49DF965A17E851CC001C345B /* Transform.h */,
 			);
 			name = Math;
 			sourceTree = "<group>";
@@ -946,6 +986,11 @@
 				498954E117A10EFC0036F5AE /* PointLightSource.cpp in Sources */,
 				498954F117D1B3DB0036F5AE /* Plane.cpp in Sources */,
 				498954F517D9AF750036F5AE /* Material.cpp in Sources */,
+				49DF963F17E5AAB9001C345B /* SimpleMaterial.cpp in Sources */,
+				49DF964517E6F6C2001C345B /* IlluminateParams.cpp in Sources */,
+				49DF964A17E850E6001C345B /* Quat.c in Sources */,
+				49DF965217E851AA001C345B /* Matrix.c in Sources */,
+				49DF965717E851B9001C345B /* Transform.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -981,6 +1026,11 @@
 				4989552A17DB11810036F5AE /* FrameBuffer.mm in Sources */,
 				4989552B17DB11880036F5AE /* Camera.mm in Sources */,
 				49170FE917DD9CA70021A10C /* RenderManager.m in Sources */,
+				49DF964017E5AAB9001C345B /* SimpleMaterial.cpp in Sources */,
+				49DF964617E6F6C2001C345B /* IlluminateParams.cpp in Sources */,
+				49DF964B17E850E6001C345B /* Quat.c in Sources */,
+				49DF965317E851AA001C345B /* Matrix.c in Sources */,
+				49DF965817E851B9001C345B /* Transform.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1016,6 +1066,11 @@
 				4989556E17DB25A00036F5AE /* ViewController.m in Sources */,
 				4989558B17DB30850036F5AE /* RenderViewController.m in Sources */,
 				49170FEA17DD9CA70021A10C /* RenderManager.m in Sources */,
+				49DF964117E5AAB9001C345B /* SimpleMaterial.cpp in Sources */,
+				49DF964717E6F6C2001C345B /* IlluminateParams.cpp in Sources */,
+				49DF964C17E850E6001C345B /* Quat.c in Sources */,
+				49DF965417E851AA001C345B /* Matrix.c in Sources */,
+				49DF965917E851B9001C345B /* Transform.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1047,6 +1102,11 @@
 				498954F017D1B3DB0036F5AE /* Plane.cpp in Sources */,
 				498954F417D9AF750036F5AE /* Material.cpp in Sources */,
 				49170FE817DD9CA70021A10C /* RenderManager.m in Sources */,
+				49DF963E17E5AAB9001C345B /* SimpleMaterial.cpp in Sources */,
+				49DF964417E6F6C2001C345B /* IlluminateParams.cpp in Sources */,
+				49DF964917E850E6001C345B /* Quat.c in Sources */,
+				49DF965117E851AA001C345B /* Matrix.c in Sources */,
+				49DF965617E851B9001C345B /* Transform.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

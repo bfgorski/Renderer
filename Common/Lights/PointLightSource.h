@@ -26,7 +26,7 @@ public:
     PointLightSource(const PointLightSource& p) : LightSource(p) {}
     PointLightSource& operator=(PointLightSource&);
     
-    virtual bool illuminate(const PointF& p, const VectorF& n, const PointF& eye, const float pToLVisibility, const SceneObject* obj, IlluminateResult& r) const;
+    virtual bool illuminate(const IlluminateParams& illuminateParams, const SceneObject* obj, IlluminateResult& r) const;
     
 private:
     

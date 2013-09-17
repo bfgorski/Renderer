@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *liveViewButton;
 
+@property (weak, nonatomic) IBOutlet UIView *imageViewContainer;
 - (IBAction)renderScene:(id)sender;
 
 

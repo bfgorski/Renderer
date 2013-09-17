@@ -10,5 +10,7 @@
 #import <GLKit/GLKit.h>
 
 @interface ViewController : GLKViewController
+@property (weak, nonatomic) IBOutlet UIButton *renderViewButton;
+- (IBAction)renderViewButtonPressed:(id)sender;
 
 @end

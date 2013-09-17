@@ -7,12 +7,14 @@
 //
 
 @class FrameBuffer;
+@class Camera;
 
 /**
  * The Renderer object is used to manage and render a single scene.
  */
 @interface Renderer : NSObject
 
+@property(strong, nonatomic, readonly) Camera* camera;
 @property(retain,atomic) NSString* name;
 
 -(Renderer*) init: (NSString*) name;

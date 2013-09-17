@@ -14,6 +14,8 @@
 
 namespace Framework {
     
+class Material;
+    
 class SceneObject {
     
 public:
@@ -32,8 +34,11 @@ public:
      */
     void setPos(const PointF& p) { m_pos = p; }
     
+    void setMaterial(Material* m) { m_material = m; }
+    
     const std::string& getName() const { return m_name; }
     const PointF& getPos() const { return m_pos; }
+    const Material* getMaterial() const { return m_material; }
     
     /**
      * Determine if the indicated Ray intersects the object.
@@ -51,6 +56,7 @@ public:
 protected:
     std::string m_name;
     PointF m_pos;
+    Material * m_material;
 };
     
 }

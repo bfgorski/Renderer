@@ -40,6 +40,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    CGColorSpaceRelease(m_colorSpace);
+}
+
 - (IBAction)renderScene:(id)sender {
     NSDictionary *options = @{
         @"saveFile" : @"Documents/image.png"
@@ -70,7 +74,21 @@
                                    NULL
                                    );*/
     
-    CGRect imageViewBounds = self.imageView.bounds;
+    /*if([[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPhone) {
+        if ([[UIScreen mainScreen] bounds].size.height == 640) {
+            CGRect rect = self.imageViewContainer.bounds;
+            rect.size.height = 600;
+            [self.imageViewContainer setBounds:rect];
+        }
+        else {
+            //iphone 3.5 inch screen
+            CGRect rect = self.imageViewContainer.bounds;
+            rect.size.height = 400;
+            [self.imageViewContainer setBounds:rect];
+        }
+    }*/
+    
+    CGRect imageViewBounds = self.imageViewContainer.bounds;
     float imageViewAspectRatio = (float)imageViewBounds.size.width /(float)imageViewBounds.size.height;
     
     // create CGRect in center of imageView with the image's aspect ratio
@@ -99,6 +117,12 @@
         }
     }
     
+    // Figure out origin point
+    drawRect.origin.x = ((imageViewBounds.size.width - drawRect.size.width) / 2);
+    drawRect.origin.y = ((imageViewBounds.size.height - drawRect.size.height) / 2);
+    
+    self.imageView.contentMode = UIViewContentModeRedraw;
+    self.imageView.frame = drawRect;
     self.imageView.image = uiImage;
 }
 

@@ -14,6 +14,19 @@
 namespace Framework { namespace Math {
 
 /**
+ * Color Calculations
+ */
+    
+/**
+ * Calculate final lit color from diffuse, spec and ambient lighting
+ * for RGB channels. Alpha is set to surfaceDiffuse alpha.
+ */
+Color lightSurface(
+    const Color& lightDiffuse, const Color& surfaceDiffuse,
+    const Color& lightSpec, const Color& surfaceSpec,
+    const Color& lightAmb, const Color& surfaceAmb);
+    
+/**
  * Return a*(1-t) * b*t
  */
 float lerp(const float a, const float b, const float t);

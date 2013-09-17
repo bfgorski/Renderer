@@ -21,17 +21,25 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="renderViewButtonPressed:" destination="2" eventType="touchUpInside" id="4T0-cw-K7M"/>
+                                    <segue destination="dBt-WR-W8x" kind="modal" id="j5z-pi-HFx"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="VBi-j7-PDA" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="Hx9-3H-HDk"/>
-                            <constraint firstAttribute="trailing" secondItem="VBi-j7-PDA" secondAttribute="trailing" constant="8" id="tsl-Bj-58V"/>
+                            <constraint firstAttribute="trailing" secondItem="VBi-j7-PDA" secondAttribute="trailing" constant="5" id="XDf-aq-YfC"/>
+                            <constraint firstAttribute="bottom" secondItem="VBi-j7-PDA" secondAttribute="bottom" constant="6" id="dF8-mU-ZID"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="renderViewButton" destination="VBi-j7-PDA" id="YBj-NJ-FoT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-20" y="478"/>
         </scene>
         <!--Render View Controller - Render View-->
         <scene sceneID="iHj-eh-SmZ">
@@ -41,12 +49,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Knv-BH-hMR">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="308" id="eZF-Ks-f0p"/>
-                                    <constraint firstAttribute="height" constant="501" id="rBV-C7-Izr"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngl-I4-llz">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Render">
@@ -70,27 +72,61 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="2" kind="modal" id="FrP-PO-grJ"/>
+                                </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XM7-0s-fAI">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Save Image">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LDx-Ic-HP1">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Knv-BH-hMR">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="274" id="0et-ZG-mBA"/>
+                                            <constraint firstAttribute="height" constant="354" id="Lya-ot-Jo3"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Knv-BH-hMR" firstAttribute="leading" secondItem="LDx-Ic-HP1" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="6OM-nv-pDr"/>
+                                    <constraint firstItem="Knv-BH-hMR" firstAttribute="top" secondItem="LDx-Ic-HP1" secondAttribute="top" constant="68" id="bdg-k0-dij"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Knv-BH-hMR" firstAttribute="top" secondItem="zci-1x-22l" secondAttribute="top" constant="5" id="4jU-0J-aMq"/>
-                            <constraint firstItem="ngl-I4-llz" firstAttribute="leading" secondItem="Knv-BH-hMR" secondAttribute="leading" type="default" id="Epw-R1-NXx"/>
-                            <constraint firstItem="ngl-I4-llz" firstAttribute="top" secondItem="Knv-BH-hMR" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="FoN-bt-ydQ"/>
+                            <constraint firstItem="XM7-0s-fAI" firstAttribute="baseline" secondItem="ngl-I4-llz" secondAttribute="baseline" type="default" id="9SW-Jy-WiB"/>
+                            <constraint firstAttribute="bottom" secondItem="ngl-I4-llz" secondAttribute="bottom" constant="11" id="ESw-Wd-dR7"/>
                             <constraint firstAttribute="trailing" secondItem="MHd-EI-JcL" secondAttribute="trailing" constant="11" id="QCB-5a-DJN"/>
-                            <constraint firstItem="Knv-BH-hMR" firstAttribute="centerX" secondItem="zci-1x-22l" secondAttribute="centerX" type="default" id="pcS-hy-o9i"/>
-                            <constraint firstItem="MHd-EI-JcL" firstAttribute="baseline" secondItem="ngl-I4-llz" secondAttribute="baseline" type="default" id="qde-By-2rp"/>
+                            <constraint firstAttribute="bottom" secondItem="LDx-Ic-HP1" secondAttribute="bottom" constant="75" id="QGn-V2-3l0"/>
+                            <constraint firstItem="LDx-Ic-HP1" firstAttribute="leading" secondItem="zci-1x-22l" secondAttribute="leading" constant="6" id="TCv-2q-iDU"/>
+                            <constraint firstItem="LDx-Ic-HP1" firstAttribute="leading" secondItem="ngl-I4-llz" secondAttribute="leading" type="default" id="YO0-qn-Ild"/>
+                            <constraint firstItem="LDx-Ic-HP1" firstAttribute="centerX" secondItem="zci-1x-22l" secondAttribute="centerX" type="default" id="b3x-Iq-oyO"/>
+                            <constraint firstItem="XM7-0s-fAI" firstAttribute="leading" secondItem="zci-1x-22l" secondAttribute="leading" constant="96" id="gTe-zg-Dnp"/>
+                            <constraint firstItem="LDx-Ic-HP1" firstAttribute="top" secondItem="zci-1x-22l" secondAttribute="top" constant="5" id="h2u-81-PcR"/>
+                            <constraint firstItem="XM7-0s-fAI" firstAttribute="baseline" secondItem="MHd-EI-JcL" secondAttribute="baseline" type="default" id="iHt-fn-bvh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="neJ-uv-QoG"/>
                     <connections>
                         <outlet property="imageView" destination="Knv-BH-hMR" id="mM2-YW-xYF"/>
+                        <outlet property="imageViewContainer" destination="LDx-Ic-HP1" id="0lN-ND-GUk"/>
                         <outlet property="liveViewButton" destination="MHd-EI-JcL" id="M8K-Sb-aEo"/>
                         <outlet property="renderButton" destination="ngl-I4-llz" id="IIi-up-HhM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WFc-B8-pWt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="384" y="478"/>
         </scene>
     </scenes>
     <classes>
@@ -102,12 +138,17 @@
             <relationships>
                 <relationship kind="action" name="renderScene:"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imageViewContainer" candidateClass="UIView"/>
                 <relationship kind="outlet" name="liveViewButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="renderButton" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="ViewController" superclassName="GLKViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="renderViewButtonPressed:"/>
+                <relationship kind="outlet" name="renderViewButton" candidateClass="UIButton"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

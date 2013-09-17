@@ -18,6 +18,7 @@
 #include "Plane.h"
 #include "BasicTypesImpl.h"
 #include "PointLightSource.h"  
+#include "SimpleMaterial.h"
 
 using namespace Framework;
 
@@ -35,10 +36,10 @@ using namespace Framework;
 
 @synthesize name;
 @synthesize frameBuffer = m_fb;
-//@synthesize scene = m_scene;
 
 -(Renderer*) init: (NSString*) n
 {
+    self = [super init];
     /*
      Camera (0,0,10) looking at 0,0,0
      Sphere at (0,0,0) radius 5.
@@ -63,15 +64,25 @@ using namespace Framework;
     VectorF planeN(0,0,1);
     Plane * plane = new Plane(planePos, planeN);
     
+    // SimpleMaterial(const Color& d, const Color& s, const float specExp, const Color& a);
+    
+    Material *sphereMat = new SimpleMaterial(Color(0.5,0.5,0.5,1), Color(1,1,1,1), 50.0f, Color(0,0,0,1));
+    so->setMaterial(sphereMat);
+    
+    Material *planeMat = new SimpleMaterial(Color(0.5,0.5,0.5,1), Color(1,1,1,1), 50.0f, Color(0,0,0,1));
+    plane->setMaterial(planeMat);
+    
     Color ambient(0,0,0,1);
-    Color diffuse(0.25,0.25,0.25,1);
-    Color specular(0,0,0,0);
+    Color diffuse(0.5,0.25,0.25,1);
+    Color specular(1,1,1,0);
     
     PointF lightPos(5,0,5);
     PointLightSource *p0 = new PointLightSource(lightPos, ambient, diffuse, specular, 1.0f);
     m_scene->addLight(p0);
  
-    Color diffuse2(0.5,0.5,0.5,1);
+    Color diffuse2(0.5,0.75,0.5,1);
+    Color specular2(1,0,0,0);
+
     PointF light2Pos(-5,0,5);
     PointLightSource* p1 = new PointLightSource(light2Pos, ambient, diffuse2, specular, 1.0f);
     m_scene->addLight(p1);

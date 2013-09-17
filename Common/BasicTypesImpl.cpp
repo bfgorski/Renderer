@@ -8,8 +8,25 @@
 
 #include "BasicTypesImpl.h"
 
+const Framework::vec3 VZero(0,0,0);
+
 namespace Framework { namespace Math {
     
+/*
+ * Combine light and surface colors.
+ */
+Color lightSurface(
+                   const Color& lightDiffuse, const Color& surfaceDiffuse,
+                   const Color& lightSpec, const Color& surfaceSpec,
+                   const Color& lightAmb, const Color& surfaceAmb) {
+    Color c(
+            lightDiffuse.c[Red]*surfaceDiffuse.c[Red] + lightSpec.c[Red]*surfaceSpec.c[Red] + lightAmb.c[Red]*surfaceAmb.c[Red],
+            lightDiffuse.c[Green]*surfaceDiffuse.c[Green] + lightSpec.c[Green]*surfaceSpec.c[Green] + lightAmb.c[Green]*surfaceAmb.c[Green],
+            lightDiffuse.c[Blue]*surfaceDiffuse.c[Blue] + lightSpec.c[Blue]*surfaceSpec.c[Blue] + lightAmb.c[Blue]*surfaceAmb.c[Blue],
+            surfaceDiffuse.c[Alpha]
+            );
+    return c;
+}
 /**
  * Return a*(1-t) * b*t
  */

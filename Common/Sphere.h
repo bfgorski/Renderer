@@ -30,7 +30,8 @@ public:
     }
     
     float getRadius() const { return m_radius; }
-    const vec3& center() const { return m_pos;}
+    const vec3& center() const { return m_pos; }
+    
     
     virtual SOIntersectionType intersect(const Ray& r, SOIntersection* intersectionInfo) const ;
     

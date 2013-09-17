@@ -11,6 +11,8 @@
 #include "LightSource.h"
 #include "BasicTypesImpl.h"
 #include "SOIntersection.h"
+#include "Material.h"
+#include "IlluminateParams.h"
 
 static const float SHADOW_RAY_OFFSET = 0.001f;
 
@@ -46,7 +48,55 @@ Color Scene::traceRay(const Framework::Ray& r) const {
         return Color(0,0,0);
     }
     
-    Color c(0,0,0,1);
+    MaterialInfo materialInfo;
+    const Material* material = closestObject->getMaterial();
+    
+    // Evaluate material properties
+    if (NULL != material) {
+        /*
+         MaterialParams(
+             const PointF& p,
+             const TexCoord4& tex,
+             const Normal& n = VZero,
+             const Tangent& t = VZero,
+             const Tangent& biT = VZero
+         );
+         */
+        MaterialParams materialParams(
+            intersection.getPoint(),
+            intersection.getTexCoord(),
+            intersection.getNormal()
+        );
+        
+        material->evaluate(materialParams, materialInfo);
+    } else {
+        // Default material
+        materialInfo.setNormal(intersection.getNormal());
+    }
+    
+    /*
+     const PointF& p,
+     const Normal& n,
+     const PointF& eye,
+     const VectorF& specParams,
+     const float visibility,
+     const Tangent& t = VZero,
+     const Tangent& biT = VZero
+     
+     */
+    IlluminateParams illuminateParams(
+        intersection.getPoint(),
+        intersection.getNormal(),
+        m_viewPoint,
+        materialInfo.getSpecExp(),
+        1.0f,
+        intersection.getTangent(),
+        intersection.getBiTangent()
+    );
+    
+    Color diffuse(0,0,0,1);
+    Color specular(0,0,0,1);
+    Color ambient(0,0,0,1);
     
     // Accumulate Color from lights
     for(LightList::const_iterator it = m_lights.begin(); it != m_lights.end(); ++it) {
@@ -54,17 +104,20 @@ Color Scene::traceRay(const Framework::Ray& r) const {
         LightSource *l = (*it);
         
         float visibility = traceShadowRay(intersection.getPoint(), (*l));
+        illuminateParams.setVisibility(visibility);
         
-        bool illumResult = l->illuminate(intersection.getPoint(), intersection.getNormal(), m_viewPoint, visibility, closestObject, illuminateResult);
+        bool illumResult = l->illuminate(illuminateParams, closestObject, illuminateResult);
         
         if (!illumResult) {
             continue;
         }
         
-        c.accumulateColor(illuminateResult.getDif());
+        diffuse.accumulateColor(illuminateResult.getDif());
+        specular.accumulateColor(illuminateResult.getSpec());
+        ambient.accumulateColor(illuminateResult.getAmbient());
     }
     
-    return c;
+    return (Math::lightSurface(diffuse, materialInfo.getDiffuse(), specular, materialInfo.getSpecular(), ambient, materialInfo.getAmbient()));
 }
     
 float Scene::traceShadowRay(const Framework::PointF& p, const Framework::LightSource& l) const {
@@ -95,6 +148,8 @@ SceneObject *Scene::intersect(const Ray& r, SOIntersection* intersectionInfo, co
     for (int i = 0; i < m_scene.size(); ++i) {
         SceneObject *s = m_scene[i];
         PointF intersectionPoint;
+        
+        // Use the simple intersection routine to find the intersection point only
         SOIntersectionType intersectsObject = s->intersect(r, intersectionPoint);
         if (SOIntersectionNone != intersectsObject) {
             float dist = Math::vec3FastDist(r.pos, intersectionPoint);
