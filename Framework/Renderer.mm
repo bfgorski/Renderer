@@ -51,7 +51,7 @@ using namespace Framework;
     Ray r(camPos, camDir);
     VectorF up(0,1,0);
     
-    self.camera = [[Camera alloc] init:r upV:up Fov:45 AspectRatio:1.0f nearPlane:5.0f];
+    self.camera = [[Camera alloc] initWithRay:r upV:up Fov:45 AspectRatio:1.0f nearPlane:5.0f farPlane:100];
     self.frameBuffer = [[FrameBuffer alloc] init:100 height:100];
 
     m_scene = new Scene();

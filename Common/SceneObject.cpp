@@ -33,6 +33,10 @@ SceneObject& SceneObject::operator=(const Framework::SceneObject & s) {
     m_pos = s.m_pos;
     return (*this);
 }
+ 
+void SceneObject::applyTransform(const Math::Transform &t) {
+    m_pos = t.applyToPoint(m_pos);
+}
     
 }
 

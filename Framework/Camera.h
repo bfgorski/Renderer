@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BasicTypes.h"
 #import "Rectangle.h"
+#import "Transform.h"
 
 using namespace Framework;
 
@@ -18,6 +19,9 @@ using namespace Framework;
 
 // Near clipping plane distance from camera point.
 @property(readwrite, assign) float nearPlane;
+
+// Far clipping plane used for calculating a projection matrix
+@property(readwrite, assign) float farPlane;
 
 // Field of view in degrees
 @property(readwrite, assign) float fov;
@@ -40,7 +44,7 @@ using namespace Framework;
  * Init camera with position, direction, up vector, field of view, aspect ratio and near plane.
  *
  */
--(Camera*) init:(Ray) r upV:(VectorF)upV Fov:(float) fov AspectRatio:(float) ar nearPlane:(float)nearPlane;
+-(Camera*) initWithRay:(Ray) r upV:(VectorF)upV Fov:(float) fov AspectRatio:(float) ar nearPlane:(float)nearPlane farPlane:(float)farPlane;
 
 -(void) setPos: (PointF) p;
 -(PointF) getPos;
@@ -55,4 +59,8 @@ using namespace Framework;
  */
 -(Rectangle) getNearPlane;
 
+/**
+ * Apply a 4x4 transformation to
+ */
+-(void) applyTransform:(Math::Transform*)t;
 @end

@@ -11,6 +11,7 @@
 
 #include <string>
 #include "SOIntersection.h"
+#include "Transform.h"
 
 namespace Framework {
     
@@ -39,6 +40,12 @@ public:
     const std::string& getName() const { return m_name; }
     const PointF& getPos() const { return m_pos; }
     const Material* getMaterial() const { return m_material; }
+    
+    /**
+     * Transform a SceneObject by transforming its position.
+     * Object should override this and
+     */
+    virtual void applyTransform(const Math::Transform& t);
     
     /**
      * Determine if the indicated Ray intersects the object.

@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4916F04A17F2C595009EC552 /* Trackball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4916F04817F2C595009EC552 /* Trackball.cpp */; };
+		4916F04B17F2C595009EC552 /* Trackball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4916F04817F2C595009EC552 /* Trackball.cpp */; };
+		4916F04C17F2C595009EC552 /* Trackball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4916F04817F2C595009EC552 /* Trackball.cpp */; };
+		4916F04D17F2C595009EC552 /* Trackball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4916F04817F2C595009EC552 /* Trackball.cpp */; };
 		49170FC317DC597B0021A10C /* LightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954D5179E61F50036F5AE /* LightSource.cpp */; };
 		49170FC517DC597B0021A10C /* IlluminateResult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954DA179E6F730036F5AE /* IlluminateResult.cpp */; };
 		49170FC717DC597B0021A10C /* PointLightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954DE17A10EFB0036F5AE /* PointLightSource.cpp */; };
 		49170FC917DC597B0021A10C /* SceneObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE36147107B000B4ED2C /* SceneObject.cpp */; };
 		49170FCA17DC597B0021A10C /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954C4179523720036F5AE /* Scene.cpp */; };
-		49170FCC17DC597B0021A10C /* SceneObject.h in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE38147107BD00B4ED2C /* SceneObject.h */; };
 		49170FCE17DC597B0021A10C /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49D5135A1595A24B00C0ECAF /* Sphere.cpp */; };
 		49170FCF17DC597B0021A10C /* SOIntersection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954C817952ACA0036F5AE /* SOIntersection.cpp */; };
 		49170FD117DC597B0021A10C /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954EE17D1B3D90036F5AE /* Plane.cpp */; };
@@ -77,7 +80,6 @@
 		4989553217DB11C80036F5AE /* SceneObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE36147107B000B4ED2C /* SceneObject.cpp */; };
 		4989553317DB11C80036F5AE /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954C4179523720036F5AE /* Scene.cpp */; };
 		4989553417DB11C80036F5AE /* Scene.h in Sources */ = {isa = PBXBuildFile; fileRef = 498954C5179523720036F5AE /* Scene.h */; };
-		4989553517DB11C80036F5AE /* SceneObject.h in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE38147107BD00B4ED2C /* SceneObject.h */; };
 		4989553617DB11C80036F5AE /* Sphere.h in Sources */ = {isa = PBXBuildFile; fileRef = 49D513581595A23E00C0ECAF /* Sphere.h */; };
 		4989553717DB11C80036F5AE /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49D5135A1595A24B00C0ECAF /* Sphere.cpp */; };
 		4989553817DB11C80036F5AE /* SOIntersection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954C817952ACA0036F5AE /* SOIntersection.cpp */; };
@@ -105,13 +107,13 @@
 		4989556717DB25A00036F5AE /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4989556517DB25A00036F5AE /* MainStoryboard_iPad.storyboard */; };
 		4989556917DB25A00036F5AE /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 4989556817DB25A00036F5AE /* Shader.fsh */; };
 		4989556B17DB25A00036F5AE /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 4989556A17DB25A00036F5AE /* Shader.vsh */; };
-		4989556E17DB25A00036F5AE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4989556D17DB25A00036F5AE /* ViewController.m */; };
+		4989556E17DB25A00036F5AE /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4989556D17DB25A00036F5AE /* ViewController.mm */; };
 		4989557517DB25A10036F5AE /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495805B814C57683002AC459 /* SenTestingKit.framework */; };
 		4989557617DB25A10036F5AE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4989554717DB259E0036F5AE /* UIKit.framework */; };
 		4989557717DB25A10036F5AE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498BCE261471073700B4ED2C /* Foundation.framework */; };
 		4989557F17DB25A20036F5AE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4989557D17DB25A20036F5AE /* InfoPlist.strings */; };
 		4989558217DB25A20036F5AE /* SanAntonioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4989558117DB25A20036F5AE /* SanAntonioTests.m */; };
-		4989558B17DB30850036F5AE /* RenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4989558A17DB30850036F5AE /* RenderViewController.m */; };
+		4989558B17DB30850036F5AE /* RenderViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4989558A17DB30850036F5AE /* RenderViewController.mm */; };
 		498BCE271471073700B4ED2C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498BCE261471073700B4ED2C /* Foundation.framework */; };
 		498BCE2A1471073700B4ED2C /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 498BCE291471073700B4ED2C /* main.mm */; };
 		498BCE2E1471073700B4ED2C /* Renderer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 498BCE2D1471073700B4ED2C /* Renderer.1 */; };
@@ -134,18 +136,18 @@
 		49DF964517E6F6C2001C345B /* IlluminateParams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964217E6F6C2001C345B /* IlluminateParams.cpp */; };
 		49DF964617E6F6C2001C345B /* IlluminateParams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964217E6F6C2001C345B /* IlluminateParams.cpp */; };
 		49DF964717E6F6C2001C345B /* IlluminateParams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964217E6F6C2001C345B /* IlluminateParams.cpp */; };
-		49DF964917E850E6001C345B /* Quat.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964817E850E6001C345B /* Quat.c */; };
-		49DF964A17E850E6001C345B /* Quat.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964817E850E6001C345B /* Quat.c */; };
-		49DF964B17E850E6001C345B /* Quat.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964817E850E6001C345B /* Quat.c */; };
-		49DF964C17E850E6001C345B /* Quat.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964817E850E6001C345B /* Quat.c */; };
-		49DF965117E851AA001C345B /* Matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965017E851AA001C345B /* Matrix.c */; };
-		49DF965217E851AA001C345B /* Matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965017E851AA001C345B /* Matrix.c */; };
-		49DF965317E851AA001C345B /* Matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965017E851AA001C345B /* Matrix.c */; };
-		49DF965417E851AA001C345B /* Matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965017E851AA001C345B /* Matrix.c */; };
-		49DF965617E851B9001C345B /* Transform.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965517E851B9001C345B /* Transform.c */; };
-		49DF965717E851B9001C345B /* Transform.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965517E851B9001C345B /* Transform.c */; };
-		49DF965817E851B9001C345B /* Transform.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965517E851B9001C345B /* Transform.c */; };
-		49DF965917E851B9001C345B /* Transform.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965517E851B9001C345B /* Transform.c */; };
+		49DF964917E850E6001C345B /* Quat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964817E850E6001C345B /* Quat.cpp */; };
+		49DF964A17E850E6001C345B /* Quat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964817E850E6001C345B /* Quat.cpp */; };
+		49DF964B17E850E6001C345B /* Quat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964817E850E6001C345B /* Quat.cpp */; };
+		49DF964C17E850E6001C345B /* Quat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF964817E850E6001C345B /* Quat.cpp */; };
+		49DF965117E851AA001C345B /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965017E851AA001C345B /* Matrix.cpp */; };
+		49DF965217E851AA001C345B /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965017E851AA001C345B /* Matrix.cpp */; };
+		49DF965317E851AA001C345B /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965017E851AA001C345B /* Matrix.cpp */; };
+		49DF965417E851AA001C345B /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965017E851AA001C345B /* Matrix.cpp */; };
+		49DF965617E851B9001C345B /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965517E851B9001C345B /* Transform.cpp */; };
+		49DF965717E851B9001C345B /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965517E851B9001C345B /* Transform.cpp */; };
+		49DF965817E851B9001C345B /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965517E851B9001C345B /* Transform.cpp */; };
+		49DF965917E851B9001C345B /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965517E851B9001C345B /* Transform.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,6 +181,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4916F04817F2C595009EC552 /* Trackball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Trackball.cpp; path = Math/Trackball.cpp; sourceTree = "<group>"; };
+		4916F04917F2C595009EC552 /* Trackball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Trackball.h; path = Math/Trackball.h; sourceTree = "<group>"; };
 		49170FE617DD9CA60021A10C /* RenderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderManager.h; sourceTree = "<group>"; };
 		49170FE717DD9CA60021A10C /* RenderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenderManager.m; sourceTree = "<group>"; };
 		49170FEB17DF06780021A10C /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
@@ -249,14 +253,14 @@
 		4989556817DB25A00036F5AE /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
 		4989556A17DB25A00036F5AE /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
 		4989556C17DB25A00036F5AE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		4989556D17DB25A00036F5AE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		4989556D17DB25A00036F5AE /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		4989557417DB25A10036F5AE /* SanAntonioTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SanAntonioTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4989557C17DB25A20036F5AE /* SanAntonioTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SanAntonioTests-Info.plist"; sourceTree = "<group>"; };
 		4989557E17DB25A20036F5AE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4989558017DB25A20036F5AE /* SanAntonioTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SanAntonioTests.h; sourceTree = "<group>"; };
 		4989558117DB25A20036F5AE /* SanAntonioTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SanAntonioTests.m; sourceTree = "<group>"; };
 		4989558917DB30850036F5AE /* RenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderViewController.h; sourceTree = "<group>"; };
-		4989558A17DB30850036F5AE /* RenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenderViewController.m; sourceTree = "<group>"; };
+		4989558A17DB30850036F5AE /* RenderViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RenderViewController.mm; sourceTree = "<group>"; };
 		498BCE221471073700B4ED2C /* Renderer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Renderer; sourceTree = BUILT_PRODUCTS_DIR; };
 		498BCE261471073700B4ED2C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		498BCE291471073700B4ED2C /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -291,11 +295,11 @@
 		49DF963D17E5AAB9001C345B /* SimpleMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleMaterial.h; path = Materials/SimpleMaterial.h; sourceTree = "<group>"; };
 		49DF964217E6F6C2001C345B /* IlluminateParams.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IlluminateParams.cpp; path = Lights/IlluminateParams.cpp; sourceTree = "<group>"; };
 		49DF964317E6F6C2001C345B /* IlluminateParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IlluminateParams.h; path = Lights/IlluminateParams.h; sourceTree = "<group>"; };
-		49DF964817E850E6001C345B /* Quat.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Quat.c; path = Math/Quat.c; sourceTree = "<group>"; };
+		49DF964817E850E6001C345B /* Quat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Quat.cpp; path = Math/Quat.cpp; sourceTree = "<group>"; };
 		49DF964D17E850FD001C345B /* Quat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Quat.h; path = Math/Quat.h; sourceTree = "<group>"; };
 		49DF964F17E85196001C345B /* Matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Matrix.h; path = Math/Matrix.h; sourceTree = "<group>"; };
-		49DF965017E851AA001C345B /* Matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Matrix.c; path = Math/Matrix.c; sourceTree = "<group>"; };
-		49DF965517E851B9001C345B /* Transform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Transform.c; path = Math/Transform.c; sourceTree = "<group>"; };
+		49DF965017E851AA001C345B /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Matrix.cpp; path = Math/Matrix.cpp; sourceTree = "<group>"; };
+		49DF965517E851B9001C345B /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Transform.cpp; path = Math/Transform.cpp; sourceTree = "<group>"; };
 		49DF965A17E851CC001C345B /* Transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Transform.h; path = Math/Transform.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -365,6 +369,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4916F04717F1715F009EC552 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 		495805BC14C57683002AC459 /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -523,6 +534,7 @@
 		4989555017DB259E0036F5AE /* SanAntonio */ = {
 			isa = PBXGroup;
 			children = (
+				4916F04717F1715F009EC552 /* iPad */,
 				4989555917DB25A00036F5AE /* AppDelegate.h */,
 				4989555A17DB25A00036F5AE /* AppDelegate.mm */,
 				4989556217DB25A00036F5AE /* MainStoryboard_iPhone.storyboard */,
@@ -530,10 +542,10 @@
 				4989556817DB25A00036F5AE /* Shader.fsh */,
 				4989556A17DB25A00036F5AE /* Shader.vsh */,
 				4989556C17DB25A00036F5AE /* ViewController.h */,
-				4989556D17DB25A00036F5AE /* ViewController.m */,
+				4989556D17DB25A00036F5AE /* ViewController.mm */,
 				4989555117DB25A00036F5AE /* Supporting Files */,
 				4989558917DB30850036F5AE /* RenderViewController.h */,
-				4989558A17DB30850036F5AE /* RenderViewController.m */,
+				4989558A17DB30850036F5AE /* RenderViewController.mm */,
 			);
 			path = SanAntonio;
 			sourceTree = "<group>";
@@ -678,12 +690,14 @@
 		498BCE49147669C200B4ED2C /* Math */ = {
 			isa = PBXGroup;
 			children = (
-				49DF964817E850E6001C345B /* Quat.c */,
+				49DF964817E850E6001C345B /* Quat.cpp */,
 				49DF964D17E850FD001C345B /* Quat.h */,
 				49DF964F17E85196001C345B /* Matrix.h */,
-				49DF965017E851AA001C345B /* Matrix.c */,
-				49DF965517E851B9001C345B /* Transform.c */,
+				49DF965017E851AA001C345B /* Matrix.cpp */,
+				49DF965517E851B9001C345B /* Transform.cpp */,
 				49DF965A17E851CC001C345B /* Transform.h */,
+				4916F04817F2C595009EC552 /* Trackball.cpp */,
+				4916F04917F2C595009EC552 /* Trackball.h */,
 			);
 			name = Math;
 			sourceTree = "<group>";
@@ -982,15 +996,16 @@
 				498954D3179BD8560036F5AE /* BasicTypesImpl.cpp in Sources */,
 				498954D4179BDBB80036F5AE /* Camera.mm in Sources */,
 				498954D8179E61F60036F5AE /* LightSource.cpp in Sources */,
+				4916F04B17F2C595009EC552 /* Trackball.cpp in Sources */,
 				498954DD179E6F730036F5AE /* IlluminateResult.cpp in Sources */,
 				498954E117A10EFC0036F5AE /* PointLightSource.cpp in Sources */,
 				498954F117D1B3DB0036F5AE /* Plane.cpp in Sources */,
 				498954F517D9AF750036F5AE /* Material.cpp in Sources */,
 				49DF963F17E5AAB9001C345B /* SimpleMaterial.cpp in Sources */,
 				49DF964517E6F6C2001C345B /* IlluminateParams.cpp in Sources */,
-				49DF964A17E850E6001C345B /* Quat.c in Sources */,
-				49DF965217E851AA001C345B /* Matrix.c in Sources */,
-				49DF965717E851B9001C345B /* Transform.c in Sources */,
+				49DF964A17E850E6001C345B /* Quat.cpp in Sources */,
+				49DF965217E851AA001C345B /* Matrix.cpp in Sources */,
+				49DF965717E851B9001C345B /* Transform.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1007,7 +1022,6 @@
 				4989553217DB11C80036F5AE /* SceneObject.cpp in Sources */,
 				4989553317DB11C80036F5AE /* Scene.cpp in Sources */,
 				4989553417DB11C80036F5AE /* Scene.h in Sources */,
-				4989553517DB11C80036F5AE /* SceneObject.h in Sources */,
 				4989553617DB11C80036F5AE /* Sphere.h in Sources */,
 				4989553717DB11C80036F5AE /* Sphere.cpp in Sources */,
 				4989553817DB11C80036F5AE /* SOIntersection.cpp in Sources */,
@@ -1025,12 +1039,13 @@
 				4989552917DB11380036F5AE /* Renderer.mm in Sources */,
 				4989552A17DB11810036F5AE /* FrameBuffer.mm in Sources */,
 				4989552B17DB11880036F5AE /* Camera.mm in Sources */,
+				4916F04C17F2C595009EC552 /* Trackball.cpp in Sources */,
 				49170FE917DD9CA70021A10C /* RenderManager.m in Sources */,
 				49DF964017E5AAB9001C345B /* SimpleMaterial.cpp in Sources */,
 				49DF964617E6F6C2001C345B /* IlluminateParams.cpp in Sources */,
-				49DF964B17E850E6001C345B /* Quat.c in Sources */,
-				49DF965317E851AA001C345B /* Matrix.c in Sources */,
-				49DF965817E851B9001C345B /* Transform.c in Sources */,
+				49DF964B17E850E6001C345B /* Quat.cpp in Sources */,
+				49DF965317E851AA001C345B /* Matrix.cpp in Sources */,
+				49DF965817E851B9001C345B /* Transform.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1048,10 +1063,10 @@
 			files = (
 				49170FC317DC597B0021A10C /* LightSource.cpp in Sources */,
 				49170FC517DC597B0021A10C /* IlluminateResult.cpp in Sources */,
+				4916F04D17F2C595009EC552 /* Trackball.cpp in Sources */,
 				49170FC717DC597B0021A10C /* PointLightSource.cpp in Sources */,
 				49170FC917DC597B0021A10C /* SceneObject.cpp in Sources */,
 				49170FCA17DC597B0021A10C /* Scene.cpp in Sources */,
-				49170FCC17DC597B0021A10C /* SceneObject.h in Sources */,
 				49170FCE17DC597B0021A10C /* Sphere.cpp in Sources */,
 				49170FCF17DC597B0021A10C /* SOIntersection.cpp in Sources */,
 				49170FD117DC597B0021A10C /* Plane.cpp in Sources */,
@@ -1063,14 +1078,14 @@
 				49170FE017DC597B0021A10C /* SceneParser.m in Sources */,
 				4989555717DB25A00036F5AE /* main.m in Sources */,
 				4989555B17DB25A00036F5AE /* AppDelegate.mm in Sources */,
-				4989556E17DB25A00036F5AE /* ViewController.m in Sources */,
-				4989558B17DB30850036F5AE /* RenderViewController.m in Sources */,
+				4989556E17DB25A00036F5AE /* ViewController.mm in Sources */,
+				4989558B17DB30850036F5AE /* RenderViewController.mm in Sources */,
 				49170FEA17DD9CA70021A10C /* RenderManager.m in Sources */,
 				49DF964117E5AAB9001C345B /* SimpleMaterial.cpp in Sources */,
 				49DF964717E6F6C2001C345B /* IlluminateParams.cpp in Sources */,
-				49DF964C17E850E6001C345B /* Quat.c in Sources */,
-				49DF965417E851AA001C345B /* Matrix.c in Sources */,
-				49DF965917E851B9001C345B /* Transform.c in Sources */,
+				49DF964C17E850E6001C345B /* Quat.cpp in Sources */,
+				49DF965417E851AA001C345B /* Matrix.cpp in Sources */,
+				49DF965917E851B9001C345B /* Transform.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1090,6 +1105,7 @@
 				498BCE37147107B000B4ED2C /* SceneObject.cpp in Sources */,
 				498BCE3E1471091C00B4ED2C /* Renderer.mm in Sources */,
 				498BCE421472505500B4ED2C /* SceneParser.m in Sources */,
+				4916F04A17F2C595009EC552 /* Trackball.cpp in Sources */,
 				498BCE451472569400B4ED2C /* Camera.mm in Sources */,
 				498BCE471476651000B4ED2C /* BasicTypesImpl.cpp in Sources */,
 				498BCE4D14766B4500B4ED2C /* FrameBuffer.mm in Sources */,
@@ -1104,9 +1120,9 @@
 				49170FE817DD9CA70021A10C /* RenderManager.m in Sources */,
 				49DF963E17E5AAB9001C345B /* SimpleMaterial.cpp in Sources */,
 				49DF964417E6F6C2001C345B /* IlluminateParams.cpp in Sources */,
-				49DF964917E850E6001C345B /* Quat.c in Sources */,
-				49DF965117E851AA001C345B /* Matrix.c in Sources */,
-				49DF965617E851B9001C345B /* Transform.c in Sources */,
+				49DF964917E850E6001C345B /* Quat.cpp in Sources */,
+				49DF965117E851AA001C345B /* Matrix.cpp in Sources */,
+				49DF965617E851B9001C345B /* Transform.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1332,6 +1348,7 @@
 		4989558417DB25A20036F5AE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1349,12 +1366,13 @@
 				GCC_PREFIX_HEADER = "SanAntonio/SanAntonio-Prefix.pch";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INFOPLIST_FILE = "SanAntonio/SanAntonio-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				"OTHER_CFLAGS[arch=*]" = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1362,6 +1380,7 @@
 		4989558517DB25A20036F5AE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1379,13 +1398,14 @@
 				GCC_PREFIX_HEADER = "SanAntonio/SanAntonio-Prefix.pch";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INFOPLIST_FILE = "SanAntonio/SanAntonio-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -27,6 +27,11 @@ Color lightSurface(
     const Color& lightAmb, const Color& surfaceAmb);
     
 /**
+ * Component wise comparison
+ */
+bool isEqual(const vec3&, const vec3&, const float delta = 0);
+
+/**
  * Return a*(1-t) * b*t
  */
 float lerp(const float a, const float b, const float t);
@@ -69,7 +74,7 @@ vec3 vec3AXPlusB(const vec3& a, const float x, const vec3& b);
  * Return component wise A*X + B*Y.
  */
 vec3 vec3AXPlusBY(const vec3& a, const float x, const vec3&b, const float y);
-    
+ 
 float dot3(const vec3& a, const vec3& b);
 float dot3(const vec4& a, const vec4& b);
 float dot4(const vec4& a, const vec4& b);

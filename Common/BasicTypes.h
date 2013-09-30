@@ -16,17 +16,38 @@ namespace Framework {
 class vec3 {
     
 public:
-    vec3() {}
+    vec3() { v[0] = v[1] = v[2] = 0; }
     vec3(const vec3& v1) { v[0] = v1.v[0]; v[1] = v1.v[1]; v[2] = v1.v[2]; }
     vec3(const float x, const float y, const float z) {v[0] = x; v[1] = y; v[2] = z;}
+    
+    float x() const { return v[0]; }
+    float y() const { return v[1]; }
+    float z() const { return v[2]; }
     
     float length() const { return sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]); }
     void scale(const float f) { v[0]*=f; v[1]*=f; v[2]*=f; }
     void increment(const vec3& v1) { v[0] += v1.v[0]; v[1] += v1.v[1]; v[2] += v1.v[2];}
+    void normalize() {
+        float l = 1.0/length();
+        scale(l);
+    }
+    
+    void clamp(const float f) {
+        for (int i = 0; i < 3; ++i) {
+            if (fabs(v[i]) < f) {
+                v[i] = 0;
+            }
+        }
+    }
     
     float v[3];
 };
 
+enum AngleType {
+    RADIANS = 0,
+    DEGREES = 1,
+};
+    
 enum Axes {
     XAxis = 0,
     X = 0,
@@ -63,6 +84,7 @@ typedef struct vec4 vec4;
     
 typedef vec4 ProjPointF;
 typedef vec3 PointF;
+typedef vec2 Point2F;
 typedef vec3 VectorF;
 typedef vec3 Normal;
 typedef vec3 Tangent;
@@ -131,14 +153,7 @@ struct Ray {
 };
 
 typedef struct Ray Ray;
-
-struct Matrix {
-    vec4 m[4];
-};
-
-typedef struct Matrix Matrix;
-typedef Matrix Transform;
-    
+  
 struct Pixel {
     // RGBA
     Color c;
@@ -146,6 +161,16 @@ struct Pixel {
 
 typedef struct Pixel Pixel;
 
+/**
+ * Coordinate Frame defined by 3 vectors and a point.
+ */
+struct Frame {
+    VectorF u, v, w;
+    PointF origin;
+};
+    
+typedef struct Frame Frame;
+    
 }
 
 extern const Framework::vec3 VZero;

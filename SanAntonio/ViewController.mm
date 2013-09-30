@@ -7,6 +7,10 @@
 //
 
 #import "ViewController.h"
+#import <UIKit/UIPanGestureRecognizer.h>
+#import <UIKit/UITapGestureRecognizer.h>
+#import "Camera.h"
+#include "Trackball.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
@@ -74,6 +78,12 @@ GLfloat gCubeVertexData[216] =
     -0.5f, 0.5f, -0.5f,        0.0f, 0.0f, -1.0f
 };
 
+static GLfloat DEFAULT_FOV_IN_DEGREES = 65.0f;
+static GLfloat DEFAULT_NEAR_PLANE = 0.1;
+static GLfloat DEFAULT_FAR_PLANE = 100;
+
+using namespace Framework;
+
 @interface ViewController () {
     GLuint _program;
     
@@ -83,9 +93,13 @@ GLfloat gCubeVertexData[216] =
     
     GLuint _vertexArray;
     GLuint _vertexBuffer;
+    
+    Math::Trackball m_trackBall;
 }
+
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
+@property (strong, nonatomic) Camera *camera;
 
 - (void)setupGL;
 - (void)tearDownGL;
@@ -107,6 +121,47 @@ GLfloat gCubeVertexData[216] =
     if (!self.context) {
         NSLog(@"Failed to create ES context");
     }
+    
+    m_trackBall.setRadius(0.9);
+    m_trackBall.reset();
+    
+    /*
+     Camera (0,0,10) looking at 0,0,0
+     Sphere at (0,0,0) radius 5.
+     
+     Light at (0,0,10)
+     */
+    PointF camPos(0,0,5);
+    VectorF camDir(0,0,-1);
+    Ray r(camPos, camDir);
+    VectorF up(0,1,0);
+    
+    float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
+    self.camera = [[Camera alloc] initWithRay:r upV:up Fov:DEFAULT_FOV_IN_DEGREES AspectRatio:aspect nearPlane:DEFAULT_NEAR_PLANE farPlane:DEFAULT_FAR_PLANE];
+    self.camera.focalPoint = PointF(0,0,0);
+    
+    // Ping to zoom ina and out
+    UIPanGestureRecognizer *pinch = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGestureRecognizer:)];
+    
+    // Single Tap to stop/start rotation
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureRecognizer:)];
+    singleTap.numberOfTapsRequired = 1;
+    singleTap.numberOfTouchesRequired = 1;
+    
+    // Double tap to display options
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognizer:)];
+    doubleTap.numberOfTapsRequired = 2;
+    doubleTap.numberOfTouchesRequired = 1;
+    
+    UIPanGestureRecognizer * panGestureRecognizer = [[UIPanGestureRecognizer alloc]
+                                                     initWithTarget:self action: @selector(panGestureRecognizer:)];
+    panGestureRecognizer.minimumNumberOfTouches  = 1;
+    panGestureRecognizer.maximumNumberOfTouches = 2;
+    
+    [self.view addGestureRecognizer:pinch];
+    [self.view addGestureRecognizer:singleTap];
+    [self.view addGestureRecognizer:doubleTap];
+    [self.view addGestureRecognizer:panGestureRecognizer];
     
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
@@ -188,31 +243,64 @@ GLfloat gCubeVertexData[216] =
 
 - (void)update
 {
-    float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
-    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
+    float aspect = self.camera.aspectRatio; // fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
+    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(
+        GLKMathDegreesToRadians(self.camera.fov), aspect, self.camera.nearPlane, self.camera.farPlane
+    );
     
+    // eye, center, up
+    PointF pos = [self.camera getPos];
+    PointF focalPoint = self.camera.focalPoint;
+    VectorF up = self.camera.up;
+    GLKMatrix4 lookAt = GLKMatrix4MakeLookAt(
+        pos.x(), pos.y(), pos.z(),
+        focalPoint.x(), focalPoint.y(), focalPoint.z(),
+        up.x(), up.y(), up.z()
+    );
+    
+    GLKMatrix4 trackBallMatrix = GLKMatrix4Identity;
+  
+    // quat rotation comes first
+    Framework::Math::Quat q = m_trackBall.getCurrentRotation();
+    if (q.length() > 0) {
+        GLKQuaternion quaternion;
+        
+        quaternion.s = q.s();
+        quaternion.v.x = q.x();
+        quaternion.v.y = q.y();
+        quaternion.v.z = q.z();
+        
+        trackBallMatrix = GLKMatrix4MakeWithQuaternion(quaternion);
+        
+        // rotate the camera by the trackball's rotation.
+        lookAt = GLKMatrix4Multiply(lookAt, trackBallMatrix);
+    }
+    
+    projectionMatrix =  GLKMatrix4Multiply(projectionMatrix, lookAt);
     self.effect.transform.projectionMatrix = projectionMatrix;
-    
-    GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -4.0f);
-    baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _rotation, 0.0f, 1.0f, 0.0f);
+   
+    GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
+    //baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _rotation, 0.0f, 1.0f, 0.0f);
     
     // Compute the model view matrix for the object rendered with GLKit
-    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -1.5f);
-    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
+    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
+    //modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
     modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
+    //modelViewMatrix = GLKMatrix4Multiply(modelViewMatrix, trackBallMatrix);
     
     self.effect.transform.modelviewMatrix = modelViewMatrix;
     
     // Compute the model view matrix for the object rendered with ES2
-    modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 1.5f);
-    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
+    modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
+    //modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
     modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
+    //modelViewMatrix = GLKMatrix4Multiply(modelViewMatrix, trackBallMatrix);
     
     _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
     
     _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
     
-    _rotation += self.timeSinceLastUpdate * 0.5f;
+    //_rotation += self.timeSinceLastUpdate * 0.5f;
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
@@ -223,9 +311,9 @@ GLfloat gCubeVertexData[216] =
     glBindVertexArrayOES(_vertexArray);
     
     // Render the object with GLKit
-    [self.effect prepareToDraw];
+    //[self.effect prepareToDraw];
     
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    //glDrawArrays(GL_TRIANGLES, 0, 36);
     
     // Render the object again with ES2
     glUseProgram(_program);
@@ -389,5 +477,109 @@ GLfloat gCubeVertexData[216] =
 }
 
 - (IBAction)renderViewButtonPressed:(id)sender {}
+
+- (IBAction)singleTapGestureRecognizer:(UITapGestureRecognizer*)recognizer {
+   
+    if (UIGestureRecognizerStateEnded == recognizer.state)
+    {
+         NSLog(@"Single Tap Gesture State Ended\n");
+        // Single tap stops and starts trackball.
+    } else {
+        NSLog(@"Single Tap Gesture State %d\n", recognizer.state);
+    }
+}
+
+- (IBAction)doubleTapGestureRecognizer:(UITapGestureRecognizer*)recognizer {
+  
+    if (UIGestureRecognizerStateEnded == recognizer.state)
+    {
+        // Double tap stops trackbal and show menu
+        NSLog(@"Double Tap Gesture State Ended\n");
+    } else {
+        NSLog(@"Double Tap Gesture State %d\n", recognizer.state);
+    }
+}
+
+- (IBAction)longPressGestureRecognizer:(UILongPressGestureRecognizer*)recognizer {
+     NSLog( @"%@\n", [recognizer description]);
+}
+
+- (IBAction)pinchGestureRecognizer:(UIPinchGestureRecognizer*)recognizer {
+    if (UIGestureRecognizerStateBegan == recognizer.state) {
+        ;
+    } else if (UIGestureRecognizerStateChanged == recognizer.state) {
+        NSLog(@"Pinch Scale(%.2f) Velocity(%.2f)\n", recognizer.scale, recognizer.velocity);
+    }
+}
+
+- (IBAction)panGestureRecognizer:(UIPanGestureRecognizer *)recognizer {
+    NSUInteger width = self.view.bounds.size.width;
+    NSUInteger height = self.view.bounds.size.height;
+    CGPoint t = [recognizer translationInView:self.view];
+    CGPoint v = [recognizer velocityInView:self.view];
+    CGPoint l = [recognizer locationInView:self.view];
+    
+    NSString * state = @"Unknown";
+    
+    // Translate pan location to [-1,1]
+    // and create a point on a sphere for rotations
+    if (UIGestureRecognizerStateBegan == recognizer.state) {
+        // On pan start get initial position for trackball rotation
+        //state = @"Began";
+        
+        float x = -(2*l.x / (width) - 1);
+        float y = -(2*l.y / (height) - 1);
+        m_trackBall.initialize(x,y);
+    }
+    else if (UIGestureRecognizerStateChanged == recognizer.state) {
+        // On pan start get initial position for trackball rotation
+        //state = @"Changed";
+        
+        // get location in [-1,1];
+        /*
+           iOS screen layout:
+         
+            [0,0] .... [1,0]
+         
+            [0,1] .... [1,1]
+         
+           Maps to 
+            [-1,1]  .. [1,1]
+         
+            [-1,-1] .. [1,-1]
+         */
+        float x = -(2*l.x / (width) - 1);
+        float y = -(2*l.y / (height) - 1);
+        
+        Framework::PointF p = m_trackBall.projectToSphere(x, y);
+        
+        m_trackBall.updateRotation(x,y);
+        
+        Framework::Math::Quat q = m_trackBall.getCurrentRotation();
+        
+        float angle;
+        Framework::VectorF vector;
+        
+        q.extractAngleAndVector(angle, vector);
+        angle = (angle*180/M_PI);
+        
+        NSLog(@"TB (%.2f,%.2f) -> (%.2f,%.2f,%.2f) (%.2f,%.2f,%.2f,%.2f)\n",
+              x, y, p.v[0], p.v[1], p.v[2], angle, vector.v[0], vector.v[1], vector.v[2]);
+        
+        /*
+         // Apply Rotation to camera
+         Math::Matrix44 trackBallMatrix =
+         [self.camera applyTransform:m_trackBall.getCurrentRotation().getMatrix()];
+         */
+    }
+    else if (UIGestureRecognizerStateEnded == recognizer.state ||
+               UIGestureRecognizerStateChanged == recognizer.state) {
+       state = @"Ended";
+        m_trackBall.disable();
+        
+         NSLog( @"Pan %@ %d %d L(%.2f,%.2f) T(%.2f,%.2f) V(%.2f,%.2f)\n", state, width, height, l.x, l.y, t.x, t.y, v.x, v.y);
+    }
+}
+
 
 @end

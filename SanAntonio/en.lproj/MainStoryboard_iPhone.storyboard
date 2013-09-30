@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="dBt-WR-W8x">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="dBt-WR-W8x">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <deployment defaultVersion="1552" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8gJ-ko-CCg"/>
+                        <viewControllerLayoutGuide type="bottom" id="F6W-Og-YmK"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3" customClass="GLKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBi-j7-PDA">
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <rect key="frame" x="228" y="532" width="87" height="30"/>
                                 <state key="normal" title="Render View">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="renderViewButtonPressed:" destination="2" eventType="touchUpInside" id="4T0-cw-K7M"/>
@@ -45,18 +46,18 @@
         <scene sceneID="iHj-eh-SmZ">
             <objects>
                 <viewController title="Render View" id="dBt-WR-W8x" customClass="RenderViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="miq-wO-XPV"/>
+                        <viewControllerLayoutGuide type="bottom" id="BSB-Ng-B0D"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zci-1x-22l">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngl-I4-llz">
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <rect key="frame" x="6" y="527" width="50" height="30"/>
                                 <state key="normal" title="Render">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="renderScene:" destination="WFc-B8-pWt" eventType="touchUpInside" id="6zv-AX-UzD"/>
@@ -64,31 +65,25 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHd-EI-JcL">
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <rect key="frame" x="244" y="527" width="65" height="30"/>
                                 <state key="normal" title="Live View">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="2" kind="modal" id="FrP-PO-grJ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XM7-0s-fAI">
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <rect key="frame" x="96" y="527" width="81" height="30"/>
                                 <state key="normal" title="Save Image">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LDx-Ic-HP1">
+                                <rect key="frame" x="6" y="5" width="308" height="488"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Knv-BH-hMR">
+                                        <rect key="frame" x="20" y="68" width="274" height="354"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="274" id="0et-ZG-mBA"/>
                                             <constraint firstAttribute="height" constant="354" id="Lya-ot-Jo3"/>
@@ -97,23 +92,23 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Knv-BH-hMR" firstAttribute="leading" secondItem="LDx-Ic-HP1" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="6OM-nv-pDr"/>
+                                    <constraint firstItem="Knv-BH-hMR" firstAttribute="leading" secondItem="LDx-Ic-HP1" secondAttribute="leading" constant="20" symbolic="YES" id="6OM-nv-pDr"/>
                                     <constraint firstItem="Knv-BH-hMR" firstAttribute="top" secondItem="LDx-Ic-HP1" secondAttribute="top" constant="68" id="bdg-k0-dij"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="XM7-0s-fAI" firstAttribute="baseline" secondItem="ngl-I4-llz" secondAttribute="baseline" type="default" id="9SW-Jy-WiB"/>
+                            <constraint firstItem="XM7-0s-fAI" firstAttribute="baseline" secondItem="ngl-I4-llz" secondAttribute="baseline" id="9SW-Jy-WiB"/>
                             <constraint firstAttribute="bottom" secondItem="ngl-I4-llz" secondAttribute="bottom" constant="11" id="ESw-Wd-dR7"/>
                             <constraint firstAttribute="trailing" secondItem="MHd-EI-JcL" secondAttribute="trailing" constant="11" id="QCB-5a-DJN"/>
                             <constraint firstAttribute="bottom" secondItem="LDx-Ic-HP1" secondAttribute="bottom" constant="75" id="QGn-V2-3l0"/>
                             <constraint firstItem="LDx-Ic-HP1" firstAttribute="leading" secondItem="zci-1x-22l" secondAttribute="leading" constant="6" id="TCv-2q-iDU"/>
-                            <constraint firstItem="LDx-Ic-HP1" firstAttribute="leading" secondItem="ngl-I4-llz" secondAttribute="leading" type="default" id="YO0-qn-Ild"/>
-                            <constraint firstItem="LDx-Ic-HP1" firstAttribute="centerX" secondItem="zci-1x-22l" secondAttribute="centerX" type="default" id="b3x-Iq-oyO"/>
+                            <constraint firstItem="LDx-Ic-HP1" firstAttribute="leading" secondItem="ngl-I4-llz" secondAttribute="leading" id="YO0-qn-Ild"/>
+                            <constraint firstItem="LDx-Ic-HP1" firstAttribute="centerX" secondItem="zci-1x-22l" secondAttribute="centerX" id="b3x-Iq-oyO"/>
                             <constraint firstItem="XM7-0s-fAI" firstAttribute="leading" secondItem="zci-1x-22l" secondAttribute="leading" constant="96" id="gTe-zg-Dnp"/>
                             <constraint firstItem="LDx-Ic-HP1" firstAttribute="top" secondItem="zci-1x-22l" secondAttribute="top" constant="5" id="h2u-81-PcR"/>
-                            <constraint firstItem="XM7-0s-fAI" firstAttribute="baseline" secondItem="MHd-EI-JcL" secondAttribute="baseline" type="default" id="iHt-fn-bvh"/>
+                            <constraint firstItem="XM7-0s-fAI" firstAttribute="baseline" secondItem="MHd-EI-JcL" secondAttribute="baseline" id="iHt-fn-bvh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="neJ-uv-QoG"/>
@@ -129,30 +124,8 @@
             <point key="canvasLocation" x="384" y="478"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="RenderViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RenderViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="renderScene:"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imageViewContainer" candidateClass="UIView"/>
-                <relationship kind="outlet" name="liveViewButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="renderButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="ViewController" superclassName="GLKViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="renderViewButtonPressed:"/>
-                <relationship kind="outlet" name="renderViewButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <nil key="statusBar"/>
+        <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>

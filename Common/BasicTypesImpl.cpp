@@ -27,6 +27,16 @@ Color lightSurface(
             );
     return c;
 }
+    
+bool isEqual(const vec3& v0, const vec3& v1, const float delta) {
+    for (int i = 0; i < 3; ++i) {
+        if (fabs(v0.v[i] - v1.v[i]) > delta) {
+            return false;
+        }
+    }
+    return true;
+}
+    
 /**
  * Return a*(1-t) * b*t
  */
@@ -153,10 +163,4 @@ vec3 affine3(const vec3& a, const vec3& b, const float t) {
 }
     
 }
-
-    
-    
-    
-    
-    
 }

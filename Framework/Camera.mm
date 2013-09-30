@@ -9,6 +9,7 @@
 #import "Camera.h"
 #import "BasicTypes.h"
 #import "BasicTypesImpl.h"
+#import "Transform.h"
 
 using namespace Framework;
 
@@ -47,13 +48,14 @@ static const float DEFAULT_FOCAL_LENGTH = 10.0f;
     return self;
 }
 
--(Camera*) init:(Ray)r upV:(VectorF)upV Fov:(float)fov AspectRatio:(float)ar nearPlane:(float)nearPlane
+-(Camera*) initWithRay:(Ray)r upV:(VectorF)upV Fov:(float)fov AspectRatio:(float)ar nearPlane:(float)nearPlane farPlane:(float)farPlane
 {
     [self setPosDir:r];
     self.up = upV;
     [self setAspectRatio:ar];
     [self setFov:fov];
     self.nearPlane = nearPlane;
+    self.farPlane = farPlane;
     [self setDefaultFocalPoint];
     return self;
 }
@@ -115,6 +117,17 @@ static const float DEFAULT_FOCAL_LENGTH = 10.0f;
     r.rightLen = width*2;
     return r;
 }
+
+- (void) applyTransform:(Math::Transform *)t {
+    self.up = t->applyToVector(self.up);
+    self.focalPoint = t->applyToPoint(self.focalPoint);
+    self.posDir = t->applyToRay(self.posDir);
+}
+
+
+
+
+
 
 
 @end
