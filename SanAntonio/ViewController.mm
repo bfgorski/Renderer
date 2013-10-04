@@ -11,6 +11,7 @@
 #import <UIKit/UITapGestureRecognizer.h>
 #import "Camera.h"
 #include "Trackball.h"
+#include "BasicTypesImpl.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
@@ -29,6 +30,13 @@ enum
     ATTRIB_VERTEX,
     ATTRIB_NORMAL,
     NUM_ATTRIBUTES
+};
+
+GLfloat trackBallVertexData[24] = {
+    0.2,0.2,-0.5, 1,0,0,
+    0.2,0.8,-0.5, 0,1,0,
+    0.8,0.8,-0.5, 0,1,0,
+    0.8,0.2,-0.5, 0,0,1,
 };
 
 GLfloat gCubeVertexData[216] = 
@@ -94,7 +102,18 @@ using namespace Framework;
     GLuint _vertexArray;
     GLuint _vertexBuffer;
     
+    GLuint _tbVertexArray;
+    GLuint _tbVertexBuffer;
+    
     Math::Trackball m_trackBall;
+    
+    NSDate *m_camPinchLastTime;
+    
+    /**
+     * Rectangle that can be drawn on screen to show where
+     * the trackball boundary is.
+     */
+    CGPathRef m_trackBallRect;
 }
 
 @property (strong, nonatomic) EAGLContext *context;
@@ -108,6 +127,7 @@ using namespace Framework;
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
 - (BOOL)linkProgram:(GLuint)prog;
 - (BOOL)validateProgram:(GLuint)prog;
+
 @end
 
 @implementation ViewController
@@ -121,6 +141,10 @@ using namespace Framework;
     if (!self.context) {
         NSLog(@"Failed to create ES context");
     }
+    
+    /*
+     * Initialize UI
+     */
     
     m_trackBall.setRadius(0.9);
     m_trackBall.reset();
@@ -140,8 +164,11 @@ using namespace Framework;
     self.camera = [[Camera alloc] initWithRay:r upV:up Fov:DEFAULT_FOV_IN_DEGREES AspectRatio:aspect nearPlane:DEFAULT_NEAR_PLANE farPlane:DEFAULT_FAR_PLANE];
     self.camera.focalPoint = PointF(0,0,0);
     
-    // Ping to zoom ina and out
-    UIPanGestureRecognizer *pinch = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGestureRecognizer:)];
+    // Pinch to zoom in and out
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGestureRecognizer:)];
+    
+    // Rotate gesture to change the roll of the camera
+    UIRotationGestureRecognizer *rotate = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotateGestureRecognizer:)];
     
     // Single Tap to stop/start rotation
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureRecognizer:)];
@@ -149,15 +176,17 @@ using namespace Framework;
     singleTap.numberOfTouchesRequired = 1;
     
     // Double tap to display options
-    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognizer:)];
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapGestureRecognizer:)];
     doubleTap.numberOfTapsRequired = 2;
     doubleTap.numberOfTouchesRequired = 1;
     
+    // Single finger pan operates the trackball to rotate the camera
     UIPanGestureRecognizer * panGestureRecognizer = [[UIPanGestureRecognizer alloc]
                                                      initWithTarget:self action: @selector(panGestureRecognizer:)];
     panGestureRecognizer.minimumNumberOfTouches  = 1;
     panGestureRecognizer.maximumNumberOfTouches = 2;
     
+    [self.view addGestureRecognizer:rotate];
     [self.view addGestureRecognizer:pinch];
     [self.view addGestureRecognizer:singleTap];
     [self.view addGestureRecognizer:doubleTap];
@@ -166,6 +195,20 @@ using namespace Framework;
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+    
+    
+    /**
+     * Set a rectangle to draw screen space bounds for the rectangle.
+     */
+    NSUInteger width = self.view.bounds.size.width;
+    NSUInteger height = self.view.bounds.size.height;
+    
+    CGRect trackBallRect;
+    trackBallRect.size.height = height*m_trackBall.getRadius();
+    trackBallRect.size.width = width*m_trackBall.getRadius();
+    trackBallRect.origin.x = (width - trackBallRect.size.width)*0.5;
+    trackBallRect.origin.y = (height - trackBallRect.size.height)*0.5;
+    m_trackBallRect = CGPathCreateWithRect(trackBallRect, NULL);
     
     [self setupGL];
 }
@@ -177,6 +220,8 @@ using namespace Framework;
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
     }
+    
+    CGPathRelease(m_trackBallRect);
 }
 
 - (void)didReceiveMemoryWarning
@@ -204,8 +249,12 @@ using namespace Framework;
     [self loadShaders];
     
     self.effect = [[GLKBaseEffect alloc] init];
-    self.effect.light0.enabled = GL_TRUE;
+    self.effect.light0.enabled = GL_FALSE;
     self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
+    
+    GLKVector4 c;
+    c.r = 1; c.g = c.g = 0; c.a = 1;
+    self.effect.constantColor = c;
     
     glEnable(GL_DEPTH_TEST);
     
@@ -221,12 +270,30 @@ using namespace Framework;
     glEnableVertexAttribArray(GLKVertexAttribNormal);
     glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
     
-    glBindVertexArrayOES(0);
+    glBindVertexArrayOES(_vertexArray);
+    
+    glGenVertexArraysOES(1, &_tbVertexArray);
+    glBindVertexArrayOES(_tbVertexArray);
+    
+    glGenBuffers(1, &_tbVertexBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, _tbVertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(trackBallVertexData), trackBallVertexData, GL_STATIC_DRAW);
+    
+    glEnableVertexAttribArray(GLKVertexAttribPosition);
+    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
+    //glDisableVertexAttribArray(GLKVertexAttribNormal);
+    glEnableVertexAttribArray(GLKVertexAttribNormal);
+    glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
+    
+    glBindVertexArrayOES(_tbVertexArray);
 }
 
 - (void)tearDownGL
 {
     [EAGLContext setCurrentContext:self.context];
+    
+    glDeleteBuffers(1, &_tbVertexBuffer);
+    glDeleteVertexArraysOES(1, &_tbVertexArray);
     
     glDeleteBuffers(1, &_vertexBuffer);
     glDeleteVertexArraysOES(1, &_vertexArray);
@@ -277,7 +344,7 @@ using namespace Framework;
     }
     
     projectionMatrix =  GLKMatrix4Multiply(projectionMatrix, lookAt);
-    self.effect.transform.projectionMatrix = projectionMatrix;
+    //self.effect.transform.projectionMatrix = projectionMatrix;
    
     GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
     //baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _rotation, 0.0f, 1.0f, 0.0f);
@@ -288,7 +355,7 @@ using namespace Framework;
     modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
     //modelViewMatrix = GLKMatrix4Multiply(modelViewMatrix, trackBallMatrix);
     
-    self.effect.transform.modelviewMatrix = modelViewMatrix;
+    //self.effect.transform.modelviewMatrix = modelViewMatrix;
     
     // Compute the model view matrix for the object rendered with ES2
     modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
@@ -308,13 +375,16 @@ using namespace Framework;
     glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, 1, 0, 1, 1, -1);
+    self.effect.transform.modelviewMatrix = GLKMatrix4Identity;
+    
+    glBindVertexArrayOES(_tbVertexArray);
+   
+    [self.effect prepareToDraw];
+    glLineWidth(3);
+    glDrawArrays(GL_LINE_LOOP, 0, 4);
+    
     glBindVertexArrayOES(_vertexArray);
-    
-    // Render the object with GLKit
-    //[self.effect prepareToDraw];
-    
-    //glDrawArrays(GL_TRIANGLES, 0, 36);
-    
     // Render the object again with ES2
     glUseProgram(_program);
     
@@ -478,6 +548,11 @@ using namespace Framework;
 
 - (IBAction)renderViewButtonPressed:(id)sender {}
 
+- (IBAction)optionsButtonPressed:(UIButton *)sender {
+    
+    // after 5 seconds hide the button
+}
+
 - (IBAction)singleTapGestureRecognizer:(UITapGestureRecognizer*)recognizer {
    
     if (UIGestureRecognizerStateEnded == recognizer.state)
@@ -493,8 +568,11 @@ using namespace Framework;
   
     if (UIGestureRecognizerStateEnded == recognizer.state)
     {
-        // Double tap stops trackbal and show menu
+        // Double tap stops trackball and shows button for options
         NSLog(@"Double Tap Gesture State Ended\n");
+        
+        [self.view bringSubviewToFront:self.optionsButton];
+        //self.optionsButton.hidden = !self.optionsButton.hidden;
     } else {
         NSLog(@"Double Tap Gesture State %d\n", recognizer.state);
     }
@@ -506,28 +584,66 @@ using namespace Framework;
 
 - (IBAction)pinchGestureRecognizer:(UIPinchGestureRecognizer*)recognizer {
     if (UIGestureRecognizerStateBegan == recognizer.state) {
-        ;
+        m_camPinchLastTime = [NSDate date];
     } else if (UIGestureRecognizerStateChanged == recognizer.state) {
-        NSLog(@"Pinch Scale(%.2f) Velocity(%.2f)\n", recognizer.scale, recognizer.velocity);
+        if (0 == recognizer.velocity) {
+            m_camPinchLastTime = [NSDate date];
+            return;
+        }
+        
+        NSTimeInterval pinchDelta = -[m_camPinchLastTime timeIntervalSinceNow];
+        float scale = (pinchDelta*recognizer.velocity);
+        
+        /*NSLog(@"Pinch Scale(%.2f) Velocity(%.2f) Delta(%.2f) Scale(%.2f_\n",
+              recognizer.scale, recognizer.velocity, pinchDelta, scale
+        );*/
+        
+        PointF pos = [self.camera getPos];
+        VectorF lookAt = [self.camera getDir];
+        
+        // velocity = (scale factor)/sec
+        // scale = scale factor
+        // time = seconds        p
+        pos = Math::vec3AXPlusBY(pos, 1, lookAt, scale);
+        self.camera.focalPoint = Math::vec3AXPlusBY(self.camera.focalPoint, 1, lookAt, scale);
+        [self.camera setPos:pos];
+        
+        m_camPinchLastTime = [NSDate date];
     }
+}
+
+- (IBAction)rotateGestureRecognizer:(UIRotationGestureRecognizer*)sender {
+
+    switch (sender.state) {
+        case UIGestureRecognizerStateBegan:
+            ;
+            break;
+        case UIGestureRecognizerStateChanged:
+            ;
+            break;
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled:
+            ;
+            break;
+        default:
+            break;
+    }
+    
+    NSLog(@"State %d %f %f\n", sender.state, [sender rotation], sender.velocity);
 }
 
 - (IBAction)panGestureRecognizer:(UIPanGestureRecognizer *)recognizer {
     NSUInteger width = self.view.bounds.size.width;
     NSUInteger height = self.view.bounds.size.height;
-    CGPoint t = [recognizer translationInView:self.view];
-    CGPoint v = [recognizer velocityInView:self.view];
+    /*CGPoint t = [recognizer translationInView:self.view];
+    CGPoint v = [recognizer velocityInView:self.view];*/
     CGPoint l = [recognizer locationInView:self.view];
-    
-    NSString * state = @"Unknown";
-    
+   
     // Translate pan location to [-1,1]
     // and create a point on a sphere for rotations
     if (UIGestureRecognizerStateBegan == recognizer.state) {
         // On pan start get initial position for trackball rotation
-        //state = @"Began";
-        
-        float x = -(2*l.x / (width) - 1);
+        float x = (2*l.x / (width) - 1);
         float y = -(2*l.y / (height) - 1);
         m_trackBall.initialize(x,y);
     }
@@ -548,38 +664,28 @@ using namespace Framework;
          
             [-1,-1] .. [1,-1]
          */
-        float x = -(2*l.x / (width) - 1);
+        float x = (2*l.x / (width) - 1);
         float y = -(2*l.y / (height) - 1);
         
-        Framework::PointF p = m_trackBall.projectToSphere(x, y);
+        //Framework::PointF p = m_trackBall.projectToSphere(x, y);
         
         m_trackBall.updateRotation(x,y);
         
-        Framework::Math::Quat q = m_trackBall.getCurrentRotation();
+        //Framework::Math::Quat q = m_trackBall.getCurrentRotation();
         
-        float angle;
-        Framework::VectorF vector;
+        //float angle;
+        //Framework::VectorF vector;
         
-        q.extractAngleAndVector(angle, vector);
-        angle = (angle*180/M_PI);
+        //q.extractAngleAndVector(angle, vector);
+        //angle = (angle*180/M_PI);
         
-        NSLog(@"TB (%.2f,%.2f) -> (%.2f,%.2f,%.2f) (%.2f,%.2f,%.2f,%.2f)\n",
-              x, y, p.v[0], p.v[1], p.v[2], angle, vector.v[0], vector.v[1], vector.v[2]);
-        
-        /*
-         // Apply Rotation to camera
-         Math::Matrix44 trackBallMatrix =
-         [self.camera applyTransform:m_trackBall.getCurrentRotation().getMatrix()];
-         */
+        //NSLog(@"TB (%.2f,%.2f) -> (%.2f,%.2f,%.2f) (%.2f,%.2f,%.2f,%.2f)\n",
+        //      x, y, p.v[0], p.v[1], p.v[2], angle, vector.v[0], vector.v[1], vector.v[2]);
     }
     else if (UIGestureRecognizerStateEnded == recognizer.state ||
                UIGestureRecognizerStateChanged == recognizer.state) {
-       state = @"Ended";
         m_trackBall.disable();
-        
-         NSLog( @"Pan %@ %d %d L(%.2f,%.2f) T(%.2f,%.2f) V(%.2f,%.2f)\n", state, width, height, l.x, l.y, t.x, t.y, v.x, v.y);
     }
 }
-
 
 @end

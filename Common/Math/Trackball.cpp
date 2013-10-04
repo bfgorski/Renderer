@@ -55,7 +55,7 @@ namespace Framework { namespace Math {
             rotateVector.normalize();
             
             // multiply by 0.1 instead of 0.5 to slow down the rotation
-            float rotateAngle = acos(dot3(m_prevPoint, m_currentPoint))*0.1;
+            float rotateAngle = acos(dot3(m_prevPoint, m_currentPoint))*0.5;
             rotateVector.scale(sin(rotateAngle));
             
             printf("RV %f, (%f,%f,%f)\n", rotateAngle, rotateVector.v[0], rotateVector.v[1], rotateVector.v[2]);

@@ -29,8 +29,12 @@ namespace Framework { namespace Math {
         
         void setRadius(const float r) { m_radius = r; }
         
+        float getRadius() const { return m_radius; }
         const Quat& getCurrentRotation() const { return m_currentRotation; }
         
+        /**
+         * Set the initial contact point
+         */
         void initialize(const float x, const float y);
         
         /**

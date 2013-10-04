@@ -12,5 +12,7 @@
 @interface ViewController : GLKViewController
 @property (weak, nonatomic) IBOutlet UIButton *renderViewButton;
 - (IBAction)renderViewButtonPressed:(id)sender;
+- (IBAction)optionsButtonPressed:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UIButton *optionsButton;
 
 @end
