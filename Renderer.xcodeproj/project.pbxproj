@@ -134,6 +134,7 @@
 		49C5E1D714C6C76500E6D655 /* SceneObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C5E1D414C6C76500E6D655 /* SceneObject.cpp */; };
 		49C5E1E314C6C7B700E6D655 /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49C5E1DE14C6C7B700E6D655 /* Renderer.mm */; };
 		49C5E1E414C6C7B700E6D655 /* SceneParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5E1E014C6C7B700E6D655 /* SceneParser.m */; };
+		49CA3A5517FFDC1600C6236B /* LiveViewOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CA3A5417FFDC1600C6236B /* LiveViewOptions.m */; };
 		49D5135B1595A24B00C0ECAF /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49D5135A1595A24B00C0ECAF /* Sphere.cpp */; };
 		49D5135C1595A24B00C0ECAF /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49D5135A1595A24B00C0ECAF /* Sphere.cpp */; };
 		49DF963E17E5AAB9001C345B /* SimpleMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF963C17E5AAB9001C345B /* SimpleMaterial.cpp */; };
@@ -303,6 +304,8 @@
 		49C5E1DE14C6C7B700E6D655 /* Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Renderer.mm; sourceTree = "<group>"; };
 		49C5E1DF14C6C7B700E6D655 /* SceneParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneParser.h; sourceTree = "<group>"; };
 		49C5E1E014C6C7B700E6D655 /* SceneParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneParser.m; sourceTree = "<group>"; };
+		49CA3A5317FFDC1600C6236B /* LiveViewOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LiveViewOptions.h; path = Source/Config/LiveViewOptions.h; sourceTree = "<group>"; };
+		49CA3A5417FFDC1600C6236B /* LiveViewOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LiveViewOptions.m; path = Source/Config/LiveViewOptions.m; sourceTree = "<group>"; };
 		49D513581595A23E00C0ECAF /* Sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sphere.h; sourceTree = "<group>"; };
 		49D5135A1595A24B00C0ECAF /* Sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sphere.cpp; sourceTree = "<group>"; };
 		49DF963C17E5AAB9001C345B /* SimpleMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimpleMaterial.cpp; path = Materials/SimpleMaterial.cpp; sourceTree = "<group>"; };
@@ -548,6 +551,7 @@
 		4989555017DB259E0036F5AE /* SanAntonio */ = {
 			isa = PBXGroup;
 			children = (
+				49CA3A5117FFDBA400C6236B /* Source */,
 				4916F04717F1715F009EC552 /* iPad */,
 				4989555917DB25A00036F5AE /* AppDelegate.h */,
 				4989555A17DB25A00036F5AE /* AppDelegate.mm */,
@@ -762,6 +766,23 @@
 			);
 			path = Framework;
 			sourceTree = SOURCE_ROOT;
+		};
+		49CA3A5117FFDBA400C6236B /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				49CA3A5217FFDBB700C6236B /* Config */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		49CA3A5217FFDBB700C6236B /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				49CA3A5317FFDC1600C6236B /* LiveViewOptions.h */,
+				49CA3A5417FFDC1600C6236B /* LiveViewOptions.m */,
+			);
+			name = Config;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -1103,6 +1124,7 @@
 				49170FE017DC597B0021A10C /* SceneParser.m in Sources */,
 				4989555717DB25A00036F5AE /* main.m in Sources */,
 				4989555B17DB25A00036F5AE /* AppDelegate.mm in Sources */,
+				49CA3A5517FFDC1600C6236B /* LiveViewOptions.m in Sources */,
 				4916F05717FEAB0D009EC552 /* RenderingOptionsViewController.m in Sources */,
 				4989556E17DB25A00036F5AE /* ViewController.mm in Sources */,
 				4989558B17DB30850036F5AE /* RenderViewController.mm in Sources */,

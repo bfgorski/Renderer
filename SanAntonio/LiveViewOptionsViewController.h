@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LiveViewOptions.h"
 
 @interface LiveViewOptionsViewController : UIViewController
+
+@property (strong, nonatomic) LiveViewOptions *liveViewOptions;
+
 @property (weak, nonatomic) IBOutlet UISwitch *showTrackballBoundsSwitch;
-- (IBAction)showTrackballBounds:(id)sender forEvent:(UIEvent *)event;
+
+- (IBAction)showTrackballBounds:(UISwitch*)sender forEvent:(UIEvent *)event;
 
 @end

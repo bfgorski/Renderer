@@ -26,7 +26,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view.
+    
+    LiveViewOptions * l = [self getOptions];
+    self.showTrackballBoundsSwitch.on = l.showTrackballBounds;
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,6 +39,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)showTrackballBounds:(id)sender forEvent:(UIEvent *)event {
+-(LiveViewOptions*) getOptions {
+    return (self.liveViewOptions ? self.liveViewOptions : [LiveViewOptions instance]);
 }
+
+- (IBAction)showTrackballBounds:(UISwitch*)sender forEvent:(UIEvent *)event {
+    LiveViewOptions * l = (self.liveViewOptions ? self.liveViewOptions : [LiveViewOptions instance]);
+    l.showTrackballBounds = sender.on;
+}
+
 @end

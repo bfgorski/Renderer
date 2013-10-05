@@ -10,6 +10,7 @@
 #import <UIKit/UIPanGestureRecognizer.h>
 #import <UIKit/UITapGestureRecognizer.h>
 #import "Camera.h"
+#import "LiveViewOptions.h"
 #include "Trackball.h"
 #include "BasicTypesImpl.h"
 
@@ -114,6 +115,11 @@ using namespace Framework;
      * the trackball boundary is.
      */
     CGPathRef m_trackBallRect;
+    
+    /**
+     * Rendering options for the realtime view.
+     */
+    LiveViewOptions * m_liveViewOptions;
 }
 
 @property (strong, nonatomic) EAGLContext *context;
@@ -142,9 +148,7 @@ using namespace Framework;
         NSLog(@"Failed to create ES context");
     }
     
-    /*
-     * Initialize UI
-     */
+    m_liveViewOptions = [LiveViewOptions instance];
     
     m_trackBall.setRadius(0.9);
     m_trackBall.reset();
@@ -196,9 +200,10 @@ using namespace Framework;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
-    
     /**
-     * Set a rectangle to draw screen space bounds for the rectangle.
+     * Set a rectangle to draw screen space bounds for the rectangle
+     * that indicates where trackball movements are arbitrary rotations
+     * or rotations about the z-axis.
      */
     NSUInteger width = self.view.bounds.size.width;
     NSUInteger height = self.view.bounds.size.height;
@@ -209,6 +214,11 @@ using namespace Framework;
     trackBallRect.origin.x = (width - trackBallRect.size.width)*0.5;
     trackBallRect.origin.y = (height - trackBallRect.size.height)*0.5;
     m_trackBallRect = CGPathCreateWithRect(trackBallRect, NULL);
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(orientationChanged:)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil];
     
     [self setupGL];
 }
@@ -375,14 +385,16 @@ using namespace Framework;
     glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, 1, 0, 1, 1, -1);
-    self.effect.transform.modelviewMatrix = GLKMatrix4Identity;
-    
-    glBindVertexArrayOES(_tbVertexArray);
-   
-    [self.effect prepareToDraw];
-    glLineWidth(3);
-    glDrawArrays(GL_LINE_LOOP, 0, 4);
+    if (m_liveViewOptions.showTrackballBounds) {
+        self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, 1, 0, 1, 1, -1);
+        self.effect.transform.modelviewMatrix = GLKMatrix4Identity;
+        
+        glBindVertexArrayOES(_tbVertexArray);
+        
+        [self.effect prepareToDraw];
+        glLineWidth(3);
+        glDrawArrays(GL_LINE_LOOP, 0, 4);
+    }
     
     glBindVertexArrayOES(_vertexArray);
     // Render the object again with ES2
@@ -549,8 +561,34 @@ using namespace Framework;
 - (IBAction)renderViewButtonPressed:(id)sender {}
 
 - (IBAction)optionsButtonPressed:(UIButton *)sender {
-    
     // after 5 seconds hide the button
+}
+
+- (BOOL) shouldAutorotate {
+    return YES;
+}
+
+- (NSUInteger) supportedInterfaceOrientations {
+    return (UIInterfaceOrientationMaskAll);
+}
+
+- (void)orientationChanged:(NSNotification*) notification {
+    
+}
+
+-(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    float aspect;
+    if (UIInterfaceOrientationMaskLandscape | toInterfaceOrientation) {
+        aspect = fabsf(self.view.bounds.size.height / self.view.bounds.size.width);
+    } else {
+        aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
+    }
+    
+    self.camera.aspectRatio = aspect;
+}
+
+-(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    
 }
 
 - (IBAction)singleTapGestureRecognizer:(UITapGestureRecognizer*)recognizer {
@@ -571,7 +609,7 @@ using namespace Framework;
         // Double tap stops trackball and shows button for options
         NSLog(@"Double Tap Gesture State Ended\n");
         
-        [self.view bringSubviewToFront:self.optionsButton];
+        //[self.view bringSubviewToFront:self.optionsButton];
         //self.optionsButton.hidden = !self.optionsButton.hidden;
     } else {
         NSLog(@"Double Tap Gesture State %d\n", recognizer.state);

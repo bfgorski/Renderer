@@ -8,17 +8,18 @@
         <!--View Controller-->
         <scene sceneID="5">
             <objects>
-                <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="2" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="O7T-xf-CAl"/>
-                        <viewControllerLayoutGuide type="bottom" id="G2b-82-Enm"/>
+                        <viewControllerLayoutGuide type="top" id="fRE-kL-qxL"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fwu-Jn-uZm"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3" customClass="GLKView">
+                    <view key="view" contentMode="scaleAspectFit" id="3" customClass="GLKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBi-j7-PDA">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBi-j7-PDA">
                                 <rect key="frame" x="228" y="444" width="87" height="30"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <state key="normal" title="Render View">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -27,9 +28,9 @@
                                     <segue destination="dBt-WR-W8x" kind="modal" id="j5z-pi-HFx"/>
                                 </connections>
                             </button>
-                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSc-Fn-rFe">
-                                <rect key="frame" x="10" y="444" width="59" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSc-Fn-rFe">
+                                <rect key="frame" x="9" y="444" width="59" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Options">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -40,6 +41,11 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="WSc-Fn-rFe" secondAttribute="bottom" constant="6" id="I3k-tR-Ebd"/>
+                            <constraint firstAttribute="bottom" secondItem="VBi-j7-PDA" secondAttribute="bottom" constant="6" id="QOP-Zr-FxV"/>
+                            <constraint firstAttribute="trailing" secondItem="VBi-j7-PDA" secondAttribute="trailing" constant="5" id="qry-kO-re8"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="optionsButton" destination="WSc-Fn-rFe" id="yMZ-fv-Mzo"/>
@@ -55,8 +61,8 @@
             <objects>
                 <viewController id="RKN-JY-QLp" customClass="LiveViewOptionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="vNP-qB-Cpb"/>
-                        <viewControllerLayoutGuide type="bottom" id="5Ei-LX-3uy"/>
+                        <viewControllerLayoutGuide type="top" id="EP3-8Z-BxZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="PyU-uk-0cy"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nH7-7V-ME9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -128,8 +134,8 @@
             <objects>
                 <viewController id="9vv-wS-VLI" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="c7T-MS-aLh"/>
-                        <viewControllerLayoutGuide type="bottom" id="wlj-Zz-QGR"/>
+                        <viewControllerLayoutGuide type="top" id="szL-pf-pLq"/>
+                        <viewControllerLayoutGuide type="bottom" id="YAc-uV-wQ6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YSt-FF-vmn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -174,17 +180,17 @@
         <!--Render View Controller - Render View-->
         <scene sceneID="iHj-eh-SmZ">
             <objects>
-                <viewController title="Render View" id="dBt-WR-W8x" customClass="RenderViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RenderViewController" title="Render View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dBt-WR-W8x" customClass="RenderViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="she-wg-mEB"/>
-                        <viewControllerLayoutGuide type="bottom" id="wcc-2d-r5o"/>
+                        <viewControllerLayoutGuide type="top" id="id4-D2-wvw"/>
+                        <viewControllerLayoutGuide type="bottom" id="wge-YQ-glY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zci-1x-22l">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngl-I4-llz">
-                                <rect key="frame" x="6" y="444" width="50" height="30"/>
+                                <rect key="frame" x="6" y="443" width="50" height="30"/>
                                 <state key="normal" title="Render">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -194,7 +200,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHd-EI-JcL">
-                                <rect key="frame" x="249" y="444" width="65" height="30"/>
+                                <rect key="frame" x="249" y="443" width="65" height="30"/>
                                 <state key="normal" title="Live View">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -203,22 +209,22 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XM7-0s-fAI">
-                                <rect key="frame" x="70" y="444" width="81" height="30"/>
+                                <rect key="frame" x="70" y="443" width="81" height="30"/>
                                 <state key="normal" title="Save Image">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LDx-Ic-HP1">
-                                <rect key="frame" x="6" y="5" width="308" height="426"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LDx-Ic-HP1">
+                                <rect key="frame" x="6" y="20" width="308" height="414"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Knv-BH-hMR">
-                                        <rect key="frame" x="17" y="26" width="274" height="385"/>
+                                        <rect key="frame" x="-100" y="16" width="97" height="40"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vII-vc-nnL">
-                                <rect key="frame" x="171" y="444" width="54" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vII-vc-nnL">
+                                <rect key="frame" x="174" y="443" width="54" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Options">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -229,6 +235,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="vII-vc-nnL" secondAttribute="bottom" constant="7" id="YPM-RX-kCq"/>
+                            <constraint firstItem="LDx-Ic-HP1" firstAttribute="top" secondItem="zci-1x-22l" secondAttribute="top" constant="20" id="ZFf-jh-7rX"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="neJ-uv-QoG"/>
                     <connections>
@@ -249,9 +259,9 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="we3-ea-Lps"/>
-        <segue reference="F0X-ja-1yf"/>
-        <segue reference="Txg-aH-u4a"/>
-        <segue reference="ckW-Uc-qpw"/>
+        <segue reference="sOH-u9-fOt"/>
+        <segue reference="j5z-pi-HFx"/>
+        <segue reference="FrP-PO-grJ"/>
+        <segue reference="MIp-L3-R06"/>
     </inferredMetricsTieBreakers>
 </document>
