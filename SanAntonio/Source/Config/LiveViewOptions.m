@@ -9,7 +9,8 @@
 #import "LiveViewOptions.h"
 #import <dispatch/once.h>
 
-static NSString* SHOW_TRACKBALL_BOUNDS = @"ShowTrackballBounds";
+static NSString *SHOW_TRACKBALL_BOUNDS = @"ShowTrackballBounds";
+static NSString *WIREFRAME = @"WireFrame";
 
 @implementation LiveViewOptions
 
@@ -30,12 +31,18 @@ static NSString* SHOW_TRACKBALL_BOUNDS = @"ShowTrackballBounds";
     return self;
 }
 
+- (void) initWithViewOptions:(LiveViewOptions*)viewOptions {
+    self.showTrackballBounds = viewOptions.showTrackballBounds;
+}
+
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeBool:self.showTrackballBounds forKey:SHOW_TRACKBALL_BOUNDS];
+    [encoder encodeBool:self.wireframe forKey:WIREFRAME];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
     self.showTrackballBounds = [decoder decodeBoolForKey:SHOW_TRACKBALL_BOUNDS];
+    self.wireframe = [decoder decodeBoolForKey:WIREFRAME];
     return self;
 }
 

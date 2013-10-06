@@ -12,6 +12,7 @@
 @interface LiveViewOptions : NSObject <NSCoding>
 
 @property (nonatomic) BOOL showTrackballBounds;
+@property (nonatomic) BOOL wireframe;
 
 /**
  * Get a singleton instance of LiveViewOptions.
@@ -22,6 +23,11 @@
  * Create a new instance and initialize to default values;
  */
 - (LiveViewOptions*) init;
+
+/**
+ * Initialize with existing values.
+ */
+- (void) initWithViewOptions:(LiveViewOptions*)viewOptions;
 
 - (void)encodeWithCoder:(NSCoder *)encoder;
 - (id)initWithCoder:(NSCoder *)decoder;

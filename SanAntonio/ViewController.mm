@@ -573,7 +573,6 @@ using namespace Framework;
 }
 
 - (void)orientationChanged:(NSNotification*) notification {
-    
 }
 
 -(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {

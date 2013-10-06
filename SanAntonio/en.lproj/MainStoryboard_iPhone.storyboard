@@ -10,14 +10,14 @@
             <objects>
                 <viewController modalTransitionStyle="crossDissolve" id="2" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fRE-kL-qxL"/>
-                        <viewControllerLayoutGuide type="bottom" id="Fwu-Jn-uZm"/>
+                        <viewControllerLayoutGuide type="top" id="TRe-45-KZq"/>
+                        <viewControllerLayoutGuide type="bottom" id="Nxh-Gh-4yC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleAspectFit" id="3" customClass="GLKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBi-j7-PDA">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBi-j7-PDA">
                                 <rect key="frame" x="228" y="444" width="87" height="30"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <state key="normal" title="Render View">
@@ -28,7 +28,7 @@
                                     <segue destination="dBt-WR-W8x" kind="modal" id="j5z-pi-HFx"/>
                                 </connections>
                             </button>
-                            <button contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSc-Fn-rFe">
+                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSc-Fn-rFe">
                                 <rect key="frame" x="9" y="444" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Options">
@@ -41,11 +41,6 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="WSc-Fn-rFe" secondAttribute="bottom" constant="6" id="I3k-tR-Ebd"/>
-                            <constraint firstAttribute="bottom" secondItem="VBi-j7-PDA" secondAttribute="bottom" constant="6" id="QOP-Zr-FxV"/>
-                            <constraint firstAttribute="trailing" secondItem="VBi-j7-PDA" secondAttribute="trailing" constant="5" id="qry-kO-re8"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="optionsButton" destination="WSc-Fn-rFe" id="yMZ-fv-Mzo"/>
@@ -61,8 +56,8 @@
             <objects>
                 <viewController id="RKN-JY-QLp" customClass="LiveViewOptionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="EP3-8Z-BxZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="PyU-uk-0cy"/>
+                        <viewControllerLayoutGuide type="top" id="bzx-kp-BUc"/>
+                        <viewControllerLayoutGuide type="bottom" id="xna-U2-4MP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nH7-7V-ME9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -98,6 +93,17 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xT0-kU-ugA">
+                                <rect key="frame" x="251" y="99" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wireframe" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zZ-FR-Pav">
+                                <rect key="frame" x="15" y="104" width="79" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -108,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MxC-NE-K1q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="36" y="1358"/>
+            <point key="canvasLocation" x="35" y="1362"/>
         </scene>
         <!--Rendering Options View Controller-->
         <scene sceneID="C0v-S1-ATs">
@@ -134,8 +140,8 @@
             <objects>
                 <viewController id="9vv-wS-VLI" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="szL-pf-pLq"/>
-                        <viewControllerLayoutGuide type="bottom" id="YAc-uV-wQ6"/>
+                        <viewControllerLayoutGuide type="top" id="CSY-wj-3Yu"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yhz-bR-S0g"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YSt-FF-vmn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -148,8 +154,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jKs-O5-2my">
-                                <rect key="frame" x="13" y="443" width="87" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jKs-O5-2my">
+                                <rect key="frame" x="6" y="398" width="87" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Render View">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -158,38 +164,31 @@
                                     <segue destination="dBt-WR-W8x" kind="modal" id="ckW-Uc-qpw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mR4-Jv-qdI">
-                                <rect key="frame" x="148" y="384" width="75" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="All Options">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="DER-Vi-3aI" kind="modal" id="F0X-ja-1yf"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Yhz-bR-S0g" firstAttribute="top" secondItem="jKs-O5-2my" secondAttribute="bottom" constant="3" id="uTa-UU-bZ0"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Rendering Options" id="e7h-fa-hyY"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jp6-jl-pZZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="62" y="2089"/>
+            <point key="canvasLocation" x="63" y="2085"/>
         </scene>
         <!--Render View Controller - Render View-->
         <scene sceneID="iHj-eh-SmZ">
             <objects>
                 <viewController storyboardIdentifier="RenderViewController" title="Render View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dBt-WR-W8x" customClass="RenderViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="id4-D2-wvw"/>
-                        <viewControllerLayoutGuide type="bottom" id="wge-YQ-glY"/>
+                        <viewControllerLayoutGuide type="top" id="35b-7D-F18"/>
+                        <viewControllerLayoutGuide type="bottom" id="hji-Kf-vLd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zci-1x-22l">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngl-I4-llz">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngl-I4-llz">
                                 <rect key="frame" x="6" y="443" width="50" height="30"/>
                                 <state key="normal" title="Render">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -199,7 +198,7 @@
                                     <action selector="renderScene:" destination="dBt-WR-W8x" eventType="touchUpInside" id="b9s-TN-OhN"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHd-EI-JcL">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHd-EI-JcL">
                                 <rect key="frame" x="249" y="443" width="65" height="30"/>
                                 <state key="normal" title="Live View">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -208,36 +207,40 @@
                                     <segue destination="2" kind="modal" id="FrP-PO-grJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XM7-0s-fAI">
-                                <rect key="frame" x="70" y="443" width="81" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XM7-0s-fAI">
+                                <rect key="frame" x="75" y="443" width="81" height="30"/>
                                 <state key="normal" title="Save Image">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LDx-Ic-HP1">
-                                <rect key="frame" x="6" y="20" width="308" height="414"/>
+                                <rect key="frame" x="6" y="20" width="308" height="417"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Knv-BH-hMR">
-                                        <rect key="frame" x="-100" y="16" width="97" height="40"/>
+                                        <rect key="frame" x="-100" y="12" width="97" height="40"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vII-vc-nnL">
-                                <rect key="frame" x="174" y="443" width="54" height="30"/>
+                                <rect key="frame" x="173" y="443" width="54" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Options">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="9vv-wS-VLI" kind="modal" id="sOH-u9-fOt"/>
+                                    <segue destination="DER-Vi-3aI" kind="modal" id="20e-87-SUL"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="vII-vc-nnL" secondAttribute="bottom" constant="7" id="YPM-RX-kCq"/>
-                            <constraint firstItem="LDx-Ic-HP1" firstAttribute="top" secondItem="zci-1x-22l" secondAttribute="top" constant="20" id="ZFf-jh-7rX"/>
+                            <constraint firstItem="hji-Kf-vLd" firstAttribute="top" secondItem="vII-vc-nnL" secondAttribute="bottom" constant="7" id="OwN-UW-ACL"/>
+                            <constraint firstItem="hji-Kf-vLd" firstAttribute="top" secondItem="ngl-I4-llz" secondAttribute="bottom" constant="7" id="era-2e-xOO"/>
+                            <constraint firstItem="hji-Kf-vLd" firstAttribute="top" secondItem="MHd-EI-JcL" secondAttribute="bottom" constant="7" id="gBy-qI-1UC"/>
+                            <constraint firstItem="hji-Kf-vLd" firstAttribute="top" secondItem="XM7-0s-fAI" secondAttribute="bottom" constant="7" id="jJj-GQ-o8c"/>
+                            <constraint firstItem="vII-vc-nnL" firstAttribute="top" secondItem="LDx-Ic-HP1" secondAttribute="bottom" constant="6" id="oOg-dW-GjK"/>
+                            <constraint firstItem="LDx-Ic-HP1" firstAttribute="top" secondItem="35b-7D-F18" secondAttribute="bottom" id="rA0-rd-tRe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="neJ-uv-QoG"/>
@@ -259,9 +262,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="sOH-u9-fOt"/>
-        <segue reference="j5z-pi-HFx"/>
+        <segue reference="20e-87-SUL"/>
+        <segue reference="ckW-Uc-qpw"/>
         <segue reference="FrP-PO-grJ"/>
-        <segue reference="MIp-L3-R06"/>
     </inferredMetricsTieBreakers>
 </document>
