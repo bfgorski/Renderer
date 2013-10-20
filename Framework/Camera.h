@@ -13,9 +13,12 @@
 
 using namespace Framework;
 
-@interface Camera : NSObject
+@interface Camera : NSObject <NSCoding>
 {
 }
+
+// Unique human-readable identifier for the camera
+@property(readwrite, strong) NSString* name;
 
 // Near clipping plane distance from camera point.
 @property(readwrite, assign) float nearPlane;
@@ -46,6 +49,11 @@ using namespace Framework;
  */
 -(Camera*) initWithRay:(Ray) r upV:(VectorF)upV Fov:(float) fov AspectRatio:(float) ar nearPlane:(float)nearPlane farPlane:(float)farPlane;
 
+/**
+ * Copy the values from the given camera.
+ */
+-(void) copyFromCamera:(Camera*) c;
+
 -(void) setPos: (PointF) p;
 -(PointF) getPos;
 
@@ -63,4 +71,11 @@ using namespace Framework;
  * Apply a 4x4 transformation to
  */
 -(void) applyTransform:(Math::Transform*)t;
+
+/**
+ * NSCoding Protocol
+ */
+- (void)encodeWithCoder:(NSCoder *)encoder;
+- (id)initWithCoder:(NSCoder *)decoder;
+
 @end

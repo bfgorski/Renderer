@@ -34,7 +34,6 @@ namespace Framework {
          * Ray/Box intersection.
          */
         virtual SOIntersectionType intersect(const Ray& r, PointF& intersectionPoint) const;
-        
 
     private:
         // Define a Box by its major diagonal

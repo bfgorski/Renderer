@@ -9,10 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
+@class Camera;
+
 @interface ViewController : GLKViewController
+
 @property (weak, nonatomic) IBOutlet UIButton *renderViewButton;
+@property (weak, nonatomic) IBOutlet UIButton *optionsButton;
+
 - (IBAction)renderViewButtonPressed:(id)sender;
 - (IBAction)optionsButtonPressed:(UIButton *)sender;
-@property (weak, nonatomic) IBOutlet UIButton *optionsButton;
 
 @end

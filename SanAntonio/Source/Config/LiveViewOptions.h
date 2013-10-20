@@ -9,10 +9,17 @@
 #import <Foundation/Foundation.h>
 #import <Foundation/NSCoder.h>
 
+@class Camera;
+
 @interface LiveViewOptions : NSObject <NSCoding>
 
 @property (nonatomic) BOOL showTrackballBounds;
 @property (nonatomic) BOOL wireframe;
+
+/**
+ * Record the last camera position
+ */
+@property (nonatomic, strong) Camera* camera;
 
 /**
  * Get a singleton instance of LiveViewOptions.

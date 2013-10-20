@@ -31,6 +31,7 @@
     
     LiveViewOptions * l = [self getOptions];
     self.showTrackballBoundsSwitch.on = l.showTrackballBounds;
+    self.drawWireframeSwitch.on = l.wireframe;
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,6 +47,11 @@
 - (IBAction)showTrackballBounds:(UISwitch*)sender forEvent:(UIEvent *)event {
     LiveViewOptions * l = (self.liveViewOptions ? self.liveViewOptions : [LiveViewOptions instance]);
     l.showTrackballBounds = sender.on;
+}
+
+- (IBAction)showWireframe:(UISwitch*)sender forEvent:(UIEvent *)event {
+    LiveViewOptions *l = [self getOptions];
+    l.wireframe = sender.on;
 }
 
 @end

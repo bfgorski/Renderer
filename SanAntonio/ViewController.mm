@@ -165,8 +165,15 @@ using namespace Framework;
     VectorF up(0,1,0);
     
     float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
-    self.camera = [[Camera alloc] initWithRay:r upV:up Fov:DEFAULT_FOV_IN_DEGREES AspectRatio:aspect nearPlane:DEFAULT_NEAR_PLANE farPlane:DEFAULT_FAR_PLANE];
-    self.camera.focalPoint = PointF(0,0,0);
+    
+    if (m_liveViewOptions.camera) {
+        self.camera = m_liveViewOptions.camera;
+    } else {
+        self.camera = [[Camera alloc] initWithRay:r upV:up Fov:DEFAULT_FOV_IN_DEGREES AspectRatio:aspect nearPlane:DEFAULT_NEAR_PLANE farPlane:DEFAULT_FAR_PLANE];
+        self.camera.focalPoint = PointF(0,0,0);
+        self.camera.name = @"LiveViewCamera";
+        self->m_liveViewOptions.camera = self.camera;
+    }
     
     // Pinch to zoom in and out
     UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGestureRecognizer:)];

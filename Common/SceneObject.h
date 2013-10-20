@@ -60,10 +60,17 @@ public:
      */
     virtual SOIntersectionType intersect(const Ray& r, PointF& intersectionPoint) const = 0;
     
+    /**
+     * Render object using openGL
+     */
+    virtual void glRender() const {}
+    
 protected:
     std::string m_name;
     PointF m_pos;
     Material * m_material;
+    
+    // Bounding Box
 };
     
 }

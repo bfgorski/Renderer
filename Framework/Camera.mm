@@ -15,6 +15,18 @@ using namespace Framework;
 
 static const float DEFAULT_FOCAL_LENGTH = 10.0f;
 
+/**
+ * NSString object for encoding/decoding Camera using NSCoding
+ */
+static NSString *CAMERA_NAME = @"Name";
+static NSString *NEAR_PLANE = @"NearPlane";
+static NSString *FAR_PLANE = @"FarPlane";
+static NSString *FIELD_OF_VIEW = @"FOV";
+static NSString *ASPECT_RATIO = @"AspectRatio";
+static NSString *POS_DIR = @"PosDir";
+static NSString *UP = @"Up";
+static NSString *FOCAL_POINT = @"FocalPoint";
+
 @implementation Camera
 {
 }
@@ -31,6 +43,12 @@ static const float DEFAULT_FOCAL_LENGTH = 10.0f;
 
 -(Camera*) init
 {
+    self = [super init];
+    
+    if (!self) {
+        return self;
+    }
+    
     [self setFov:45];
     [self setAspectRatio:(1920.0f/1080.0f)];
    
@@ -50,6 +68,12 @@ static const float DEFAULT_FOCAL_LENGTH = 10.0f;
 
 -(Camera*) initWithRay:(Ray)r upV:(VectorF)upV Fov:(float)fov AspectRatio:(float)ar nearPlane:(float)nearPlane farPlane:(float)farPlane
 {
+    self = [super init];
+    
+    if (!self) {
+        return self;
+    }
+    
     [self setPosDir:r];
     self.up = upV;
     [self setAspectRatio:ar];
@@ -57,7 +81,20 @@ static const float DEFAULT_FOCAL_LENGTH = 10.0f;
     self.nearPlane = nearPlane;
     self.farPlane = farPlane;
     [self setDefaultFocalPoint];
+    
     return self;
+}
+
+- (void) copyFromCamera:(Camera *)c
+{
+    self.nearPlane = c.nearPlane;
+    self.farPlane = c.farPlane;
+    self.fov = c.fov;
+    self.aspectRatio = c.aspectRatio;
+    self.posDir = c.posDir;
+    self.up = c.up;
+    self.focalPoint = c.focalPoint;
+    self.up = c.up;
 }
 
 -(void) setPos: (PointF) p
@@ -123,6 +160,68 @@ static const float DEFAULT_FOCAL_LENGTH = 10.0f;
     self.focalPoint = t->applyToPoint(self.focalPoint);
     self.posDir = t->applyToRay(self.posDir);
 }
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:self.name forKey:CAMERA_NAME];
+    [encoder encodeFloat:self.nearPlane forKey:NEAR_PLANE];
+    [encoder encodeFloat:self.farPlane forKey:FAR_PLANE];
+    [encoder encodeFloat:self.aspectRatio forKey:ASPECT_RATIO];
+    [encoder encodeFloat:self.fov forKey:FIELD_OF_VIEW];
+   
+    const uint8_t *d = (const uint8_t*)&m_posDir;
+    [encoder encodeBytes:d length:sizeof(Ray) forKey:POS_DIR];
+    
+    d = (const uint8_t*)&m_up;
+    [encoder encodeBytes:d length:sizeof(VectorF) forKey:UP];
+    
+    d = (const uint8_t*)&m_focalPoint;
+    [encoder encodeBytes:d length:sizeof(PointF) forKey:FOCAL_POINT];
+    
+    return;
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    self.name = [decoder decodeObjectForKey:CAMERA_NAME];
+    self.nearPlane = [decoder decodeFloatForKey:NEAR_PLANE];
+    self.farPlane = [decoder decodeFloatForKey:FAR_PLANE];
+    self.aspectRatio = [decoder decodeFloatForKey:ASPECT_RATIO];
+    self.fov = [decoder decodeFloatForKey:FIELD_OF_VIEW];
+    
+    const char * rayType = @encode(Ray);
+    [decoder decodeValueOfObjCType:rayType at:&m_posDir];
+    
+    NSUInteger length;
+    const uint8_t *d = [decoder decodeBytesForKey:POS_DIR returnedLength:&length];
+    const Ray *r = (const Ray*)d;
+    self->m_posDir = (*r);
+    
+    d = [decoder decodeBytesForKey:UP returnedLength:&length];
+    const VectorF *u = (const VectorF*)d;
+    self->m_up = (*u);
+    
+    d = [decoder decodeBytesForKey:FOCAL_POINT returnedLength:&length];
+    const PointF *fp = (const PointF*)d;
+    self->m_focalPoint = (*fp);
+    
+    return self;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -14,7 +14,9 @@
 @property (strong, nonatomic) LiveViewOptions *liveViewOptions;
 
 @property (weak, nonatomic) IBOutlet UISwitch *showTrackballBoundsSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *drawWireframeSwitch;
 
 - (IBAction)showTrackballBounds:(UISwitch*)sender forEvent:(UIEvent *)event;
+- (IBAction)showWireframe:(UISwitch*)sender forEvent:(UIEvent *)event;
 
 @end

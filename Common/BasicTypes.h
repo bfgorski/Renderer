@@ -146,6 +146,7 @@ struct Ray {
     VectorF dir;
     
     Ray() : pos(), dir() {}
+    Ray(const Ray& r) : pos(r.pos), dir(r.dir) {}
     Ray(const PointF& p, const VectorF &d) : pos(p), dir(d) {}
     
     const VectorF& getDir() const { return dir; }
