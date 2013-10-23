@@ -12,13 +12,10 @@
 
 namespace Framework { namespace Math {
  
-    Quat::Quat() : m_s(0), m_v() {
-       
-    }
+    Quat::Quat() : m_s(1), m_v() {}
     
     Quat::Quat(const float s, const float x, const float y, const float z)
-    : m_s(s), m_v(x,y,z) {
-    }
+    : m_s(s), m_v(x,y,z) {}
     
     Quat::Quat(const float scalar, const VectorF& vector) : m_s(scalar), m_v(vector){}
     Quat::Quat(const Quat& q) : m_s(q.m_s), m_v(q.m_v) {}
@@ -52,6 +49,11 @@ namespace Framework { namespace Math {
         // m_v stores sin(angle/2)*v
         float vecScale = 1.0f/sinf(angle*0.5);
         v = vec3Scale(m_v, vecScale);
+    }
+    
+    void Quat::set(const float s, const float x, const float y, const float z) {
+        m_s = s;
+        m_v.set(x,y,z);
     }
     
     void Quat::setRotation(const float angle, const VectorF &v, const AngleType angleType) {
@@ -153,8 +155,12 @@ namespace Framework { namespace Math {
         a[3][3] = 1.0 ;*/
         
         return m;
-
     }
+    
+    bool Quat::isZero() const {
+        return (0.0 == s() && m_v.isZero());
+    }
+    
 }
 }
 

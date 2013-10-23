@@ -92,14 +92,17 @@ static NSString * LIVE_VIEW_OPTIONS = @"LiveViewOptions";
     
     if (url) {
         NSData *data = [[NSFileManager defaultManager] contentsAtPath:[url path]];
-        NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-            
-        id liveOptions = [unArchiver decodeObjectForKey:LIVE_VIEW_OPTIONS];
         
-        if ([liveOptions isKindOfClass:[LiveViewOptions class]]) {
-            [[LiveViewOptions instance] initWithViewOptions:liveOptions];
-        } else {
-            NSLog(@"Object Type %@\n", [[liveOptions class] description]);
+        if (data && [data isKindOfClass:[NSData class]] && ([data length] > 0)) {
+            NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+            
+            id liveOptions = [unArchiver decodeObjectForKey:LIVE_VIEW_OPTIONS];
+            
+            if ([liveOptions isKindOfClass:[LiveViewOptions class]]) {
+                [[LiveViewOptions instance] initWithViewOptions:liveOptions];
+            } else {
+                NSLog(@"Object Type %@\n", [[liveOptions class] description]);
+            }
         }
         
         return YES;

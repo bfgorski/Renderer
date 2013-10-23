@@ -9,20 +9,22 @@
 attribute vec4 position;
 attribute vec3 normal;
 
-varying lowp vec4 colorVarying;
+varying highp vec3 normalVarying;
+varying highp vec4 positionVarying;
+varying highp vec3 vertexColor;
 
 uniform mat4 modelViewProjectionMatrix;
+uniform mat4 modelMatrix;
 uniform mat3 normalMatrix;
 
 void main()
 {
-    vec3 eyeNormal = normalize(normalMatrix * normal);
-    vec3 lightPosition = vec3(0.0, 0.0, 1.0);
-    vec4 diffuseColor = vec4(0.4, 0.4, 1.0, 1.0);
+    highp vec3 eyeNormal = normalize(normalMatrix * normal);
+    normalVarying = eyeNormal;
+    positionVarying = position;
     
-    float nDotVP = max(0.0, dot(eyeNormal, normalize(lightPosition)));
-                 
-    colorVarying = position + vec4(0.5,0.5,0.5,1);// diffuseColor * nDotVP;
+    // Sample cube is in -0.5,0.5
+    vertexColor = position.xyz + vec3(0.5,0.5,0.5);
     
     gl_Position = modelViewProjectionMatrix * position;
 }

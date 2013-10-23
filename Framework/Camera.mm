@@ -187,21 +187,15 @@ static NSString *FOCAL_POINT = @"FocalPoint";
     self.aspectRatio = [decoder decodeFloatForKey:ASPECT_RATIO];
     self.fov = [decoder decodeFloatForKey:FIELD_OF_VIEW];
     
-    const char * rayType = @encode(Ray);
-    [decoder decodeValueOfObjCType:rayType at:&m_posDir];
-    
     NSUInteger length;
     const uint8_t *d = [decoder decodeBytesForKey:POS_DIR returnedLength:&length];
-    const Ray *r = (const Ray*)d;
-    self->m_posDir = (*r);
+    memcpy(&self->m_posDir, d, sizeof(Ray));
     
     d = [decoder decodeBytesForKey:UP returnedLength:&length];
-    const VectorF *u = (const VectorF*)d;
-    self->m_up = (*u);
+    memcpy(&self->m_up, d, sizeof(VectorF));
     
     d = [decoder decodeBytesForKey:FOCAL_POINT returnedLength:&length];
-    const PointF *fp = (const PointF*)d;
-    self->m_focalPoint = (*fp);
+    memcpy(&self->m_focalPoint, d, sizeof(PointF));
     
     return self;
 }

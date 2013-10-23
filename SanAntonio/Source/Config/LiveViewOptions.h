@@ -8,16 +8,33 @@
 
 #import <Foundation/Foundation.h>
 #import <Foundation/NSCoder.h>
+#include "Quat.h"
+
+using namespace Framework::Math;
 
 @class Camera;
+
+enum RenderingMode {Standard = 0, DiffuseLighting, DiffuseColor, NormalMap};
 
 @interface LiveViewOptions : NSObject <NSCoding>
 
 @property (nonatomic) BOOL showTrackballBounds;
 @property (nonatomic) BOOL wireframe;
 
+@property (nonatomic, assign) RenderingMode renderingMode;
+
 /**
- * Record the last camera position
+ * Global lighting control 
+ */
+@property (nonatomic, assign) float lightingFalloff;
+
+/**
+ * Current trackball rotation.
+ */
+@property (nonatomic, assign) Quat trackBall;
+
+/**
+ * Record the camera parameters
  */
 @property (nonatomic, strong) Camera* camera;
 
@@ -38,5 +55,15 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder;
 - (id)initWithCoder:(NSCoder *)decoder;
+
+/**
+ * Number of elements in RenderingMode enum class.
+ */
++ (NSUInteger) getNumRenderingModes;
+
+/**
+ * String that can be used for UI display.
+ */
++ (NSString*) getDescriptionForRenderingMode:(NSUInteger)renderingMode;
 
 @end

@@ -35,6 +35,11 @@ namespace Framework { namespace Math {
         float z() const { return m_v.v[ZAxis]; }
         
         /**
+         * Set scale and vector components directly.
+         */
+        void set(const float s, const float x, const float y, const float z);
+        
+        /**
          * Set to rotation about the indicated vector
          *
          * @param angle Angle in degrees
@@ -47,11 +52,20 @@ namespace Framework { namespace Math {
         void extractAngleAndVector(float& angle, VectorF& v) const;
         
         float length() const;
+        
+        /**
+         * Squared length to avoid sqrt operation.
+         */
         float fastLength() const;
         
         void normalize();
         Quat inverse() const;
         Matrix44 getMatrix() const;
+        
+        /**
+         * Check if all of the components are 0.
+         */
+        bool isZero() const;
     };
     
     typedef struct Quat Quat;

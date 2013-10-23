@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBi-j7-PDA">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBi-j7-PDA">
                                 <rect key="frame" x="228" y="444" width="87" height="30"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <state key="normal" title="Render View">
@@ -28,7 +28,7 @@
                                     <segue destination="dBt-WR-W8x" kind="modal" id="j5z-pi-HFx"/>
                                 </connections>
                             </button>
-                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSc-Fn-rFe">
+                            <button contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSc-Fn-rFe">
                                 <rect key="frame" x="9" y="444" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Options">
@@ -41,6 +41,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Nxh-Gh-4yC" firstAttribute="top" secondItem="VBi-j7-PDA" secondAttribute="bottom" constant="6" id="bSC-GS-v2g"/>
+                            <constraint firstItem="Nxh-Gh-4yC" firstAttribute="top" secondItem="WSc-Fn-rFe" secondAttribute="bottom" constant="6" id="nZz-Mh-8mS"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="optionsButton" destination="WSc-Fn-rFe" id="yMZ-fv-Mzo"/>
@@ -69,8 +73,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wu5-Ac-e0v">
-                                <rect key="frame" x="20" y="395" width="65" height="39"/>
+                            <button contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wu5-Ac-e0v">
+                                <rect key="frame" x="15" y="391" width="65" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Live View">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -97,11 +101,36 @@
                                 <rect key="frame" x="251" y="99" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
+                                    <action selector="drawWireframe:forEvent:" destination="RKN-JY-QLp" eventType="valueChanged" id="s09-5v-dBO"/>
                                     <action selector="showWireframe:forEvent:" destination="RKN-JY-QLp" eventType="valueChanged" id="c3I-Ou-GK1"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wireframe" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zZ-FR-Pav">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Wireframe" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zZ-FR-Pav">
                                 <rect key="frame" x="15" y="104" width="79" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A6r-aK-4xq">
+                                <rect key="frame" x="10" y="138" width="300" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="RKN-JY-QLp" id="ykj-4F-Osl"/>
+                                    <outlet property="delegate" destination="RKN-JY-QLp" id="oSv-oZ-0eW"/>
+                                </connections>
+                            </pickerView>
+                            <slider contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gkV-gt-VuE">
+                                <rect key="frame" x="140" y="322" width="162" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.19280555779744968" green="0.10456303861295535" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="updateLightFalloff:forEvent:" destination="RKN-JY-QLp" eventType="valueChanged" id="bMU-Fo-cst"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Light Falloff" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n53-io-TDM">
+                                <rect key="frame" x="15" y="328" width="113" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -109,10 +138,18 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xna-U2-4MP" firstAttribute="top" secondItem="wu5-Ac-e0v" secondAttribute="bottom" constant="1" id="8wR-49-RVq"/>
+                            <constraint firstItem="A6r-aK-4xq" firstAttribute="top" secondItem="5zZ-FR-Pav" secondAttribute="bottom" constant="25" id="FLw-PG-XGe"/>
+                            <constraint firstItem="n53-io-TDM" firstAttribute="top" secondItem="A6r-aK-4xq" secondAttribute="bottom" constant="14" id="dHw-gY-0Ky"/>
+                            <constraint firstItem="gkV-gt-VuE" firstAttribute="top" secondItem="A6r-aK-4xq" secondAttribute="bottom" constant="8" id="z2b-uT-oh8"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Live View Options" id="tQX-pN-DEb"/>
                     <connections>
-                        <outlet property="drawWireframe" destination="xT0-kU-ugA" id="a8T-bw-HRA"/>
+                        <outlet property="drawWireframeSwitch" destination="xT0-kU-ugA" id="YMS-IM-fDD"/>
+                        <outlet property="lightFalloffSlider" destination="gkV-gt-VuE" id="bHm-OC-OLz"/>
+                        <outlet property="renderModePicker" destination="A6r-aK-4xq" id="cpg-dG-WYP"/>
                         <outlet property="showTrackballBoundsSwitch" destination="Aw2-2s-ErE" id="TE3-ZT-pX4"/>
                     </connections>
                 </viewController>

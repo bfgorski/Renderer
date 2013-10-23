@@ -33,6 +33,11 @@ namespace Framework { namespace Math {
         const Quat& getCurrentRotation() const { return m_currentRotation; }
         
         /**
+         * Initialize the current rotation with the given quaternion.
+         */
+        void init(const Quat& q) { m_currentRotation = q; }
+        
+        /**
          * Set the initial contact point
          */
         void initialize(const float x, const float y);

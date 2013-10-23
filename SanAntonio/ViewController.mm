@@ -21,6 +21,9 @@ enum
 {
     UNIFORM_MODELVIEWPROJECTION_MATRIX,
     UNIFORM_NORMAL_MATRIX,
+    UNIFORM_MODEL_MATRIX,
+    UNIFORM_LIGHTING_MODEL,
+    UNIFORM_RENDERING_OPTIONS,
     NUM_UNIFORMS
 };
 GLint uniforms[NUM_UNIFORMS];
@@ -48,8 +51,8 @@ GLfloat gCubeVertexData[216] =
     0.5f, 0.5f, -0.5f,         1.0f, 0.0f, 0.0f,
     0.5f, -0.5f, 0.5f,         1.0f, 0.0f, 0.0f,
     0.5f, -0.5f, 0.5f,         1.0f, 0.0f, 0.0f,
-    0.5f, 0.5f, -0.5f,          1.0f, 0.0f, 0.0f,
-    0.5f, 0.5f, 0.5f,         1.0f, 0.0f, 0.0f,
+    0.5f, 0.5f, -0.5f,         1.0f, 0.0f, 0.0f,
+    0.5f, 0.5f, 0.5f,          1.0f, 0.0f, 0.0f,
     
     0.5f, 0.5f, -0.5f,         0.0f, 1.0f, 0.0f,
     -0.5f, 0.5f, -0.5f,        0.0f, 1.0f, 0.0f,
@@ -96,8 +99,15 @@ using namespace Framework;
 @interface ViewController () {
     GLuint _program;
     
+    // Model matrix, camera matrix, projection matrix
     GLKMatrix4 _modelViewProjectionMatrix;
+    
+    // Model matrix
+    GLKMatrix4 _modelMatrix;
+    
+    // Transform normal vectors
     GLKMatrix3 _normalMatrix;
+    
     float _rotation;
     
     GLuint _vertexArray;
@@ -153,22 +163,26 @@ using namespace Framework;
     m_trackBall.setRadius(0.9);
     m_trackBall.reset();
     
-    /*
-     Camera (0,0,10) looking at 0,0,0
-     Sphere at (0,0,0) radius 5.
-     
-     Light at (0,0,10)
-     */
-    PointF camPos(0,0,5);
-    VectorF camDir(0,0,-1);
-    Ray r(camPos, camDir);
-    VectorF up(0,1,0);
-    
-    float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
+    if (!m_liveViewOptions.trackBall.isZero()) {
+        m_trackBall.init(m_liveViewOptions.trackBall);
+    }
     
     if (m_liveViewOptions.camera) {
         self.camera = m_liveViewOptions.camera;
     } else {
+        /*
+         Camera (0,0,10) looking at 0,0,0
+         Sphere at (0,0,0) radius 5.
+         
+         Light at (0,0,10)
+         */
+        PointF camPos(0,0,5);
+        VectorF camDir(0,0,-1);
+        Ray r(camPos, camDir);
+        VectorF up(0,1,0);
+        
+        float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
+        
         self.camera = [[Camera alloc] initWithRay:r upV:up Fov:DEFAULT_FOV_IN_DEGREES AspectRatio:aspect nearPlane:DEFAULT_NEAR_PLANE farPlane:DEFAULT_FAR_PLANE];
         self.camera.focalPoint = PointF(0,0,0);
         self.camera.name = @"LiveViewCamera";
@@ -228,6 +242,18 @@ using namespace Framework;
                                                object:nil];
     
     [self setupGL];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [self saveLiveViewOptions];
+}
+
+- (void) viewDidUnload {
+    [self saveLiveViewOptions];
+}
+
+- (void) viewWillDisappear {
+    [self saveLiveViewOptions];
 }
 
 - (void)dealloc
@@ -360,7 +386,7 @@ using namespace Framework;
         lookAt = GLKMatrix4Multiply(lookAt, trackBallMatrix);
     }
     
-    projectionMatrix =  GLKMatrix4Multiply(projectionMatrix, lookAt);
+    projectionMatrix = GLKMatrix4Multiply(projectionMatrix, lookAt);
     //self.effect.transform.projectionMatrix = projectionMatrix;
    
     GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
@@ -381,7 +407,7 @@ using namespace Framework;
     //modelViewMatrix = GLKMatrix4Multiply(modelViewMatrix, trackBallMatrix);
     
     _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
-    
+    _modelMatrix = modelViewMatrix;
     _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
     
     //_rotation += self.timeSinceLastUpdate * 0.5f;
@@ -404,10 +430,20 @@ using namespace Framework;
     }
     
     glBindVertexArrayOES(_vertexArray);
-    // Render the object again with ES2
+    
     glUseProgram(_program);
     
+    GLfloat renderingOptions[4] = { 0, 0, 0, 0 };
+    
+    RenderingMode m = m_liveViewOptions.renderingMode;
+    renderingOptions[(int)m] = 1;
+    
+    GLfloat lightingModel[4] = {m_liveViewOptions.lightingFalloff, 0, 0, 0};
+    
+    glUniform4fv(uniforms[UNIFORM_RENDERING_OPTIONS], 1, renderingOptions);
+    glUniform4fv(uniforms[UNIFORM_LIGHTING_MODEL], 1, lightingModel);
     glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
+    glUniformMatrix4fv(uniforms[UNIFORM_MODEL_MATRIX], 1, 0, _modelMatrix.m);
     glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
     
     glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -469,7 +505,10 @@ using namespace Framework;
     }
     
     // Get uniform locations.
+    uniforms[UNIFORM_RENDERING_OPTIONS] = glGetUniformLocation(_program, "renderingOptions");
+    uniforms[UNIFORM_LIGHTING_MODEL] = glGetUniformLocation(_program, "lightingModel");
     uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX] = glGetUniformLocation(_program, "modelViewProjectionMatrix");
+    uniforms[UNIFORM_MODEL_MATRIX] = glGetUniformLocation(_program, "modelMatrix");
     uniforms[UNIFORM_NORMAL_MATRIX] = glGetUniformLocation(_program, "normalMatrix");
     
     // Release vertex and fragment shaders.
@@ -715,6 +754,8 @@ using namespace Framework;
         
         m_trackBall.updateRotation(x,y);
         
+        // Rotate Camera b trackball;
+        
         //Framework::Math::Quat q = m_trackBall.getCurrentRotation();
         
         //float angle;
@@ -730,6 +771,11 @@ using namespace Framework;
                UIGestureRecognizerStateChanged == recognizer.state) {
         m_trackBall.disable();
     }
+}
+
+- (void) saveLiveViewOptions {
+    // Save rendering parameters to LiveViewOptions
+    m_liveViewOptions.trackBall = m_trackBall.getCurrentRotation();
 }
 
 @end

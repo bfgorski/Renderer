@@ -20,6 +20,10 @@ public:
     vec3(const vec3& v1) { v[0] = v1.v[0]; v[1] = v1.v[1]; v[2] = v1.v[2]; }
     vec3(const float x, const float y, const float z) {v[0] = x; v[1] = y; v[2] = z;}
     
+    void set(const float x, const float y, const float z) {
+        v[0] = x; v[1] = y; v[2] = z;
+    }
+    
     float x() const { return v[0]; }
     float y() const { return v[1]; }
     float z() const { return v[2]; }
@@ -27,6 +31,7 @@ public:
     float length() const { return sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]); }
     void scale(const float f) { v[0]*=f; v[1]*=f; v[2]*=f; }
     void increment(const vec3& v1) { v[0] += v1.v[0]; v[1] += v1.v[1]; v[2] += v1.v[2];}
+    
     void normalize() {
         float l = 1.0/length();
         scale(l);
@@ -39,6 +44,8 @@ public:
             }
         }
     }
+    
+    bool isZero() const { return (0.0 == v[0] && 0.0 == v[1] && 0.0 == v[2]); }
     
     float v[3];
 };
@@ -77,6 +84,10 @@ struct vec2 {
 typedef struct vec2 vec2;
     
 struct vec4 {
+    void set(const float x, const float y, const float z, const float w) {
+        v[0] = x; v[1] = y; v[2] = z; v[3] = w;
+    }
+    
     float v[4];
 };
 
@@ -134,12 +145,6 @@ struct Color {
 };
 
 typedef struct Color Color;
-
-struct Quat {
-    float q[4];
-};
-
-typedef struct Quat Quat;
 
 struct Ray {
     PointF pos;
