@@ -37,25 +37,6 @@ bool isEqual(const vec3& v0, const vec3& v1, const float delta) {
     return true;
 }
     
-/**
- * Return a*(1-t) * b*t
- */
-float lerp(const float a, const float b, const float t) {
-    return (a + t*(b - a));
-}
-
-float clamp(const float value, const float min, const float max) {
-    return ((value > max) ? max : ((value < min) ? min : value));
-}
-    
-float min(const float a, const float b) {
-    return ((a > b) ? b : a);
-}
-
-float max(const float a, const float b) {
-    return ((a > b) ? a : b);
-}
-    
 float vec3Len(const vec3& v) {
      return sqrt(dot3(v, v));
 }

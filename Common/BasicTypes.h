@@ -10,6 +10,7 @@
 #define Renderer_BasicTypes_h
 
 #include <math.h>
+#include "MathUtils.h"
 
 namespace Framework {
     
@@ -141,6 +142,16 @@ struct Color {
      */
     void accumulateColor(const Color& col) {
         c[0] += col.c[0]; c[1] += col.c[1]; c[2] += col.c[2];
+    }
+    
+    /**
+     * Convert color range from [0,1] to [0,255]
+     */
+    void toBytes(char * b) const {
+        b[0] = Math::toByte(c[0], 0.0, 1.0);
+        b[1] = Math::toByte(c[1], 0.0, 1.0);
+        b[2] = Math::toByte(c[2], 0.0, 1.0);
+        b[3] = Math::toByte(c[3], 0.0, 1.0);
     }
 };
 

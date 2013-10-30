@@ -16,6 +16,7 @@
 namespace Framework {
     
     class Box : public SceneObject {
+        
     public :
         Box();
         Box(const PointF& p0, const PointF& p1);
@@ -35,6 +36,11 @@ namespace Framework {
          */
         virtual SOIntersectionType intersect(const Ray& r, PointF& intersectionPoint) const;
 
+        /**
+         * Create points, normals and 
+         */
+        virtual void createGeo(const SOCreateGeoArgs *args = nullptr) override;
+        
     private:
         // Define a Box by its major diagonal
         PointF m_diagStart;

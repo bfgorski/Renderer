@@ -58,29 +58,29 @@ namespace Framework { namespace Math {
             float rotateAngle = acos(dot3(m_prevPoint, m_currentPoint))*0.5;
             rotateVector.scale(sin(rotateAngle));
             
-            printf("RV %f, (%f,%f,%f)\n", rotateAngle, rotateVector.v[0], rotateVector.v[1], rotateVector.v[2]);
+            //printf("RV %f, (%f,%f,%f)\n", rotateAngle, rotateVector.v[0], rotateVector.v[1], rotateVector.v[2]);
             
             Quat newRotation(cos(rotateAngle), rotateVector);
             newRotation.normalize();
             
-            float angle;
-            VectorF vNew;
+            //float angle;
+            //VectorF vNew;
             
-            newRotation.extractAngleAndVector(angle, vNew);
-            angle = (angle*180/M_PI);
-            printf("New %f, (%f,%f,%f)\n", angle, vNew.v[0], vNew.v[1], vNew.v[2]);
+            //newRotation.extractAngleAndVector(angle, vNew);
+            //angle = (angle*180/M_PI);
+            //printf("New %f, (%f,%f,%f)\n", angle, vNew.v[0], vNew.v[1], vNew.v[2]);
             
-            m_currentRotation.extractAngleAndVector(angle, vNew);
+            //m_currentRotation.extractAngleAndVector(angle, vNew);
 
-            angle = (angle*180/M_PI);
-            printf("Cur %f, (%f,%f,%f)\n", angle, vNew.v[0], vNew.v[1], vNew.v[2]);
+            //angle = (angle*180/M_PI);
+            //printf("Cur %f, (%f,%f,%f)\n", angle, vNew.v[0], vNew.v[1], vNew.v[2]);
             
             m_currentRotation *= newRotation;
             
-            m_currentRotation.extractAngleAndVector(angle, vNew);
+            //m_currentRotation.extractAngleAndVector(angle, vNew);
             
-            angle = (angle*180/M_PI);
-            printf("Final %f, (%f,%f,%f)\n", angle, vNew.v[0], vNew.v[1], vNew.v[2]);
+            //angle = (angle*180/M_PI);
+            //printf("Final %f, (%f,%f,%f)\n", angle, vNew.v[0], vNew.v[1], vNew.v[2]);
             
             m_currentRotation.normalize();
         }

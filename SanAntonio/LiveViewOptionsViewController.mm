@@ -17,13 +17,12 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
     if (self) {
-        // Custom initialization
-        
-        self.renderModePicker.delegate = self;
-        self.renderModePicker.dataSource = self;
-        self.renderModePicker.showsSelectionIndicator = YES;
-        [self.renderModePicker selectRow:0 inComponent:0 animated:NO];
+        _renderModePicker.delegate = self;
+        _renderModePicker.dataSource = [self getOptions];
+        _renderModePicker.showsSelectionIndicator = YES;
+        [_renderModePicker selectRow:0 inComponent:0 animated:NO];
     }
     return self;
 }
@@ -38,13 +37,18 @@
     self.showTrackballBoundsSwitch.on = l.showTrackballBounds;
     self.drawWireframeSwitch.on = l.wireframe;
     self.lightFalloffSlider.value = l.lightingFalloff;
+    self.renderModePicker.dataSource = [self getOptions];
+    
     [self.renderModePicker selectRow:l.renderingMode inComponent:0 animated:NO];
+    [self.lightFalloffLabel setText:[NSString stringWithFormat:@"Falloff %.2f", l.lightingFalloff]];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
     // Dispose of any resources that can be recreated.
+    self.liveViewOptions = nil;
 }
 
 -(LiveViewOptions*) getOptions {
@@ -61,29 +65,11 @@
     l.wireframe = sender.on;
 }
 
-/**
- * PickerView Delegate methods for UIPickerViewDataSource
- */
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    if (self.renderModePicker == pickerView) {
-        return 1;
-    }
-    
-    return 0;
-}
-
 - (IBAction)updateLightFalloff:(UISlider *)sender forEvent:(UIEvent *)event {
     LiveViewOptions *l = [self getOptions];
     l.lightingFalloff = sender.value;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    if (self.renderModePicker == pickerView) {
-        if (0 == component) {
-            return [LiveViewOptions getNumRenderingModes];
-        }
-    }
-    return 0;
+    
+    [self.lightFalloffLabel setText:[NSString stringWithFormat:@"Falloff %.2f", l.lightingFalloff]];
 }
 
 /**
@@ -91,7 +77,7 @@
  */
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
     if (self.renderModePicker == pickerView && (0 == component)) {
-        return 20.0;
+        return 40.0;
     }
     return 0.0;
 }
@@ -100,6 +86,7 @@
     if (self.renderModePicker == pickerView && (0 == component)) {
         UILabel *label = [[UILabel alloc] init];
         [label setText:[LiveViewOptions getDescriptionForRenderingMode:row]];
+        label.font = [UIFont systemFontOfSize:20.0];
         label.textAlignment = NSTextAlignmentCenter;
         return label;
     }
@@ -124,6 +111,9 @@
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSLog(@"Preparing for Seque %@ %@\n", [segue description], [sender description]);
+}
 
 
 

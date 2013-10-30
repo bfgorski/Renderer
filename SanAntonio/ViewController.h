@@ -11,12 +11,14 @@
 
 @class Camera;
 
-@interface ViewController : GLKViewController
+@interface ViewController : GLKViewController <UIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *renderViewButton;
 @property (weak, nonatomic) IBOutlet UIButton *optionsButton;
+@property (weak, nonatomic) IBOutlet UIButton *renderModeButton;
 
 - (IBAction)renderViewButtonPressed:(id)sender;
 - (IBAction)optionsButtonPressed:(UIButton *)sender;
+- (IBAction)renderModeButtonPressed:(UIButton *)sender forEvent:(UIEvent *)event;
 
 @end

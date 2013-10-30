@@ -12,20 +12,20 @@
 #include <string>
 #include "SOIntersection.h"
 #include "Transform.h"
+#include "PolygonMesh.h"
 
 namespace Framework {
+
     
 class Material;
+class SOCreateGeoArgs;
     
 class SceneObject {
     
 public:
     SceneObject();
     virtual ~SceneObject();
-    SceneObject(const SceneObject&);
     SceneObject(const char * name);
-    
-    SceneObject& operator=(const SceneObject&);
     
     void setName(const char * s) { m_name = s; }
     void setName(const std::string& s) { m_name = s; }
@@ -61,16 +61,39 @@ public:
     virtual SOIntersectionType intersect(const Ray& r, PointF& intersectionPoint) const = 0;
     
     /**
-     * Render object using openGL
+     * SceneObjects that are described analytically, e.g. Box, Sphere etc. 
+     * can create their own geometry for rendering, intersection etc. that
+     * is stored as part of the SceneObject.
+     *
+     * @param args  Optional parameters for creating geometry
      */
-    virtual void glRender() const {}
+    virtual void createGeo(const SOCreateGeoArgs* args = nullptr) {};
     
 protected:
+    
+    /**
+     * Delete an existing PolygonMesh and return a reference to a new one.
+     */
+    PolygonMesh& createPolygonMesh();
+    
     std::string m_name;
+    
     PointF m_pos;
+    
     Material * m_material;
     
     // Bounding Box
+private :
+
+    SceneObject(const SceneObject&);
+    SceneObject& operator=(const SceneObject&);
+    
+    /**
+     * SceneObjects can create a polygon mesh (a list of triangles)
+     * that represents their geometry.
+     */
+    PolygonMesh * m_polygonMesh;
+
 };
     
 }

@@ -29,6 +29,8 @@ public:
         const Tangent& biT = VZero
     );
     
+    ~MaterialParams() {}
+    
     const PointF& getPoint() const { return m_point; }
     const TexCoord4& getTexCoord() const { return m_texCoord; }
     const Normal& getNormal() const { return m_normal; }
@@ -50,7 +52,7 @@ class MaterialInfo {
     
 public:
     MaterialInfo();
-   
+    ~MaterialInfo() {}
     const Normal& getNormal() const { return m_normal; }
     const Color& getDiffuse() const { return m_diffuse; }
     const Color& getSpecular() const { return m_specular; }
@@ -82,7 +84,7 @@ class Material {
   
 public :
     Material();
-    ~Material() {};
+    virtual ~Material() {};
     
     /**
      * Materials can indicate which parameters they need.

@@ -48,10 +48,10 @@ static CGFloat DEFAULT_ZERO_POINT = 0.5;
     self = [super init];
     
     if (self) {
-        self.showTrackballBounds = YES;
-        self.wireframe = NO;
-        self.camera = nil;
-        self.lightingFalloff = DEFAULT_ZERO_POINT;
+        _showTrackballBounds = YES;
+        _wireframe = NO;
+        _camera = nil;
+        _lightingFalloff = DEFAULT_ZERO_POINT;
     }
    
     return self;
@@ -111,11 +111,8 @@ static CGFloat DEFAULT_ZERO_POINT = 0.5;
     return self;
 }
 
-/**
- *
- */
 + (NSUInteger) getNumRenderingModes {
-    return 4;
+    return NumRenderingModes;
 }
 
 + (NSString*) getDescriptionForRenderingMode:(NSUInteger)renderingMode {
@@ -134,6 +131,16 @@ static CGFloat DEFAULT_ZERO_POINT = 0.5;
     return @"";
 }
 
+/**
+ * The LiveViewOptions class serves as UIPickerViewDataSource for the RenderingMode
+ */
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [LiveViewOptions getNumRenderingModes];
+}
 
 
 

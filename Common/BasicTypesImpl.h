@@ -30,16 +30,6 @@ Color lightSurface(
  * Component wise comparison
  */
 bool isEqual(const vec3&, const vec3&, const float delta = 0);
-
-/**
- * Return a*(1-t) * b*t
- */
-float lerp(const float a, const float b, const float t);
-
-float clamp(const float value, const float min, const float max);
-    
-float min(const float a, const float b);
-float max(const float a, const float b);
     
 float vec3Len(const vec3& v);
 float vec3Len(const vec4& v);

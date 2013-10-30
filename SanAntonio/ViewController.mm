@@ -11,22 +11,21 @@
 #import <UIKit/UITapGestureRecognizer.h>
 #import "Camera.h"
 #import "LiveViewOptions.h"
+#import "LiveViewOptionsViewController.h"
+#import "ViewController+RenderMode.h"
+#import "ViewController_RenderMode.h"
+#import "ContentGenerator.h"
+#import <CoreGraphics/CGImage.h>
+
+#import <ShaderGlobals.h>
+#import "Shader.h"
+#import "ShaderProgram.h"
+#import "ShaderProgram+External.h"
+
 #include "Trackball.h"
 #include "BasicTypesImpl.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
-
-// Uniform index.
-enum
-{
-    UNIFORM_MODELVIEWPROJECTION_MATRIX,
-    UNIFORM_NORMAL_MATRIX,
-    UNIFORM_MODEL_MATRIX,
-    UNIFORM_LIGHTING_MODEL,
-    UNIFORM_RENDERING_OPTIONS,
-    NUM_UNIFORMS
-};
-GLint uniforms[NUM_UNIFORMS];
 
 // Attribute index.
 enum
@@ -116,6 +115,12 @@ using namespace Framework;
     GLuint _tbVertexArray;
     GLuint _tbVertexBuffer;
     
+    GLuint m_textures[4];
+    
+    NSData *m_TextureData[2];
+    
+    GLKTextureInfo *m_TextureInfo;
+    
     Math::Trackball m_trackBall;
     
     NSDate *m_camPinchLastTime;
@@ -126,23 +131,22 @@ using namespace Framework;
      */
     CGPathRef m_trackBallRect;
     
-    /**
-     * Rendering options for the realtime view.
-     */
-    LiveViewOptions * m_liveViewOptions;
+    ShaderProgram * m_shaderProgram;
+    
 }
 
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
 @property (strong, nonatomic) Camera *camera;
 
+
 - (void)setupGL;
 - (void)tearDownGL;
 
 - (BOOL)loadShaders;
-- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
-- (BOOL)linkProgram:(GLuint)prog;
-- (BOOL)validateProgram:(GLuint)prog;
+//- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
+//- (BOOL)linkProgram:(GLuint)prog;
+//- (BOOL)validateProgram:(GLuint)prog;
 
 @end
 
@@ -158,6 +162,20 @@ using namespace Framework;
         NSLog(@"Failed to create ES context");
     }
     
+    if (!m_TextureData) {
+        Color c0(1,0,0,1);
+        Color c1(0,0,1,1);
+        
+        m_TextureData[0] = [ContentGenerator genCheckerTexture:c0 color1:c1 width:32 height:32 widthTileSize:8 heightTileSize:8];
+        
+        Color c2(1,0,1,1);
+        Color c3(0,1,1,1);
+        m_TextureData[1] = [ContentGenerator genCheckerTexture:c2 color1:c3 width:16 height:16 widthTileSize:2 heightTileSize:2];
+    }
+    
+    /*
+     * Use the global instance which is shared with LiveViewOptionsViewController
+     */
     m_liveViewOptions = [LiveViewOptions instance];
     
     m_trackBall.setRadius(0.9);
@@ -220,6 +238,7 @@ using namespace Framework;
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
+    view.drawableColorFormat = GLKViewDrawableColorFormatRGBA8888;
     
     /**
      * Set a rectangle to draw screen space bounds for the rectangle
@@ -329,6 +348,75 @@ using namespace Framework;
     glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
     
     glBindVertexArrayOES(_tbVertexArray);
+    
+    glGenTextures(1, m_textures);
+    
+    /*
+     void glTexImage2D(	GLenum target,
+     GLint level,
+     GLint internalFormat,
+     GLsizei width,
+     GLsizei height,
+     GLint border,
+     GLenum format,
+     GLenum type,
+     const GLvoid * data);
+     */
+   
+    glBindTexture(GL_TEXTURE_2D, m_textures[0]);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 32, 32, 0, GL_RGBA, GL_UNSIGNED_BYTE, [m_TextureData[0] bytes]);
+    //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 16, 16, 1, GL_RGBA, GL_UNSIGNED_BYTE, [m_TextureData[1] bytes]);
+    
+    /*
+     NSDictionary *fbData = [renderer getFrameBufferPixels:fbOptions];
+     NSData *data = fbData[@"data"];
+     NSUInteger width = [fbData[@"width"] integerValue];
+     NSUInteger height = [fbData[@"height"] integerValue];
+     NSUInteger bytesPerRow = [fbData[@"rowSize"] integerValue];
+     
+     CGSize size;
+     size.width = width;
+     size.height = height;
+     
+     CIImage *ciImage = [CIImage imageWithBitmapData:data bytesPerRow:bytesPerRow size:size format:kCIFormatARGB8 colorSpace:m_colorSpace];
+     UIImage *uiImage = [UIImage imageWithCIImage:ciImage];
+    */
+    /*
+     size_t width,
+     size_t height,
+     size_t bitsPerComponent,
+     size_t bitsPerPixel,
+     size_t bytesPerRow,
+     CGColorSpaceRef colorspace,
+     CGBitmapInfo bitmapInfo,
+     CGDataProviderRef provider,
+     const CGFloat decode[],
+     bool shouldInterpolate,
+     CGColorRenderingIntent intent
+    */
+    /*CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL, [m_TextureData bytes], [m_TextureData length], NULL);
+    CGImageRef textureImage = CGImageCreate(32,32,8,32,32*4,
+                                            CGColorSpaceCreateDeviceRGB(),
+                                            kCGBitmapByteOrderDefault,
+                                            dataProvider,
+                                            NULL,
+                                            YES,
+                                            kCGRenderingIntentDefault
+    );
+    
+    UIImage *uiImage = [UIImage imageWithCGImage:textureImage];
+    
+    NSError *textureError;
+    NSDictionary *options = @{GLKTextureLoaderOriginBottomLeft : [NSNumber numberWithBool:YES]};
+    m_TextureInfo = [GLKTextureLoader textureWithCGImage:uiImage.CGImage options:options error:&textureError];
+    
+    
+    if (textureError) {
+        NSLog(@"%@\n", [textureError description]);
+    } else {
+        //glBindTexture(m_TextureInfo.target, m_TextureInfo.name);
+        //glEnable(m_TextureInfo.target);
+    }*/
 }
 
 - (void)tearDownGL
@@ -382,29 +470,15 @@ using namespace Framework;
         
         trackBallMatrix = GLKMatrix4MakeWithQuaternion(quaternion);
         
-        // rotate the camera by the trackball's rotation.
+        // matrix to rotate
         lookAt = GLKMatrix4Multiply(lookAt, trackBallMatrix);
     }
     
     projectionMatrix = GLKMatrix4Multiply(projectionMatrix, lookAt);
-    //self.effect.transform.projectionMatrix = projectionMatrix;
    
     GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
-    //baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _rotation, 0.0f, 1.0f, 0.0f);
-    
-    // Compute the model view matrix for the object rendered with GLKit
     GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
-    //modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
     modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
-    //modelViewMatrix = GLKMatrix4Multiply(modelViewMatrix, trackBallMatrix);
-    
-    //self.effect.transform.modelviewMatrix = modelViewMatrix;
-    
-    // Compute the model view matrix for the object rendered with ES2
-    modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
-    //modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
-    modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
-    //modelViewMatrix = GLKMatrix4Multiply(modelViewMatrix, trackBallMatrix);
     
     _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
     _modelMatrix = modelViewMatrix;
@@ -419,6 +493,7 @@ using namespace Framework;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     if (m_liveViewOptions.showTrackballBounds) {
+        //glDisable(GL_TEXTURE_2D);
         self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, 1, 0, 1, 1, -1);
         self.effect.transform.modelviewMatrix = GLKMatrix4Identity;
         
@@ -431,20 +506,64 @@ using namespace Framework;
     
     glBindVertexArrayOES(_vertexArray);
     
-    glUseProgram(_program);
+    //glUseProgram(_program);
     
-    GLfloat renderingOptions[4] = { 0, 0, 0, 0 };
+    //GLfloat renderingOptions[4] = { 0, 0, 0, 0 };
     
-    RenderingMode m = m_liveViewOptions.renderingMode;
-    renderingOptions[(int)m] = 1;
+    //RenderingMode m = m_liveViewOptions.renderingMode;
+    //renderingOptions[(int)m] = 1;
     
     GLfloat lightingModel[4] = {m_liveViewOptions.lightingFalloff, 0, 0, 0};
     
-    glUniform4fv(uniforms[UNIFORM_RENDERING_OPTIONS], 1, renderingOptions);
-    glUniform4fv(uniforms[UNIFORM_LIGHTING_MODEL], 1, lightingModel);
-    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
-    glUniformMatrix4fv(uniforms[UNIFORM_MODEL_MATRIX], 1, 0, _modelMatrix.m);
-    glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
+    //[ShaderProgram setLightingModel:lightingModel];
+    [ShaderProgram setRenderingMode:m_liveViewOptions.renderingMode];
+    [ShaderProgram setModelViewProjectionMatrix:&_modelViewProjectionMatrix];
+    
+    [m_shaderProgram enable];
+    [m_shaderProgram setLightingModel:lightingModel immediately:YES];
+    [m_shaderProgram setNormalMatrix:&_normalMatrix immediately:YES];
+    [m_shaderProgram setModelMatrix:&_modelMatrix immediately:YES];
+    
+    //[m_shaderProgram setGlobalUniforms];
+    //glUniform4fv(uniforms[UNIFORM_RENDERING_OPTIONS], 1, renderingOptions);
+    //glUniform4fv(uniforms[UNIFORM_LIGHTING_MODEL], 1, lightingModel);
+    //glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
+   
+    //glUniformMatrix4fv(uniforms[UNIFORM_MODEL_MATRIX], 1, 0, _modelMatrix.m);
+    //glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
+    
+    TextureSetupParams p;
+    p.m_params[0].m_pname = GL_TEXTURE_MIN_FILTER;
+    p.m_params[0].m_type = TEXTURE_PARAM_TYPE_INT;
+    p.m_params[0].iVal = GL_LINEAR;
+    
+    p.m_params[1].m_pname = GL_TEXTURE_MIN_FILTER;
+    p.m_params[1].m_type = TEXTURE_PARAM_TYPE_INT;
+    p.m_params[1].iVal = GL_LINEAR;
+    
+    p.m_params[2].m_pname = GL_TEXTURE_WRAP_S;
+    p.m_params[2].m_type = TEXTURE_PARAM_TYPE_INT;
+    p.m_params[2].iVal = GL_REPEAT;
+    
+    p.m_params[3].m_pname = GL_TEXTURE_WRAP_T;
+    p.m_params[3].m_type = TEXTURE_PARAM_TYPE_INT;
+    p.m_params[3].iVal = GL_REPEAT;
+    
+    p.m_numParams = 4;
+    
+    [m_shaderProgram setupTexture2D:UNIFORM_DIFFUSE_TEXTURE textureResource:m_textures[0] samplerNumber:0 params:&p];
+    
+    /*glEnable(GL_TEXTURE_2D);
+    
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, m_textures[0]);
+    glUniform1i(uniforms[UNIFORM_DIFFUSE_TEXTURE], 0);*/
     
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }
@@ -453,7 +572,14 @@ using namespace Framework;
 
 - (BOOL)loadShaders
 {
-    GLuint vertShader, fragShader;
+    if (!m_shaderProgram) {
+        m_shaderProgram = [[ShaderProgram alloc] initWithName:@"Simple Shader" vertexShaderPath:@"Shader" fragmentShaderPath:@"Shader"];
+    }
+    
+    return m_shaderProgram.valid;
+    
+    
+    /*GLuint vertShader, fragShader;
     NSString *vertShaderPathname, *fragShaderPathname;
     
     // Create shader program.
@@ -510,6 +636,7 @@ using namespace Framework;
     uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX] = glGetUniformLocation(_program, "modelViewProjectionMatrix");
     uniforms[UNIFORM_MODEL_MATRIX] = glGetUniformLocation(_program, "modelMatrix");
     uniforms[UNIFORM_NORMAL_MATRIX] = glGetUniformLocation(_program, "normalMatrix");
+    uniforms[UNIFORM_DIFFUSE_TEXTURE] = glGetUniformLocation(_program, "diffuseSampler");
     
     // Release vertex and fragment shaders.
     if (vertShader) {
@@ -521,10 +648,10 @@ using namespace Framework;
         glDeleteShader(fragShader);
     }
     
-    return YES;
+    return YES;*/
 }
 
-- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file
+/*- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file
 {
     GLint status;
     const GLchar *source;
@@ -602,12 +729,18 @@ using namespace Framework;
     }
     
     return YES;
-}
+}*/
 
 - (IBAction)renderViewButtonPressed:(id)sender {}
 
-- (IBAction)optionsButtonPressed:(UIButton *)sender {
-    // after 5 seconds hide the button
+- (IBAction)optionsButtonPressed:(UIButton *)sender {}
+
+/**
+ * Show UI for selecting rendering mode. 
+ * See ViewController_RenderMode.h and ViewController+RenderMode.h
+ */
+- (IBAction)renderModeButtonPressed:(UIButton *)sender forEvent:(UIEvent *)event {
+    [self showRenderModeView];
 }
 
 - (BOOL) shouldAutorotate {

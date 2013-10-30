@@ -8,15 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import <Foundation/NSCoder.h>
+#import "ShaderRenderingModes.h"
+
 #include "Quat.h"
 
 using namespace Framework::Math;
 
 @class Camera;
 
-enum RenderingMode {Standard = 0, DiffuseLighting, DiffuseColor, NormalMap};
-
-@interface LiveViewOptions : NSObject <NSCoding>
+@interface LiveViewOptions : NSObject <NSCoding, UIPickerViewDataSource>
 
 @property (nonatomic) BOOL showTrackballBounds;
 @property (nonatomic) BOOL wireframe;
@@ -65,5 +65,7 @@ enum RenderingMode {Standard = 0, DiffuseLighting, DiffuseColor, NormalMap};
  * String that can be used for UI display.
  */
 + (NSString*) getDescriptionForRenderingMode:(NSUInteger)renderingMode;
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView;
 
 @end
