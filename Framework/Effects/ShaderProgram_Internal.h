@@ -7,18 +7,17 @@
 //
 
 #import "ShaderProgram.h"
-#import "ShaderGlobals.h"
 
 /*
  * Global Model matrix, camera matrix and projection matrix
  * to transform world-space objects into camera screen space
  */
-static GLKMatrix4 m_modelViewProjectionMatrix;
+extern GLKMatrix4 m_modelViewProjectionMatrix;
 
 /*
  * Indicate which rendering layer to draw
  */
-static GLfloat m_renderingOptions[4];
+extern GLfloat m_renderingOptions[4];
 
 @interface ShaderProgram ()
 {

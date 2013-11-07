@@ -89,54 +89,54 @@ namespace Framework { namespace Math {
         Transform t1 ;
         
         // This takes point in f1 and moves it to the Cartesian Frame
-        t1.m[0][0] = f1.u.v[XAxis];
-        t1.m[0][1] = f1.u.v[YAxis];
-        t1.m[0][2] = f1.u.v[ZAxis];
+        t1.m[0][0] = f1.u().v[XAxis];
+        t1.m[0][1] = f1.u().v[YAxis];
+        t1.m[0][2] = f1.u().v[ZAxis];
         
-        t1.m[1][0] = f1.v.v[XAxis];
-        t1.m[1][1] = f1.v.v[YAxis];
-        t1.m[1][2] = f1.v.v[ZAxis];
+        t1.m[1][0] = f1.v().v[XAxis];
+        t1.m[1][1] = f1.v().v[YAxis];
+        t1.m[1][2] = f1.v().v[ZAxis];
         
-        t1.m[2][0] = f1.w.v[XAxis];
-        t1.m[2][1] = f1.w.v[YAxis];
-        t1.m[2][2] = f1.w.v[ZAxis];
+        t1.m[2][0] = f1.w().v[XAxis];
+        t1.m[2][1] = f1.w().v[YAxis];
+        t1.m[2][2] = f1.w().v[ZAxis];
         
-        t1.m[3][0] = f1.origin.v[XAxis];
-        t1.m[3][1] = f1.origin.v[YAxis];
-        t1.m[3][2] = f1.origin.v[ZAxis];
+        t1.m[3][0] = f1.origin().v[XAxis];
+        t1.m[3][1] = f1.origin().v[YAxis];
+        t1.m[3][2] = f1.origin().v[ZAxis];
         
         Transform t2 ;
         VectorF t ;
         
-        float d = 1.0f / dot3(f2.u, cross (f2.v, f2.w)) ;
+        float d = 1.0f / dot3(f2.u(), cross (f2.v(), f2.w())) ;
         
         t = VectorF( 1.0, 0.0, 0.0 ) ;
         
-        VectorF crossVW = cross(f2.v, f2.w);
-        VectorF crossTW = cross(t, f2.w);
-        VectorF crossVT = cross(f2.v, t);
+        VectorF crossVW = cross(f2.m_v, f2.w());
+        VectorF crossTW = cross(t, f2.w());
+        VectorF crossVT = cross(f2.v(), t);
         
         t2.m[0][0] = dot3(t, crossVW) * d ;
-        t2.m[0][1] = dot3(f2.u, crossTW) * d ;
-        t2.m[0][2] = dot3(f2.u, crossVT) * d ;
+        t2.m[0][1] = dot3(f2.u(), crossTW) * d ;
+        t2.m[0][2] = dot3(f2.u(), crossVT) * d ;
         
         t = VectorF( 0.0, 1.0, 0.0 ) ;
         
         t2.m[1][0] = dot3(t, crossVW) * d ;
-        t2.m[1][1] = dot3(f2.u, crossTW) * d ;
-        t2.m[1][2] = dot3(f2.u, crossVT) * d ;
+        t2.m[1][1] = dot3(f2.u(), crossTW) * d ;
+        t2.m[1][2] = dot3(f2.u(), crossVT) * d ;
         
         t = VectorF( 0.0, 0.0, 1.0 ) ;
         
         t2.m[2][0] = dot3(t, crossVW) * d ;
-        t2.m[2][1] = dot3(f2.u, crossTW) * d ;
-        t2.m[2][2] = dot3(f2.u, crossVT) * d ;
+        t2.m[2][1] = dot3(f2.u(), crossTW) * d ;
+        t2.m[2][2] = dot3(f2.u(), crossVT) * d ;
         
-        t = PointF(-f2.origin.v[0], -f2.origin.v[1], -f2.origin.v[2]);
+        t = PointF(-f2.origin().v[0], -f2.origin().v[1], -f2.origin().v[2]);
         
         t2.m[3][0] = dot3(t, crossVW) * d ;
-        t2.m[3][1] = dot3(f2.u, crossTW) * d ;
-        t2.m[3][2] = dot3(f2.u, crossVT) * d ;
+        t2.m[3][1] = dot3(f2.u(), crossTW) * d ;
+        t2.m[3][2] = dot3(f2.u(), crossVT) * d ;
         
         return (mult44(t1, t2)) ;
     }

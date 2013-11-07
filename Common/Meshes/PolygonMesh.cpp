@@ -14,8 +14,7 @@ namespace Framework {
     
     PolygonMesh::PolygonMesh(const unsigned int numVertices, const unsigned int numTris, const VertexFormat format)
     :m_format(format), m_vertexCapacity(numVertices), m_numVertices(0), m_vertices(NULL), m_triCapacity(numTris), m_numTris(0), m_triangles(NULL) {
-        m_triangles = new unsigned int[numTris];
-        m_vertices = ::operator new(vertexFormatSize()*numVertices);
+        createBuffers();
     }
     
     PolygonMesh::~PolygonMesh() {
@@ -24,10 +23,10 @@ namespace Framework {
     
     void PolygonMesh::init(const unsigned int numVertices, const unsigned int numTris, const Framework::PolygonMesh::VertexFormat format) {
         destroy();
+        m_format = format;
         m_vertexCapacity = numVertices;
         m_triCapacity = numTris;
-        m_triangles = new unsigned int[numTris];
-        m_vertices = ::operator new(vertexFormatSize()*numVertices);
+        createBuffers();
     }
     
     bool PolygonMesh::isValid() const {
@@ -66,6 +65,11 @@ namespace Framework {
         }
         
         m_numTris = m_numVertices = m_triCapacity = m_vertexCapacity = 0;
+    }
+    
+    void PolygonMesh::createBuffers() {
+        m_triangles = new unsigned int[m_triCapacity*3];
+        m_vertices = ::operator new(vertexFormatSize()*m_vertexCapacity);
     }
     
     unsigned int PolygonMesh::vertexFormatSize() const {

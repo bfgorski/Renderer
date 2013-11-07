@@ -10,6 +10,17 @@
 #import "ShaderProgram.h"
 #import "ShaderProgram_Internal.h"
 
+/*
+ * Global Model matrix, camera matrix and projection matrix
+ * to transform world-space objects into camera screen space
+ */
+GLKMatrix4 m_modelViewProjectionMatrix;
+
+/*
+ * Indicate which rendering layer to draw
+ */
+GLfloat m_renderingOptions[4];
+
 @implementation ShaderProgram
 
 - (id) init {
@@ -51,12 +62,19 @@
     // Release vertex and fragment shaders.
     if (self.vertexShader) {
         glDetachShader(m_program, self.vertexShader.shaderHandle);
+        _vertexShader = nil;
         //glDeleteShader(vertShader);
     }
     
     if (self.fragmentShader) {
         glDetachShader(m_program, self.fragmentShader.shaderHandle);
+        _fragmentShader = nil;
         //glDeleteShader(fragShader);
+    }
+    
+    if (m_program) {
+        glDeleteProgram(m_program);
+        m_program = 0;
     }
 }
 
@@ -187,7 +205,7 @@
 
 - (void) setGlobalUniforms {
     glUniform4fv(m_globalUniforms[UNIFORM_GLOBAL_RENDERING_OPTIONS], 1, m_renderingOptions);
-    glUniformMatrix4fv(m_uniforms[UNIFORM_GLOBAL_MODELVIEWPROJECTION_MATRIX], 1, 0, m_modelViewProjectionMatrix.m);
+    glUniformMatrix4fv(m_globalUniforms[UNIFORM_GLOBAL_MODELVIEWPROJECTION_MATRIX], 1, 0, m_modelViewProjectionMatrix.m);
 }
 
 @end

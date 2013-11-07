@@ -69,6 +69,8 @@ public:
      */
     virtual void createGeo(const SOCreateGeoArgs* args = nullptr) {};
     
+    PolygonMesh * getPolygonMesh() const { return m_polygonMesh; }
+    
 protected:
     
     /**

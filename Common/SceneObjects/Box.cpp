@@ -7,16 +7,22 @@
 //
 
 #include "Box.h"
+#include "BasicTypesImpl.h"
 
 namespace Framework {
-    Box::Box() : m_diagStart(-0.5,-0.5,-0.5), m_diagEnd(0.5,0.5,0.5){
-        
+    Box::Box() : m_frame(PointF(0,0,0), VectorF(1,0,0), VectorF(0,1,0), VectorF(0,0,1)){
+        // Store dimension as the distance from the center to the box boundary
+        m_dimensions[0] = m_dimensions[1] = m_dimensions[2] = 0.5f;
     }
     
-    Box::Box(const PointF& p0, const PointF& p1) : m_diagStart(p0), m_diagEnd(p1) {}
+    Box::Box(const Frame& f, const float uDim, const float vDim, const float wDim) : m_frame(f) {
+        m_dimensions[0] = uDim*0.5;
+        m_dimensions[1] = vDim*0.5;
+        m_dimensions[2] = wDim*0.5;
+    }
     
     void Box::applyTransform(const Math::Transform &t) {
-        
+        // Apply transform to frame and calculate new dimensions
     }
     
     SOIntersectionType Box::intersect(const Ray& r, SOIntersection* intersectionInfo) const {
@@ -27,43 +33,85 @@ namespace Framework {
         return SOIntersectionNone;
     }
     
-    void Box::createGeo(const SOCreateGeoArgs *args) {
-        static const unsigned int boxTriangles[] = { 0,2,1, 1,2,3, 5,1,3, 5,3,7, 7,3,2, 2,6,7, 4,2,0, 6,2,4, 4,7,6, 4,5,7, 4,0,5, 0,1,5 };
-        
-        static_assert( (sizeof(boxTriangles) == (36*sizeof(unsigned int))), "Box triangle indices are incorrect" );
-        
-        PolygonMesh& pm = createPolygonMesh();
-        pm.init(8, 12, PolygonMesh::PosNorm);
-        pm.addTriangles(boxTriangles, 12);
-    
-        // Vertex 0 is diag start, vertex 7 is diag end
-        float x = m_diagEnd.x() - m_diagStart.x();
-        float y = m_diagEnd.y() - m_diagStart.y();
-        float z = m_diagEnd.z() - m_diagStart.z();
-        
-        float cx = m_diagStart.x() + 0.5*x;
-        float cy = m_diagStart.y() + 0.5*x;
-        float cz = m_diagStart.z() + 0.5*x;
-        
-        float v[6]; // 3 pos, 3 norm
-        
-        for (int i = 0; i < 7; ++i) {
-            float hasX = float(i&0x1);
-            float hasY = float(i&0x2);
-            float hasZ = float(i&0x4);
+    void Box::createGeoHelper(const PointF& fc, const VectorF& fn, const VectorF& v0, const float v0S, const VectorF& v1, const float v1S, float * v) {
+        for (int i = 0; i < 4; ++i, v+=6) {
+            float v0Scale = (i & 0x1) ? v0S : -v0S;
+            float v1Scale = (i & 0x2) ? v1S : -v1S;
             
-            v[0] = m_diagStart.x() + x*hasX;
-            v[1] = m_diagStart.y() + y*hasY;
-            v[2] = m_diagStart.z() + z*hasZ;
-            
-            vec3 n = vec3(v[0]-cx, v[1]-cy, v[2]-cz);
-            n.normalize();
-            v[3] = n.x();
-            v[4] = n.y();
-            v[5] = n.z();
-            
-            pm.addVertices(reinterpret_cast<const void*>(v), 1);
+            v[0] = fc.x() + v0.x()*v0Scale + v1.x()*v1Scale;
+            v[1] = fc.y() + v0.y()*v0Scale + v1.y()*v1Scale;
+            v[2] = fc.z() + v0.z()*v0Scale + v1.z()*v1Scale;
+            v[3] = fn.x();
+            v[4] = fn.y();
+            v[5] = fn.z();
         }
+    }
+    
+    void Box::createGeo(const SOCreateGeoArgs *args) {
         
+        // Create 12 triangles from 24 vertices each with a distinct normal
+        static const unsigned int boxTriangles[] = {
+            0,2,1,      1,2,3,      // -U face
+            4,6,5,      5,6,7,      //  U face
+            8,10,9,     9,10,11,    // -V face
+            12,14,13,   13,14,15,   //  V face
+            16,18,17,   17,18,19,   // -W face
+            20,22,21,   21,22,23    //  W face
+        };
+        
+        //static_assert( (sizeof(boxTriangles) == (36*sizeof(unsigned int))), "Box triangle indices are incorrect" );
+        
+        // 24 vertices, 12 triangles
+        PolygonMesh& pm = createPolygonMesh();
+        pm.init(24, 12, PolygonMesh::PosNorm);
+        pm.addTriangles(boxTriangles, 12);
+        pm.setNumVertices(24);
+        
+        float *v = reinterpret_cast<float*>(pm.getRawVerts()); // space for 4 positions and 4 normal vectors
+        
+        // -U face
+        PointF faceCenter = Math::vec3AXPlusB(m_frame.u(), -m_dimensions[0], m_frame.origin());
+        VectorF faceNormal = Math::vec3Scale(m_frame.u(), -1);
+        createGeoHelper(faceCenter, faceNormal, m_frame.v(), m_dimensions[1], m_frame.w(), m_dimensions[2], v);
+        v += 24;
+        
+        // U face
+        faceCenter = Math::vec3AXPlusB(m_frame.u(), m_dimensions[0], m_frame.origin());
+        createGeoHelper(faceCenter, m_frame.u(), m_frame.v(), m_dimensions[1], m_frame.w(), m_dimensions[2], v);
+        v += 24;
+        
+        // -V face
+        faceCenter = Math::vec3AXPlusB(m_frame.v(), -m_dimensions[1], m_frame.origin());
+        faceNormal = Math::vec3Scale(m_frame.v(), -1);
+        createGeoHelper(faceCenter, faceNormal, m_frame.u(), m_dimensions[0], m_frame.w(), m_dimensions[2], v);
+        v += 24;
+        
+        // V face
+        faceCenter = Math::vec3AXPlusB(m_frame.v(), m_dimensions[1], m_frame.origin());
+        createGeoHelper(faceCenter, m_frame.v(), m_frame.u(), m_dimensions[0], m_frame.w(), m_dimensions[2], v);
+        v += 24;
+        
+        // -W face
+        faceCenter = Math::vec3AXPlusB(m_frame.w(), -m_dimensions[2], m_frame.origin());
+        faceNormal = Math::vec3Scale(m_frame.w(), -1);
+        createGeoHelper(faceCenter, faceNormal, m_frame.u(), m_dimensions[0], m_frame.v(), m_dimensions[1], v);
+        v += 24;
+        
+        // W face
+        faceCenter = Math::vec3AXPlusB(m_frame.w(), m_dimensions[2], m_frame.origin());
+        createGeoHelper(faceCenter, m_frame.w(), m_frame.u(), m_dimensions[0], m_frame.v(), m_dimensions[1], v);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

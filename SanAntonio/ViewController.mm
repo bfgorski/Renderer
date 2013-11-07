@@ -9,21 +9,25 @@
 #import "ViewController.h"
 #import <UIKit/UIPanGestureRecognizer.h>
 #import <UIKit/UITapGestureRecognizer.h>
+#import <CoreGraphics/CGImage.h>
+
 #import "Camera.h"
 #import "LiveViewOptions.h"
 #import "LiveViewOptionsViewController.h"
 #import "ViewController+RenderMode.h"
 #import "ViewController_RenderMode.h"
 #import "ContentGenerator.h"
-#import <CoreGraphics/CGImage.h>
-
-#import <ShaderGlobals.h>
+#import "RenderManager.h"
 #import "Shader.h"
 #import "ShaderProgram.h"
 #import "ShaderProgram+External.h"
+#import "OpenGLRenderer.h"
+#import "OpenGLRenderUnit.h"
 
 #include "Trackball.h"
 #include "BasicTypesImpl.h"
+#include "Box.h"
+#include "ShaderRenderingModes.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
@@ -42,53 +46,6 @@ GLfloat trackBallVertexData[24] = {
     0.8,0.2,-0.5, 0,0,1,
 };
 
-GLfloat gCubeVertexData[216] = 
-{
-    // Data layout for each line below is:
-    // positionX, positionY, positionZ,     normalX, normalY, normalZ,
-    0.5f, -0.5f, -0.5f,        1.0f, 0.0f, 0.0f,
-    0.5f, 0.5f, -0.5f,         1.0f, 0.0f, 0.0f,
-    0.5f, -0.5f, 0.5f,         1.0f, 0.0f, 0.0f,
-    0.5f, -0.5f, 0.5f,         1.0f, 0.0f, 0.0f,
-    0.5f, 0.5f, -0.5f,         1.0f, 0.0f, 0.0f,
-    0.5f, 0.5f, 0.5f,          1.0f, 0.0f, 0.0f,
-    
-    0.5f, 0.5f, -0.5f,         0.0f, 1.0f, 0.0f,
-    -0.5f, 0.5f, -0.5f,        0.0f, 1.0f, 0.0f,
-    0.5f, 0.5f, 0.5f,          0.0f, 1.0f, 0.0f,
-    0.5f, 0.5f, 0.5f,          0.0f, 1.0f, 0.0f,
-    -0.5f, 0.5f, -0.5f,        0.0f, 1.0f, 0.0f,
-    -0.5f, 0.5f, 0.5f,         0.0f, 1.0f, 0.0f,
-    
-    -0.5f, 0.5f, -0.5f,        -1.0f, 0.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f,       -1.0f, 0.0f, 0.0f,
-    -0.5f, 0.5f, 0.5f,         -1.0f, 0.0f, 0.0f,
-    -0.5f, 0.5f, 0.5f,         -1.0f, 0.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f,       -1.0f, 0.0f, 0.0f,
-    -0.5f, -0.5f, 0.5f,        -1.0f, 0.0f, 0.0f,
-    
-    -0.5f, -0.5f, -0.5f,       0.0f, -1.0f, 0.0f,
-    0.5f, -0.5f, -0.5f,        0.0f, -1.0f, 0.0f,
-    -0.5f, -0.5f, 0.5f,        0.0f, -1.0f, 0.0f,
-    -0.5f, -0.5f, 0.5f,        0.0f, -1.0f, 0.0f,
-    0.5f, -0.5f, -0.5f,        0.0f, -1.0f, 0.0f,
-    0.5f, -0.5f, 0.5f,         0.0f, -1.0f, 0.0f,
-    
-    0.5f, 0.5f, 0.5f,          0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f,        0.0f, 0.0f, 1.0f,
-    
-    0.5f, -0.5f, -0.5f,        0.0f, 0.0f, -1.0f,
-    -0.5f, -0.5f, -0.5f,       0.0f, 0.0f, -1.0f,
-    0.5f, 0.5f, -0.5f,         0.0f, 0.0f, -1.0f,
-    0.5f, 0.5f, -0.5f,         0.0f, 0.0f, -1.0f,
-    -0.5f, -0.5f, -0.5f,       0.0f, 0.0f, -1.0f,
-    -0.5f, 0.5f, -0.5f,        0.0f, 0.0f, -1.0f
-};
-
 static GLfloat DEFAULT_FOV_IN_DEGREES = 65.0f;
 static GLfloat DEFAULT_NEAR_PLANE = 0.1;
 static GLfloat DEFAULT_FAR_PLANE = 100;
@@ -96,6 +53,8 @@ static GLfloat DEFAULT_FAR_PLANE = 100;
 using namespace Framework;
 
 @interface ViewController () {
+    RenderManager * m_renderManager;
+    
     GLuint _program;
     
     // Model matrix, camera matrix, projection matrix
@@ -109,15 +68,18 @@ using namespace Framework;
     
     float _rotation;
     
-    GLuint _vertexArray;
-    GLuint _vertexBuffer;
+    //GLuint _vertexArray;
+    //GLuint _vertexBuffer;
+    
+    //GLuint _indexArray;
+    //GLuint _indexBuffer;
     
     GLuint _tbVertexArray;
     GLuint _tbVertexBuffer;
     
     GLuint m_textures[4];
     
-    NSData *m_TextureData[2];
+    NSData *m_TextureData;
     
     GLKTextureInfo *m_TextureInfo;
     
@@ -133,6 +95,7 @@ using namespace Framework;
     
     ShaderProgram * m_shaderProgram;
     
+    Framework::Box * m_box;
 }
 
 @property (strong, nonatomic) EAGLContext *context;
@@ -142,11 +105,7 @@ using namespace Framework;
 
 - (void)setupGL;
 - (void)tearDownGL;
-
 - (BOOL)loadShaders;
-//- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
-//- (BOOL)linkProgram:(GLuint)prog;
-//- (BOOL)validateProgram:(GLuint)prog;
 
 @end
 
@@ -162,15 +121,27 @@ using namespace Framework;
         NSLog(@"Failed to create ES context");
     }
     
+    if (!m_renderManager) {
+        m_renderManager = [RenderManager instance];
+    }
+    
+    if (!m_box) {
+        m_box = new Box();
+        m_box->createGeo();
+        
+        //OpenGLRenderUnit * ru = [[OpenGLRenderUnit alloc] initWithShader:Nil polygonMesh:m_box->getPolygonMesh()];
+        //[[m_renderManager getOpenGLRenderer] addRenderUnit:ru];
+    }
+    
     if (!m_TextureData) {
         Color c0(1,0,0,1);
         Color c1(0,0,1,1);
         
-        m_TextureData[0] = [ContentGenerator genCheckerTexture:c0 color1:c1 width:32 height:32 widthTileSize:8 heightTileSize:8];
+        m_TextureData = [ContentGenerator genCheckerTexture:c0 color1:c1 width:32 height:32 widthTileSize:8 heightTileSize:8];
         
-        Color c2(1,0,1,1);
-        Color c3(0,1,1,1);
-        m_TextureData[1] = [ContentGenerator genCheckerTexture:c2 color1:c3 width:16 height:16 widthTileSize:2 heightTileSize:2];
+        //Color c2(1,0,1,1);
+        //Color c3(0,1,1,1);
+        //m_TextureData[1] = [ContentGenerator genCheckerTexture:c2 color1:c3 width:16 height:16 widthTileSize:2 heightTileSize:2];
     }
     
     /*
@@ -284,6 +255,8 @@ using namespace Framework;
     }
     
     CGPathRelease(m_trackBallRect);
+    
+    delete m_box;
 }
 
 - (void)didReceiveMemoryWarning
@@ -320,12 +293,18 @@ using namespace Framework;
     
     glEnable(GL_DEPTH_TEST);
     
-    glGenVertexArraysOES(1, &_vertexArray);
+    if (m_box) {
+        OpenGLRenderUnit * ru = [[OpenGLRenderUnit alloc] initWithShader:Nil polygonMesh:m_box->getPolygonMesh()];
+        [[m_renderManager getOpenGLRenderer] addRenderUnit:ru];
+    }
+
+    /*glGenVertexArraysOES(1, &_vertexArray);
     glBindVertexArrayOES(_vertexArray);
     
     glGenBuffers(1, &_vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(gCubeVertexData), gCubeVertexData, GL_STATIC_DRAW);
+    
+    glBufferData(GL_ARRAY_BUFFER, m_box->getPolygonMesh()->vertSize(), m_box->getPolygonMesh()->getRawVerts(), GL_STATIC_DRAW);
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
     glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
@@ -334,6 +313,13 @@ using namespace Framework;
     
     glBindVertexArrayOES(_vertexArray);
     
+    glGenBuffers(1, &_indexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_box->getPolygonMesh()->triMemSize(), m_box->getPolygonMesh()->getTris(), GL_STATIC_DRAW);
+    */
+    
+    // TODO Create OpenGLRenderUnit object for this
+    
     glGenVertexArraysOES(1, &_tbVertexArray);
     glBindVertexArrayOES(_tbVertexArray);
     
@@ -341,7 +327,7 @@ using namespace Framework;
     glBindBuffer(GL_ARRAY_BUFFER, _tbVertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(trackBallVertexData), trackBallVertexData, GL_STATIC_DRAW);
     
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
+    glEnableVertexAttribArray(0);
     glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
     //glDisableVertexAttribArray(GLKVertexAttribNormal);
     glEnableVertexAttribArray(GLKVertexAttribNormal);
@@ -364,9 +350,8 @@ using namespace Framework;
      */
    
     glBindTexture(GL_TEXTURE_2D, m_textures[0]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 32, 32, 0, GL_RGBA, GL_UNSIGNED_BYTE, [m_TextureData[0] bytes]);
-    //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 16, 16, 1, GL_RGBA, GL_UNSIGNED_BYTE, [m_TextureData[1] bytes]);
-    
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 32, 32, 0, GL_RGBA, GL_UNSIGNED_BYTE, [m_TextureData bytes]);
+   
     /*
      NSDictionary *fbData = [renderer getFrameBufferPixels:fbOptions];
      NSData *data = fbData[@"data"];
@@ -426,22 +411,22 @@ using namespace Framework;
     glDeleteBuffers(1, &_tbVertexBuffer);
     glDeleteVertexArraysOES(1, &_tbVertexArray);
     
-    glDeleteBuffers(1, &_vertexBuffer);
-    glDeleteVertexArraysOES(1, &_vertexArray);
+    //glDeleteBuffers(1, &_vertexBuffer);
+    //glDeleteVertexArraysOES(1, &_vertexArray);
     
     self.effect = nil;
     
-    if (_program) {
-        glDeleteProgram(_program);
-        _program = 0;
-    }
+    //if (_program) {
+      //  glDeleteProgram(_program);
+        //_program = 0;
+    //}
 }
 
 #pragma mark - GLKView and GLKViewController delegate methods
 
 - (void)update
 {
-    float aspect = self.camera.aspectRatio; // fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
+    float aspect = self.camera.aspectRatio;
     GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(
         GLKMathDegreesToRadians(self.camera.fov), aspect, self.camera.nearPlane, self.camera.farPlane
     );
@@ -504,18 +489,10 @@ using namespace Framework;
         glDrawArrays(GL_LINE_LOOP, 0, 4);
     }
     
-    glBindVertexArrayOES(_vertexArray);
-    
-    //glUseProgram(_program);
-    
-    //GLfloat renderingOptions[4] = { 0, 0, 0, 0 };
-    
-    //RenderingMode m = m_liveViewOptions.renderingMode;
-    //renderingOptions[(int)m] = 1;
+    //glBindVertexArrayOES(_vertexArray);
     
     GLfloat lightingModel[4] = {m_liveViewOptions.lightingFalloff, 0, 0, 0};
     
-    //[ShaderProgram setLightingModel:lightingModel];
     [ShaderProgram setRenderingMode:m_liveViewOptions.renderingMode];
     [ShaderProgram setModelViewProjectionMatrix:&_modelViewProjectionMatrix];
     
@@ -524,20 +501,12 @@ using namespace Framework;
     [m_shaderProgram setNormalMatrix:&_normalMatrix immediately:YES];
     [m_shaderProgram setModelMatrix:&_modelMatrix immediately:YES];
     
-    //[m_shaderProgram setGlobalUniforms];
-    //glUniform4fv(uniforms[UNIFORM_RENDERING_OPTIONS], 1, renderingOptions);
-    //glUniform4fv(uniforms[UNIFORM_LIGHTING_MODEL], 1, lightingModel);
-    //glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
-   
-    //glUniformMatrix4fv(uniforms[UNIFORM_MODEL_MATRIX], 1, 0, _modelMatrix.m);
-    //glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
-    
     TextureSetupParams p;
     p.m_params[0].m_pname = GL_TEXTURE_MIN_FILTER;
     p.m_params[0].m_type = TEXTURE_PARAM_TYPE_INT;
     p.m_params[0].iVal = GL_LINEAR;
     
-    p.m_params[1].m_pname = GL_TEXTURE_MIN_FILTER;
+    p.m_params[1].m_pname = GL_TEXTURE_MAG_FILTER;
     p.m_params[1].m_type = TEXTURE_PARAM_TYPE_INT;
     p.m_params[1].iVal = GL_LINEAR;
     
@@ -553,19 +522,11 @@ using namespace Framework;
     
     [m_shaderProgram setupTexture2D:UNIFORM_DIFFUSE_TEXTURE textureResource:m_textures[0] samplerNumber:0 params:&p];
     
-    /*glEnable(GL_TEXTURE_2D);
     
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    [[m_renderManager getOpenGLRenderer] render];
     
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, m_textures[0]);
-    glUniform1i(uniforms[UNIFORM_DIFFUSE_TEXTURE], 0);*/
-    
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
+    //glDrawElements(GL_TRIANGLES, m_box->getPolygonMesh()->numTris()*3, GL_UNSIGNED_INT, (void*)0);
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation
@@ -577,159 +538,7 @@ using namespace Framework;
     }
     
     return m_shaderProgram.valid;
-    
-    
-    /*GLuint vertShader, fragShader;
-    NSString *vertShaderPathname, *fragShaderPathname;
-    
-    // Create shader program.
-    _program = glCreateProgram();
-    
-    // Create and compile vertex shader.
-    vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"vsh"];
-    if (![self compileShader:&vertShader type:GL_VERTEX_SHADER file:vertShaderPathname]) {
-        NSLog(@"Failed to compile vertex shader");
-        return NO;
-    }
-    
-    // Create and compile fragment shader.
-    fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"fsh"];
-    if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER file:fragShaderPathname]) {
-        NSLog(@"Failed to compile fragment shader");
-        return NO;
-    }
-    
-    // Attach vertex shader to program.
-    glAttachShader(_program, vertShader);
-    
-    // Attach fragment shader to program.
-    glAttachShader(_program, fragShader);
-    
-    // Bind attribute locations.
-    // This needs to be done prior to linking.
-    glBindAttribLocation(_program, GLKVertexAttribPosition, "position");
-    glBindAttribLocation(_program, GLKVertexAttribNormal, "normal");
-    
-    // Link program.
-    if (![self linkProgram:_program]) {
-        NSLog(@"Failed to link program: %d", _program);
-        
-        if (vertShader) {
-            glDeleteShader(vertShader);
-            vertShader = 0;
-        }
-        if (fragShader) {
-            glDeleteShader(fragShader);
-            fragShader = 0;
-        }
-        if (_program) {
-            glDeleteProgram(_program);
-            _program = 0;
-        }
-        
-        return NO;
-    }
-    
-    // Get uniform locations.
-    uniforms[UNIFORM_RENDERING_OPTIONS] = glGetUniformLocation(_program, "renderingOptions");
-    uniforms[UNIFORM_LIGHTING_MODEL] = glGetUniformLocation(_program, "lightingModel");
-    uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX] = glGetUniformLocation(_program, "modelViewProjectionMatrix");
-    uniforms[UNIFORM_MODEL_MATRIX] = glGetUniformLocation(_program, "modelMatrix");
-    uniforms[UNIFORM_NORMAL_MATRIX] = glGetUniformLocation(_program, "normalMatrix");
-    uniforms[UNIFORM_DIFFUSE_TEXTURE] = glGetUniformLocation(_program, "diffuseSampler");
-    
-    // Release vertex and fragment shaders.
-    if (vertShader) {
-        glDetachShader(_program, vertShader);
-        glDeleteShader(vertShader);
-    }
-    if (fragShader) {
-        glDetachShader(_program, fragShader);
-        glDeleteShader(fragShader);
-    }
-    
-    return YES;*/
 }
-
-/*- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file
-{
-    GLint status;
-    const GLchar *source;
-    
-    source = (GLchar *)[[NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil] UTF8String];
-    if (!source) {
-        NSLog(@"Failed to load vertex shader");
-        return NO;
-    }
-    
-    *shader = glCreateShader(type);
-    glShaderSource(*shader, 1, &source, NULL);
-    glCompileShader(*shader);
-    
-#if defined(DEBUG)
-    GLint logLength;
-    glGetShaderiv(*shader, GL_INFO_LOG_LENGTH, &logLength);
-    if (logLength > 0) {
-        GLchar *log = (GLchar *)malloc(logLength);
-        glGetShaderInfoLog(*shader, logLength, &logLength, log);
-        NSLog(@"Shader compile log:\n%s", log);
-        free(log);
-    }
-#endif
-    
-    glGetShaderiv(*shader, GL_COMPILE_STATUS, &status);
-    if (status == 0) {
-        glDeleteShader(*shader);
-        return NO;
-    }
-    
-    return YES;
-}
-
-- (BOOL)linkProgram:(GLuint)prog
-{
-    GLint status;
-    glLinkProgram(prog);
-    
-#if defined(DEBUG)
-    GLint logLength;
-    glGetProgramiv(prog, GL_INFO_LOG_LENGTH, &logLength);
-    if (logLength > 0) {
-        GLchar *log = (GLchar *)malloc(logLength);
-        glGetProgramInfoLog(prog, logLength, &logLength, log);
-        NSLog(@"Program link log:\n%s", log);
-        free(log);
-    }
-#endif
-    
-    glGetProgramiv(prog, GL_LINK_STATUS, &status);
-    if (status == 0) {
-        return NO;
-    }
-    
-    return YES;
-}
-
-- (BOOL)validateProgram:(GLuint)prog
-{
-    GLint logLength, status;
-    
-    glValidateProgram(prog);
-    glGetProgramiv(prog, GL_INFO_LOG_LENGTH, &logLength);
-    if (logLength > 0) {
-        GLchar *log = (GLchar *)malloc(logLength);
-        glGetProgramInfoLog(prog, logLength, &logLength, log);
-        NSLog(@"Program validate log:\n%s", log);
-        free(log);
-    }
-    
-    glGetProgramiv(prog, GL_VALIDATE_STATUS, &status);
-    if (status == 0) {
-        return NO;
-    }
-    
-    return YES;
-}*/
 
 - (IBAction)renderViewButtonPressed:(id)sender {}
 
@@ -851,8 +660,6 @@ using namespace Framework;
 - (IBAction)panGestureRecognizer:(UIPanGestureRecognizer *)recognizer {
     NSUInteger width = self.view.bounds.size.width;
     NSUInteger height = self.view.bounds.size.height;
-    /*CGPoint t = [recognizer translationInView:self.view];
-    CGPoint v = [recognizer velocityInView:self.view];*/
     CGPoint l = [recognizer locationInView:self.view];
    
     // Translate pan location to [-1,1]

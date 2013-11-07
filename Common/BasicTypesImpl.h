@@ -64,7 +64,7 @@ vec3 vec3AXPlusB(const vec3& a, const float x, const vec3& b);
  * Return component wise A*X + B*Y.
  */
 vec3 vec3AXPlusBY(const vec3& a, const float x, const vec3&b, const float y);
- 
+    
 float dot3(const vec3& a, const vec3& b);
 float dot3(const vec4& a, const vec4& b);
 float dot4(const vec4& a, const vec4& b);

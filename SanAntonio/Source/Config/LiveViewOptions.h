@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Foundation/NSCoder.h>
-#import "ShaderRenderingModes.h"
+#include "ShaderRenderingModes.h"
 
 #include "Quat.h"
 

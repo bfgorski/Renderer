@@ -12,12 +12,15 @@
 #include <iostream>
 
 namespace Framework {
+    
     /**
      * The SOCreateGeoArgs is used to control how a SceneObject
      * creates its own geometry when SceneObject::createGeo is called.
      */
     class SOCreateGeoArgs {
+    public:
         
+    private:
     };
 }
 

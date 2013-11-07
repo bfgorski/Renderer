@@ -182,8 +182,25 @@ typedef struct Pixel Pixel;
  * Coordinate Frame defined by 3 vectors and a point.
  */
 struct Frame {
-    VectorF u, v, w;
-    PointF origin;
+    enum Axes { UAxis = 0, VAxis = 1, WAxis = 2 };
+    
+    VectorF m_u, m_v, m_w;
+    PointF m_origin;
+    
+    Frame() : m_u(), m_v(), m_w(), m_origin() {}
+    Frame(const PointF& o, const VectorF& u, const VectorF& v, const VectorF& w) : m_u(u), m_v(v), m_w(w), m_origin(o) {}
+    Frame(const Frame& f) : m_u(f.m_u), m_v(f.m_v), m_w(f.m_w), m_origin(f.m_origin) {}
+    
+    const PointF& origin() const { return m_origin; }
+    const VectorF& u() const { return m_u; }
+    const VectorF& v() const { return m_v; }
+    const VectorF& w() const { return m_w; }
+    
+    void setOrigin(const PointF& p) { m_origin = p; }
+    void setU(const VectorF& u) { m_u = u; }
+    void setV(const VectorF& v) { m_v = v; }
+    void setW(const VectorF& w) { m_w = w; }
+    
 };
     
 typedef struct Frame Frame;

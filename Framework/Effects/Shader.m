@@ -9,15 +9,12 @@
 #import "Shader.h"
 
 @interface Shader()
-{
-}
 
 @property (nonatomic) GLuint shaderHandle;
 @property (nonatomic) NSString* resource;
 @property (nonatomic) NSString* resourcePath;
 @property (nonatomic) NSString* name;
 @property (nonatomic) enum ShaderType type;
-
 
 @end
 

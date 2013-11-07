@@ -14,13 +14,14 @@
 namespace Framework {
     
     class PolygonMesh {
+        
     public:
         
         /**
          * Vertex formats supported by the PolygonMesh.
          * Pos, Norm, Tex are floats. Col are bytes.
          */
-        enum VertexFormat { Pos, PosNorm, PosNormTex0, PosNormTex0Col0 };
+        enum VertexFormat { Pos = 0, PosNorm, PosNormTex0, PosNormTex0Col0 };
         
         /**
          * Create an unitialized polygon mesh.
@@ -64,9 +65,28 @@ namespace Framework {
         unsigned int numTris() const { return m_numTris; }
         
         /**
+         * Memory used by the triangle indices
+         */
+        unsigned int triMemSize() const { return (m_numTris*3*sizeof(unsigned int)); }
+        
+        /**
+         * Memory used by the vertex data
+         */
+        unsigned int vertSize() const { return (m_numVertices*vertexFormatSize()); }
+        
+        void setNumVertices(const unsigned int newNumVertices) {
+            if (newNumVertices <= m_vertexCapacity) { m_numVertices = newNumVertices; }
+        }
+        
+        /**
          * Access the raw vertex data.
          */
         const void * getVerts() const { return m_vertices; }
+        
+        /**
+         * Naked pointer to vertex data used for manually adding vertices in place.
+         */
+        void * getRawVerts() const { return m_vertices; }
         
         /**
          * Access the raw triangle data.
@@ -79,6 +99,11 @@ namespace Framework {
          * Delete the existing mesh data and reset capacities and counts.
          */
         void destroy();
+        
+        /**
+         * Allocate buffers for tris and verts.
+         */
+        void createBuffers();
         
         unsigned int vertexFormatSize() const;
         
@@ -113,6 +138,7 @@ namespace Framework {
          * Three consecutive vertices are a triangle
          */
         unsigned int * m_triangles;
+        
     };
 }
 

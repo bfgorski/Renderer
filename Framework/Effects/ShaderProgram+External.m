@@ -7,22 +7,22 @@
 //
 
 #import "ShaderProgram+External.h"
-#import "ShaderGlobals.h"
 #import "ShaderProgram_Internal.h"
 
 @implementation ShaderProgram (External)
 
 + (void) setModelViewProjectionMatrix:(GLKMatrix4 *)m {
-    m_modelViewProjectionMatrix = (*m);
+    memcpy((void*)(&m_modelViewProjectionMatrix), m, sizeof(GLKMatrix4));
 }
 
 + (void) setRenderingMode:(enum RenderingMode)m {
+    memset(m_renderingOptions, 0, 4*sizeof(unsigned int));
     m_renderingOptions[(int)m] = 1;
 }
 
 - (void) setLightingModel:(GLfloat *)lightingModel immediately:(BOOL)immediately {
     if (immediately) {
-        glUniform4fv(m_uniforms[UNIFORM_LIGHTING_MODEL], 1, m_lightingModel);
+        glUniform4fv(m_uniforms[UNIFORM_LIGHTING_MODEL], 1, lightingModel);
     } else {
         memcpy(m_lightingModel, lightingModel, sizeof(GLfloat)*4);
     }
@@ -32,7 +32,7 @@
     if (immediately) {
         glUniformMatrix4fv(m_uniforms[UNIFORM_MODEL_MATRIX], 1, 0, matrix->m);
     } else {
-        m_modelMatrix = (*matrix);
+        memcpy(&m_modelMatrix, matrix, sizeof(GLKMatrix4));
     }
 }
 
@@ -40,7 +40,7 @@
     if (immediately) {
         glUniformMatrix3fv(m_uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, matrix->m);
     } else {
-        m_normalMatrix = (*matrix);
+        memcpy(&m_normalMatrix, matrix, sizeof(GLKMatrix4));
     }
 }
 
@@ -50,14 +50,16 @@
     }
     
     glEnable(GL_TEXTURE_2D);
-    glActiveTexture(GL_TEXTURE0 + samplerNumber);
-    glBindTexture(GL_TEXTURE_2D, textureResource);
-    glUniform1i(m_uniforms[texture], samplerNumber);
     
     if (params) {
         for (unsigned int i = 0; i < params->m_numParams; ++i) {
             glTexParameteri(GL_TEXTURE_2D, params->m_params[i].m_pname, params->m_params[i].iVal);
         }
     }
+    
+    glActiveTexture(GL_TEXTURE0 + samplerNumber);
+    glBindTexture(GL_TEXTURE_2D, textureResource);
+    glUniform1i(m_uniforms[texture], samplerNumber);
 }
+
 @end

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class Renderer;
+@class OpenGLRenderer;
 
 /**
  * The RenderManager object controls one or more Renderer objects
@@ -30,4 +31,8 @@
  */
 - (Renderer*) getActiveRenderer;
 
+/**
+ * Render a scene using OpenGL
+ */
+- (OpenGLRenderer*) getOpenGLRenderer;
 @end

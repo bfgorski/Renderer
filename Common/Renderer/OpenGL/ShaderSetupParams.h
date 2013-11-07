@@ -15,6 +15,7 @@ enum {
     TEXTURE_PARAM_TYPE_FLOAT_V = 2,
     
     MAX_TEXTURE_PARAMS = 8,
+    MAX_VERTEX_ATTRIBUTES = 5,
 };
 
 struct TextureSetupParam {

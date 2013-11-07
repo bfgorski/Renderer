@@ -18,8 +18,17 @@ namespace Framework {
     class Box : public SceneObject {
         
     public :
+        /**
+         * Default Box is centered at the origin
+         */
         Box();
-        Box(const PointF& p0, const PointF& p1);
+        
+        /**
+         * Create a new box with a frame and dimensions.
+         *
+         * @param f Frame at the box center.
+         */
+        Box(const Frame& f, const float uDim, const float vDim, const float wDim);
         
         /**
          * Apply the transform to box's diagonal points
@@ -42,10 +51,24 @@ namespace Framework {
         virtual void createGeo(const SOCreateGeoArgs *args = nullptr) override;
         
     private:
-        // Define a Box by its major diagonal
-        PointF m_diagStart;
-        PointF m_diagEnd;
         
+        void createGeoHelper(
+            const PointF& faceCenter,
+            const VectorF& faceNormal,
+            const VectorF& v0,
+            const float v0Scale,
+            const VectorF& v1,
+            const float v1Scale,
+            float * v
+        );
+        
+        /* 
+         * Define a Box with a normalized frame and three dimensions
+         * The
+         */
+        Frame m_frame;
+        
+        float m_dimensions[3];
     };
 }
 

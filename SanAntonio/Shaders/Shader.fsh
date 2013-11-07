@@ -38,7 +38,7 @@ highp vec3 calcDiffuseLighting(highp vec3 pos, highp vec3 N, highp vec4 lm) {
 }
 
 uniform sampler2D diffuseSampler;
-uniform sampler2D detailSampler;
+//uniform sampler2D detailSampler;
 
 uniform lowp vec4 lightingModel;
 
@@ -57,9 +57,9 @@ void main()
     highp vec3 dl = calcDiffuseLighting(positionVarying.xyz, N, lightingModel);
     
     highp vec4 c0 = texture2D(diffuseSampler, vec2(vertexColor.xy));
-    highp vec4 c1 = texture2D(detailSampler, vec2(vertexColor.xy));
+    //highp vec4 c1 = texture2D(detailSampler, vec2(vertexColor.xy));
     
-    gl_FragColor = vec4(dl*c.rgb, 1.0);
+    gl_FragColor = vec4(dl*c0.rgb, 1.0);
     gl_FragColor = mix(gl_FragColor, vec4(dl, 1.0), renderingOptions.yyyy);
     gl_FragColor = mix(gl_FragColor, vec4(vertexColor, 1.0), renderingOptions.zzzz);
     gl_FragColor = mix(gl_FragColor, vec4((N*0.5 + 0.5),1.0), renderingOptions.wwww);

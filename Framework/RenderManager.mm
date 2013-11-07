@@ -8,10 +8,12 @@
 
 #import "RenderManager.h"
 #import "Renderer.h"
+#import "OpenGLRenderer.h"
 
 @interface RenderManager()
 
-@property(strong, nonatomic) Renderer* activeRenderer;
+@property(nonatomic) Renderer* activeRenderer;
+@property(nonatomic) OpenGLRenderer *openGLRenderer;
 
 @end
 
@@ -27,12 +29,21 @@
 
 - (RenderManager*) init {
     self = [super init];
-    self.activeRenderer = [[Renderer alloc] init:@"San Antonio"];
+    
+    if (self) {
+        _activeRenderer = [[Renderer alloc] init:@"San Antonio"];
+        _openGLRenderer = [[OpenGLRenderer alloc] init];
+    }
+    
     return self;
 }
 
 - (Renderer*) getActiveRenderer {
     return self.activeRenderer;
+}
+
+- (OpenGLRenderer*) getOpenGLRenderer {
+    return self.openGLRenderer;
 }
 
 @end
