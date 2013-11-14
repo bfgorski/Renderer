@@ -9,6 +9,7 @@
 #include "BasicTypesImpl.h"
 
 const Framework::vec3 VZero(0,0,0);
+const float PLANE_INTERSECTION_THRESHOLD = 1e-6;
 
 namespace Framework { namespace Math {
     
@@ -141,6 +142,67 @@ vec3 affine3(const vec3& a, const vec3& b, const float t) {
     return vec3(a.v[0] + t * (b.v[0] - a.v[0]),
                 a.v[1] + t * (b.v[1] - a.v[1]),
                 a.v[2] + t * (b.v[2] - a.v[2]));
+}
+    
+    
+/**
+ * Intersect a Ray with a plane defined by a point and a normal
+ */
+bool planeIntersect(const Ray& r, const PointF& point, const VectorF& normal, PointF& intersection) {
+    const PointF& rp = r.getPos();
+    float dotNormalRayDir = Math::dot3(normal, r.getDir());
+    
+    // Is the ray perpendicular to the plane's normal?
+    if (fabs(dotNormalRayDir) < PLANE_INTERSECTION_THRESHOLD) {
+        return false;
+    }
+    
+    // Determine which side of the plane the point is on
+    float D = -Math::dot3(normal, point);
+    float distFromPlane = Math::dot3(normal, rp) + D;
+    float t = distFromPlane/dotNormalRayDir;
+    
+    // > 0 if ray and normal are in the same direction and
+    // the ray is on the normal side of the plane or
+    // If the ray and normal point in opposite directions and
+    // the ray is not on the normal side of the plane
+    if (t > 0) {
+        return false;
+    }
+    
+    intersection = Math::vec3AXPlusB(r.getDir(), -t, r.getPos());
+    return true;
+}
+
+/**
+ * Intersect a Ray with a plane defined by the 4 coefficients Ax + By + Cz + D = 0.
+ * A,B,C are the plane normal
+ */
+bool planeIntersect(const Ray& r, const float *plane, PointF& intersection) {
+    Normal normal(plane[0], plane[1], plane[2]);
+    
+    const PointF& rp = r.getPos();
+    float dotNormalRayDir = Math::dot3(normal, r.getDir());
+    
+    // Is the ray perpendicular to the plane's normal?
+    if (fabs(dotNormalRayDir) < PLANE_INTERSECTION_THRESHOLD) {
+        return false;
+    }
+    
+    // Determine which side of the plane the point is on
+    float distFromPlane = Math::dot3(normal, rp) + plane[3];
+    float t = distFromPlane/dotNormalRayDir;
+    
+    // > 0 if ray and normal are in the same direction and
+    // the ray is on the normal side of the plane or
+    // If the ray and normal point in opposite directions and
+    // the ray is not on the normal side of the plane
+    if (t > 0) {
+        return false;
+    }
+    
+    intersection = Math::vec3AXPlusB(r.getDir(), -t, r.getPos());
+    return true;
 }
     
 }

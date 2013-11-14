@@ -55,6 +55,7 @@
      * but it will not be deleted until it is no longer attached to any program object
      */
     glDeleteShader(self.shaderHandle);
+    _shaderHandle = 0;
 }
 
 - (BOOL) isValid {

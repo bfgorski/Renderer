@@ -174,12 +174,9 @@ SOIntersectionType Sphere::intersect(const Ray& r, PointF& intersectionPoint) co
     return SOIntersectionNone;
 }
 
-
-
-
-
-
-
+void Sphere::createGeo(const SOCreateGeoArgs *args)  {
+    
+}
 
 
 

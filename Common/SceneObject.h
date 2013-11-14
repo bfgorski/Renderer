@@ -16,7 +16,6 @@
 
 namespace Framework {
 
-    
 class Material;
 class SOCreateGeoArgs;
     
@@ -68,6 +67,8 @@ public:
      * @param args  Optional parameters for creating geometry
      */
     virtual void createGeo(const SOCreateGeoArgs* args = nullptr) {};
+    
+    bool hasGeo() const { return (NULL != m_polygonMesh); }
     
     PolygonMesh * getPolygonMesh() const { return m_polygonMesh; }
     

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="dBt-WR-W8x">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="dBt-WR-W8x">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -302,7 +302,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="renderScene:" destination="WFc-B8-pWt" eventType="touchUpInside" id="6zv-AX-UzD"/>
                                     <action selector="renderScene:" destination="dBt-WR-W8x" eventType="touchUpInside" id="b9s-TN-OhN"/>
                                 </connections>
                             </button>
@@ -388,8 +387,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="we3-ea-Lps"/>
-        <segue reference="MIp-L3-R06"/>
         <segue reference="ckW-Uc-qpw"/>
+        <segue reference="20e-87-SUL"/>
+        <segue reference="FrP-PO-grJ"/>
     </inferredMetricsTieBreakers>
 </document>

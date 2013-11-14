@@ -52,6 +52,17 @@ namespace Framework {
         
     private:
         
+        void intersectionHelper(
+            const Ray& r,
+            const PointF& p,
+            const VectorF& v,
+            PointF& closestIntersection,
+            VectorF& closestNormal,
+            float& closestDistance
+        ) const;
+        
+        SOIntersectionType findIntersection(const Ray& r, PointF& closestIntersection, VectorF& closestNormal) const;
+        
         void createGeoHelper(
             const PointF& faceCenter,
             const VectorF& faceNormal,

@@ -76,6 +76,30 @@ vec3 cross(const vec3& a, const vec3& b);
  */
 vec3 affine3(const vec3& a, const vec3&b, const float t);
     
+/**
+ * Intersect a Ray with a plane defined by a point and a normal.
+ *
+ * @param r             The Ray to intersect with the plane
+ * @param point         A point on the plane
+ * @param normal        The plane normal.
+ * @param intersection  Return the itersection point here.
+ *                      Undefined if false is returned.
+ * @return true/false   Indicating if the Ray intersects the plane.
+ */
+bool planeIntersect(const Ray& r, const PointF& point, const VectorF& normal, PointF& intersection);
+
+/**
+ * Intersect a Ray with a plane defined by the equation Ax + By + Cz + D = 0.
+ *
+ * @param r             The Ray to intersect with the plane
+ * @param plane         An array of 4 floats for the plane equation .
+ * @param intersection  Return the itersection point here.
+ *                      Undefined if false is returned.
+ *
+ * @return true/false   Indicating if the Ray intersects the plane.
+ */
+bool planeIntersect(const Ray& r, const float *plane, PointF& intersection);
+    
 }
 }
 #endif

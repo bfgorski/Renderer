@@ -208,4 +208,28 @@ GLfloat m_renderingOptions[4];
     glUniformMatrix4fv(m_globalUniforms[UNIFORM_GLOBAL_MODELVIEWPROJECTION_MATRIX], 1, 0, m_modelViewProjectionMatrix.m);
 }
 
+- (BOOL) bindMaterial:(Framework::OpenGL::Material *)material {
+    
+    if (!material) {
+        return NO;
+    }
+    
+    /* 
+     * Bind samplers using parameter name.
+     * TODO: Bind other material parameters
+     */
+     
+    for (unsigned int samplerIndex = 0; samplerIndex < material->getNumSamplers(); ++samplerIndex) {
+        TextureSamplerParam& ts = material->getSampler(samplerIndex);
+        GLuint samplerHandle = glGetUniformLocation(m_program, ts.getName());
+        ts.setHandle(samplerHandle);
+    }
+    
+    return YES;
+}
+
+
+
+
+
 @end

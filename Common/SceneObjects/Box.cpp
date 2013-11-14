@@ -25,12 +25,78 @@ namespace Framework {
         // Apply transform to frame and calculate new dimensions
     }
     
-    SOIntersectionType Box::intersect(const Ray& r, SOIntersection* intersectionInfo) const {
+    void Box::intersectionHelper(const Ray& r, const PointF& p, const VectorF& n, PointF& closestIntersection, VectorF& closestNormal, float& closestDistance) const {
+        
+        PointF intersection;
+        if (Math::planeIntersect(r, p, n, intersection)) {
+            float d = Math::vec3FastDist(r.getPos(), intersection);
+            if (d < closestDistance) {
+                closestDistance = d;
+                closestIntersection = intersection;
+                closestNormal = n;
+            }
+        }
+    }
+    
+    SOIntersectionType Box::findIntersection(const Ray& r, PointF& closestIntersection, VectorF& closestNormal) const {
+        PointF intersection;
+        float closestDistance = 1e6;
+        
+        // Intersection 6 planes and see which comes first
+        // -U face
+        PointF faceCenter = Math::vec3AXPlusB(m_frame.u(), -m_dimensions[0], m_frame.origin());
+        VectorF faceNormal = Math::vec3Scale(m_frame.u(), -1);
+        
+        intersectionHelper(r, faceCenter, faceNormal, closestIntersection, closestNormal, closestDistance);
+        
+        // U face
+        faceCenter = Math::vec3AXPlusB(m_frame.u(), m_dimensions[0], m_frame.origin());
+        intersectionHelper(r, faceCenter, m_frame.u(), closestIntersection, closestNormal, closestDistance);
+        
+        // -V face
+        faceCenter = Math::vec3AXPlusB(m_frame.v(), -m_dimensions[1], m_frame.origin());
+        faceNormal = Math::vec3Scale(m_frame.v(), -1);
+        intersectionHelper(r, faceCenter, faceNormal, closestIntersection, closestNormal, closestDistance);
+        
+        // V face
+        faceCenter = Math::vec3AXPlusB(m_frame.v(), m_dimensions[1], m_frame.origin());
+        intersectionHelper(r, faceCenter, m_frame.v(), closestIntersection, closestNormal, closestDistance);
+        
+        // -W face
+        faceCenter = Math::vec3AXPlusB(m_frame.w(), -m_dimensions[2], m_frame.origin());
+        faceNormal = Math::vec3Scale(m_frame.w(), -1);
+        intersectionHelper(r, faceCenter, faceNormal, closestIntersection, closestNormal, closestDistance);
+        
+        // W face
+        faceCenter = Math::vec3AXPlusB(m_frame.w(), m_dimensions[2], m_frame.origin());
+        intersectionHelper(r, faceCenter, faceNormal, closestIntersection, closestNormal, closestDistance);
+        
+        if (1e6 != closestDistance) {
+            return ((Math::dot3(r.getDir(), closestNormal) > 0) ? SOIntersectionLeaving : SOIntersectionEntering);
+        }
+        
         return SOIntersectionNone;
     }
     
+    SOIntersectionType Box::intersect(const Ray& r, SOIntersection* intersectionInfo) const {
+        PointF closestIntersection;
+        VectorF closestNormal;
+
+        SOIntersectionType t = findIntersection(r, closestIntersection, closestNormal);
+
+        if (intersectionInfo && (SOIntersectionNone != t)) {
+            intersectionInfo->setPoint(closestIntersection);
+            intersectionInfo->setNormal(closestNormal);
+            intersectionInfo->setObject(this);
+            intersectionInfo->setType(t);
+        }
+        
+        return t;
+    }
+    
     SOIntersectionType Box::intersect(const Ray& r, PointF& intersectionPoint) const {
-        return SOIntersectionNone;
+        VectorF closestNormal;
+        return findIntersection(r, intersectionPoint, closestNormal);
     }
     
     void Box::createGeoHelper(const PointF& fc, const VectorF& fn, const VectorF& v0, const float v0S, const VectorF& v1, const float v1S, float * v) {

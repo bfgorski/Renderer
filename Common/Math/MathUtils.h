@@ -9,8 +9,6 @@
 #ifndef __Renderer__MathUtils__
 #define __Renderer__MathUtils__
 
-#include <iostream>
-
 namespace Framework { namespace Math {
     
 /**

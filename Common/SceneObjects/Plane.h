@@ -50,6 +50,12 @@ namespace Framework {
          */
         virtual SOIntersectionType intersect(const Ray& r, PointF& intersectionPoint) const;
         
+        /**
+         * Create points, normals and texture coordinates.
+         * Default geometry is 10x10 around the plane point.
+         */
+        virtual void createGeo(const SOCreateGeoArgs *args = nullptr) override;
+        
     protected:
         
         /**

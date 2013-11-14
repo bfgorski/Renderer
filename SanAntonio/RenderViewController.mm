@@ -52,7 +52,8 @@
     [renderer render:options];
     
     NSDictionary *fbOptions = @{
-        @"ARGB": [NSNumber numberWithBool:YES]
+        @"ARGB": [NSNumber numberWithBool:YES],
+        @"topRowFirst" : [NSNumber numberWithBool:YES]
     };
     
     NSDictionary *fbData = [renderer getFrameBufferPixels:fbOptions];

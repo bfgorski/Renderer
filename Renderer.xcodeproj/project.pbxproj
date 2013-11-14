@@ -70,14 +70,14 @@
 		493C78561819B2FC009F9450 /* ContentGenerator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 493C78521819B2FC009F9450 /* ContentGenerator.mm */; };
 		493C78581819C0C8009F9450 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493C78571819C0C8009F9450 /* QuartzCore.framework */; };
 		493C785A1819C168009F9450 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493C78591819C168009F9450 /* CoreGraphics.framework */; };
-		493C785E1819E2E3009F9450 /* Shader.m in Sources */ = {isa = PBXBuildFile; fileRef = 493C785D1819E2E3009F9450 /* Shader.m */; };
-		493C785F1819E2E3009F9450 /* Shader.m in Sources */ = {isa = PBXBuildFile; fileRef = 493C785D1819E2E3009F9450 /* Shader.m */; };
-		493C78601819E2E3009F9450 /* Shader.m in Sources */ = {isa = PBXBuildFile; fileRef = 493C785D1819E2E3009F9450 /* Shader.m */; };
-		493C78611819E2E3009F9450 /* Shader.m in Sources */ = {isa = PBXBuildFile; fileRef = 493C785D1819E2E3009F9450 /* Shader.m */; };
-		493C78641819E34F009F9450 /* ShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 493C78631819E34F009F9450 /* ShaderProgram.m */; };
-		493C78651819E34F009F9450 /* ShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 493C78631819E34F009F9450 /* ShaderProgram.m */; };
-		493C78661819E34F009F9450 /* ShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 493C78631819E34F009F9450 /* ShaderProgram.m */; };
-		493C78671819E34F009F9450 /* ShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 493C78631819E34F009F9450 /* ShaderProgram.m */; };
+		493C785E1819E2E3009F9450 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 493C785D1819E2E3009F9450 /* Shader.mm */; };
+		493C785F1819E2E3009F9450 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 493C785D1819E2E3009F9450 /* Shader.mm */; };
+		493C78601819E2E3009F9450 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 493C785D1819E2E3009F9450 /* Shader.mm */; };
+		493C78611819E2E3009F9450 /* Shader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 493C785D1819E2E3009F9450 /* Shader.mm */; };
+		493C78641819E34F009F9450 /* ShaderProgram.mm in Sources */ = {isa = PBXBuildFile; fileRef = 493C78631819E34F009F9450 /* ShaderProgram.mm */; };
+		493C78651819E34F009F9450 /* ShaderProgram.mm in Sources */ = {isa = PBXBuildFile; fileRef = 493C78631819E34F009F9450 /* ShaderProgram.mm */; };
+		493C78661819E34F009F9450 /* ShaderProgram.mm in Sources */ = {isa = PBXBuildFile; fileRef = 493C78631819E34F009F9450 /* ShaderProgram.mm */; };
+		493C78671819E34F009F9450 /* ShaderProgram.mm in Sources */ = {isa = PBXBuildFile; fileRef = 493C78631819E34F009F9450 /* ShaderProgram.mm */; };
 		493C786B181A52A0009F9450 /* RenderingOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 493C786A181A52A0009F9450 /* RenderingOptions.m */; };
 		493C786C181A52A0009F9450 /* RenderingOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 493C786A181A52A0009F9450 /* RenderingOptions.m */; };
 		493C786D181A52A0009F9450 /* RenderingOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 493C786A181A52A0009F9450 /* RenderingOptions.m */; };
@@ -91,12 +91,12 @@
 		4983B1B8181E4CB200A55922 /* PolygonMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4983B1B5181E4CB200A55922 /* PolygonMesh.cpp */; };
 		4983B1B9181E4CB200A55922 /* PolygonMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4983B1B5181E4CB200A55922 /* PolygonMesh.cpp */; };
 		4983B1BA181E4CB200A55922 /* PolygonMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4983B1B5181E4CB200A55922 /* PolygonMesh.cpp */; };
-		4983B1BD181FB54D00A55922 /* SimpleShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 4983B1BC181FB54D00A55922 /* SimpleShaderProgram.m */; };
-		4983B1BE181FB54D00A55922 /* SimpleShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 4983B1BC181FB54D00A55922 /* SimpleShaderProgram.m */; };
-		4983B1BF181FB54D00A55922 /* SimpleShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 4983B1BC181FB54D00A55922 /* SimpleShaderProgram.m */; };
-		4983B1C0181FB54D00A55922 /* SimpleShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 4983B1BC181FB54D00A55922 /* SimpleShaderProgram.m */; };
-		4983B1CD18205A2A00A55922 /* ShaderProgram+External.m in Sources */ = {isa = PBXBuildFile; fileRef = 4983B1CC18205A2A00A55922 /* ShaderProgram+External.m */; };
-		4983B1CE18205A2A00A55922 /* ShaderProgram+External.m in Sources */ = {isa = PBXBuildFile; fileRef = 4983B1CC18205A2A00A55922 /* ShaderProgram+External.m */; };
+		4983B1BD181FB54D00A55922 /* SimpleShaderProgram.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4983B1BC181FB54D00A55922 /* SimpleShaderProgram.mm */; };
+		4983B1BE181FB54D00A55922 /* SimpleShaderProgram.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4983B1BC181FB54D00A55922 /* SimpleShaderProgram.mm */; };
+		4983B1BF181FB54D00A55922 /* SimpleShaderProgram.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4983B1BC181FB54D00A55922 /* SimpleShaderProgram.mm */; };
+		4983B1C0181FB54D00A55922 /* SimpleShaderProgram.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4983B1BC181FB54D00A55922 /* SimpleShaderProgram.mm */; };
+		4983B1CD18205A2A00A55922 /* ShaderProgram+External.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4983B1CC18205A2A00A55922 /* ShaderProgram+External.mm */; };
+		4983B1CE18205A2A00A55922 /* ShaderProgram+External.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4983B1CC18205A2A00A55922 /* ShaderProgram+External.mm */; };
 		4985B24C18177BB200453884 /* lighting.fsh in Sources */ = {isa = PBXBuildFile; fileRef = 4985B24B18177BB200453884 /* lighting.fsh */; };
 		4985B25218186E7700453884 /* ViewController+RenderMode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4985B25118186E7700453884 /* ViewController+RenderMode.mm */; };
 		498954C6179523720036F5AE /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 498954C4179523720036F5AE /* Scene.cpp */; };
@@ -214,6 +214,9 @@
 		49DF965717E851B9001C345B /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965517E851B9001C345B /* Transform.cpp */; };
 		49DF965817E851B9001C345B /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965517E851B9001C345B /* Transform.cpp */; };
 		49DF965917E851B9001C345B /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF965517E851B9001C345B /* Transform.cpp */; };
+		49E8CA311830B4D600297EE4 /* OpenGLTextureResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E8CA301830B4D500297EE4 /* OpenGLTextureResource.m */; };
+		49E8CA321830B4D600297EE4 /* OpenGLTextureResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E8CA301830B4D500297EE4 /* OpenGLTextureResource.m */; };
+		49E8CA331830B4D600297EE4 /* OpenGLTextureResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E8CA301830B4D500297EE4 /* OpenGLTextureResource.m */; };
 		49EACA2B181D176E00AB2670 /* SOCreateGeoArgs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49EACA29181D176E00AB2670 /* SOCreateGeoArgs.cpp */; };
 		49EACA2C181D176E00AB2670 /* SOCreateGeoArgs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49EACA29181D176E00AB2670 /* SOCreateGeoArgs.cpp */; };
 		49EACA2D181D176E00AB2670 /* SOCreateGeoArgs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49EACA29181D176E00AB2670 /* SOCreateGeoArgs.cpp */; };
@@ -281,9 +284,9 @@
 		493C78571819C0C8009F9450 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		493C78591819C168009F9450 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		493C785C1819E2E3009F9450 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shader.h; path = Effects/Shader.h; sourceTree = "<group>"; };
-		493C785D1819E2E3009F9450 /* Shader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Shader.m; path = Effects/Shader.m; sourceTree = "<group>"; };
+		493C785D1819E2E3009F9450 /* Shader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Shader.mm; path = Effects/Shader.mm; sourceTree = "<group>"; };
 		493C78621819E34F009F9450 /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShaderProgram.h; path = Effects/ShaderProgram.h; sourceTree = "<group>"; };
-		493C78631819E34F009F9450 /* ShaderProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShaderProgram.m; path = Effects/ShaderProgram.m; sourceTree = "<group>"; };
+		493C78631819E34F009F9450 /* ShaderProgram.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ShaderProgram.mm; path = Effects/ShaderProgram.mm; sourceTree = "<group>"; };
 		493C7869181A52A0009F9450 /* RenderingOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderingOptions.h; path = Config/RenderingOptions.h; sourceTree = "<group>"; };
 		493C786A181A52A0009F9450 /* RenderingOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RenderingOptions.m; path = Config/RenderingOptions.m; sourceTree = "<group>"; };
 		495805B714C57683002AC459 /* RendererTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RendererTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -304,10 +307,10 @@
 		4983B1B5181E4CB200A55922 /* PolygonMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PolygonMesh.cpp; path = Meshes/PolygonMesh.cpp; sourceTree = "<group>"; };
 		4983B1B6181E4CB200A55922 /* PolygonMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PolygonMesh.h; path = Meshes/PolygonMesh.h; sourceTree = "<group>"; };
 		4983B1BB181FB54D00A55922 /* SimpleShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleShaderProgram.h; path = Effects/SimpleShaderProgram.h; sourceTree = "<group>"; };
-		4983B1BC181FB54D00A55922 /* SimpleShaderProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleShaderProgram.m; path = Effects/SimpleShaderProgram.m; sourceTree = "<group>"; };
+		4983B1BC181FB54D00A55922 /* SimpleShaderProgram.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SimpleShaderProgram.mm; path = Effects/SimpleShaderProgram.mm; sourceTree = "<group>"; };
 		4983B1C51820426200A55922 /* ShaderProgram_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShaderProgram_Internal.h; path = Effects/ShaderProgram_Internal.h; sourceTree = "<group>"; };
 		4983B1CB18205A2A00A55922 /* ShaderProgram+External.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ShaderProgram+External.h"; path = "Effects/ShaderProgram+External.h"; sourceTree = "<group>"; };
-		4983B1CC18205A2A00A55922 /* ShaderProgram+External.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ShaderProgram+External.m"; path = "Effects/ShaderProgram+External.m"; sourceTree = "<group>"; };
+		4983B1CC18205A2A00A55922 /* ShaderProgram+External.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "ShaderProgram+External.mm"; path = "Effects/ShaderProgram+External.mm"; sourceTree = "<group>"; };
 		4985B24B18177BB200453884 /* lighting.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = lighting.fsh; path = Shaders/lighting.fsh; sourceTree = "<group>"; };
 		4985B25018186E7700453884 /* ViewController+RenderMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ViewController+RenderMode.h"; path = "ViewControllers/ViewController+RenderMode.h"; sourceTree = "<group>"; };
 		4985B25118186E7700453884 /* ViewController+RenderMode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "ViewController+RenderMode.mm"; path = "ViewControllers/ViewController+RenderMode.mm"; sourceTree = "<group>"; };
@@ -417,6 +420,8 @@
 		49DF965017E851AA001C345B /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Matrix.cpp; path = Math/Matrix.cpp; sourceTree = "<group>"; };
 		49DF965517E851B9001C345B /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Transform.cpp; path = Math/Transform.cpp; sourceTree = "<group>"; };
 		49DF965A17E851CC001C345B /* Transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Transform.h; path = Math/Transform.h; sourceTree = "<group>"; };
+		49E8CA2F1830B4D500297EE4 /* OpenGLTextureResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTextureResource.h; path = Renderer/OpenGL/OpenGLTextureResource.h; sourceTree = "<group>"; };
+		49E8CA301830B4D500297EE4 /* OpenGLTextureResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTextureResource.m; path = Renderer/OpenGL/OpenGLTextureResource.m; sourceTree = "<group>"; };
 		49EACA29181D176E00AB2670 /* SOCreateGeoArgs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SOCreateGeoArgs.cpp; path = SceneObjects/SOCreateGeoArgs.cpp; sourceTree = "<group>"; };
 		49EACA2A181D176E00AB2670 /* SOCreateGeoArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SOCreateGeoArgs.h; path = SceneObjects/SOCreateGeoArgs.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -520,6 +525,8 @@
 				491614E2182225C800B1D34E /* OpenGLRenderer.mm */,
 				491614ED18222A0C00B1D34E /* OpenGLRenderUnit.h */,
 				491614EE18222A0C00B1D34E /* OpenGLRenderUnit.mm */,
+				49E8CA2F1830B4D500297EE4 /* OpenGLTextureResource.h */,
+				49E8CA301830B4D500297EE4 /* OpenGLTextureResource.m */,
 			);
 			name = Renderer;
 			sourceTree = "<group>";
@@ -544,14 +551,14 @@
 			isa = PBXGroup;
 			children = (
 				493C785C1819E2E3009F9450 /* Shader.h */,
-				493C785D1819E2E3009F9450 /* Shader.m */,
+				493C785D1819E2E3009F9450 /* Shader.mm */,
 				493C78621819E34F009F9450 /* ShaderProgram.h */,
 				4983B1CB18205A2A00A55922 /* ShaderProgram+External.h */,
-				4983B1CC18205A2A00A55922 /* ShaderProgram+External.m */,
-				493C78631819E34F009F9450 /* ShaderProgram.m */,
+				4983B1CC18205A2A00A55922 /* ShaderProgram+External.mm */,
+				493C78631819E34F009F9450 /* ShaderProgram.mm */,
 				4983B1C51820426200A55922 /* ShaderProgram_Internal.h */,
 				4983B1BB181FB54D00A55922 /* SimpleShaderProgram.h */,
-				4983B1BC181FB54D00A55922 /* SimpleShaderProgram.m */,
+				4983B1BC181FB54D00A55922 /* SimpleShaderProgram.mm */,
 			);
 			name = Effects;
 			sourceTree = "<group>";
@@ -1248,10 +1255,10 @@
 				493C784D1819AF37009F9450 /* MathUtils.cpp in Sources */,
 				495805C814C57683002AC459 /* RendererTests.mm in Sources */,
 				49EACA2C181D176E00AB2670 /* SOCreateGeoArgs.cpp in Sources */,
-				493C785F1819E2E3009F9450 /* Shader.m in Sources */,
+				493C785F1819E2E3009F9450 /* Shader.mm in Sources */,
 				49C5E1D714C6C76500E6D655 /* SceneObject.cpp in Sources */,
 				493C78541819B2FC009F9450 /* ContentGenerator.mm in Sources */,
-				493C78651819E34F009F9450 /* ShaderProgram.m in Sources */,
+				493C78651819E34F009F9450 /* ShaderProgram.mm in Sources */,
 				49C5E1E314C6C7B700E6D655 /* Renderer.mm in Sources */,
 				49C5E1E414C6C7B700E6D655 /* SceneParser.m in Sources */,
 				4969251114E3C88D00FB3BCB /* FrameBufferTest.mm in Sources */,
@@ -1265,7 +1272,7 @@
 				498954D1179BD5600036F5AE /* FrameBuffer.mm in Sources */,
 				498954D3179BD8560036F5AE /* BasicTypesImpl.cpp in Sources */,
 				498954D4179BDBB80036F5AE /* Camera.mm in Sources */,
-				4983B1BE181FB54D00A55922 /* SimpleShaderProgram.m in Sources */,
+				4983B1BE181FB54D00A55922 /* SimpleShaderProgram.mm in Sources */,
 				498954D8179E61F60036F5AE /* LightSource.cpp in Sources */,
 				4916F04B17F2C595009EC552 /* Trackball.cpp in Sources */,
 				498954DD179E6F730036F5AE /* IlluminateResult.cpp in Sources */,
@@ -1292,7 +1299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4989552C17DB11C80036F5AE /* LightSource.cpp in Sources */,
-				4983B1BF181FB54D00A55922 /* SimpleShaderProgram.m in Sources */,
+				4983B1BF181FB54D00A55922 /* SimpleShaderProgram.mm in Sources */,
 				493C786D181A52A0009F9450 /* RenderingOptions.m in Sources */,
 				4989552D17DB11C80036F5AE /* LightSource.h in Sources */,
 				4989552E17DB11C80036F5AE /* IlluminateResult.cpp in Sources */,
@@ -1300,11 +1307,12 @@
 				4989552F17DB11C80036F5AE /* IlluminateResult.h in Sources */,
 				4989553017DB11C80036F5AE /* PointLightSource.cpp in Sources */,
 				4989553117DB11C80036F5AE /* PointLightSource.h in Sources */,
-				493C78661819E34F009F9450 /* ShaderProgram.m in Sources */,
+				493C78661819E34F009F9450 /* ShaderProgram.mm in Sources */,
 				4989553217DB11C80036F5AE /* SceneObject.cpp in Sources */,
 				4989553317DB11C80036F5AE /* Scene.cpp in Sources */,
 				4989553417DB11C80036F5AE /* Scene.h in Sources */,
 				4916F05617FEAB0D009EC552 /* RenderingOptionsViewController.m in Sources */,
+				49E8CA321830B4D600297EE4 /* OpenGLTextureResource.m in Sources */,
 				4989553617DB11C80036F5AE /* Sphere.h in Sources */,
 				4983B1B9181E4CB200A55922 /* PolygonMesh.cpp in Sources */,
 				491614F7182B15CC00B1D34E /* MaterialParams.cpp in Sources */,
@@ -1325,7 +1333,7 @@
 				4989550517D9CF5A0036F5AE /* main.m in Sources */,
 				4989550C17D9CF5A0036F5AE /* AppDelegate.mm in Sources */,
 				4989552917DB11380036F5AE /* Renderer.mm in Sources */,
-				4983B1CD18205A2A00A55922 /* ShaderProgram+External.m in Sources */,
+				4983B1CD18205A2A00A55922 /* ShaderProgram+External.mm in Sources */,
 				4989552A17DB11810036F5AE /* FrameBuffer.mm in Sources */,
 				4989552B17DB11880036F5AE /* Camera.mm in Sources */,
 				493C7848181909EB009F9450 /* TextureGenerator.cpp in Sources */,
@@ -1335,7 +1343,7 @@
 				49170FE917DD9CA70021A10C /* RenderManager.mm in Sources */,
 				49DF964017E5AAB9001C345B /* SimpleMaterial.cpp in Sources */,
 				4916F05217FC1984009EC552 /* Box.cpp in Sources */,
-				493C78601819E2E3009F9450 /* Shader.m in Sources */,
+				493C78601819E2E3009F9450 /* Shader.mm in Sources */,
 				493C784E1819AF37009F9450 /* MathUtils.cpp in Sources */,
 				49DF964617E6F6C2001C345B /* IlluminateParams.cpp in Sources */,
 				49DF964B17E850E6001C345B /* Quat.cpp in Sources */,
@@ -1360,7 +1368,7 @@
 				4916F05317FC1984009EC552 /* Box.cpp in Sources */,
 				49170FC517DC597B0021A10C /* IlluminateResult.cpp in Sources */,
 				4916F04D17F2C595009EC552 /* Trackball.cpp in Sources */,
-				4983B1CE18205A2A00A55922 /* ShaderProgram+External.m in Sources */,
+				4983B1CE18205A2A00A55922 /* ShaderProgram+External.mm in Sources */,
 				49170FC717DC597B0021A10C /* PointLightSource.cpp in Sources */,
 				493C784F1819AF37009F9450 /* MathUtils.cpp in Sources */,
 				491614D31821CDC700B1D34E /* BasicTypesImpl.h in Sources */,
@@ -1368,7 +1376,7 @@
 				49CA3A5A1801386700C6236B /* ConfigManager.mm in Sources */,
 				491614F218222A0C00B1D34E /* OpenGLRenderUnit.mm in Sources */,
 				49170FC917DC597B0021A10C /* SceneObject.cpp in Sources */,
-				4983B1C0181FB54D00A55922 /* SimpleShaderProgram.m in Sources */,
+				4983B1C0181FB54D00A55922 /* SimpleShaderProgram.mm in Sources */,
 				49170FCA17DC597B0021A10C /* Scene.cpp in Sources */,
 				49170FCE17DC597B0021A10C /* Sphere.cpp in Sources */,
 				493C786E181A52A0009F9450 /* RenderingOptions.m in Sources */,
@@ -1388,6 +1396,7 @@
 				4989555B17DB25A00036F5AE /* AppDelegate.mm in Sources */,
 				4985B24C18177BB200453884 /* lighting.fsh in Sources */,
 				493C7849181909EB009F9450 /* TextureGenerator.cpp in Sources */,
+				49E8CA331830B4D600297EE4 /* OpenGLTextureResource.m in Sources */,
 				49CA3A5517FFDC1600C6236B /* LiveViewOptions.mm in Sources */,
 				491614EC182226CB00B1D34E /* VertexBufferObject.cpp in Sources */,
 				4916F05717FEAB0D009EC552 /* RenderingOptionsViewController.m in Sources */,
@@ -1399,8 +1408,8 @@
 				4916F05B17FEAD50009EC552 /* LiveViewOptionsViewController.mm in Sources */,
 				49DF964C17E850E6001C345B /* Quat.cpp in Sources */,
 				49DF965417E851AA001C345B /* Matrix.cpp in Sources */,
-				493C78671819E34F009F9450 /* ShaderProgram.m in Sources */,
-				493C78611819E2E3009F9450 /* Shader.m in Sources */,
+				493C78671819E34F009F9450 /* ShaderProgram.mm in Sources */,
+				493C78611819E2E3009F9450 /* Shader.mm in Sources */,
 				49DF965917E851B9001C345B /* Transform.cpp in Sources */,
 				491614E6182225C800B1D34E /* OpenGLRenderer.mm in Sources */,
 			);
@@ -1424,12 +1433,13 @@
 				49EACA2B181D176E00AB2670 /* SOCreateGeoArgs.cpp in Sources */,
 				498BCE37147107B000B4ED2C /* SceneObject.cpp in Sources */,
 				498BCE3E1471091C00B4ED2C /* Renderer.mm in Sources */,
+				49E8CA311830B4D600297EE4 /* OpenGLTextureResource.m in Sources */,
 				491614EF18222A0C00B1D34E /* OpenGLRenderUnit.mm in Sources */,
 				498BCE421472505500B4ED2C /* SceneParser.m in Sources */,
 				4916F04A17F2C595009EC552 /* Trackball.cpp in Sources */,
 				498BCE451472569400B4ED2C /* Camera.mm in Sources */,
 				498BCE471476651000B4ED2C /* BasicTypesImpl.cpp in Sources */,
-				4983B1BD181FB54D00A55922 /* SimpleShaderProgram.m in Sources */,
+				4983B1BD181FB54D00A55922 /* SimpleShaderProgram.mm in Sources */,
 				498BCE4D14766B4500B4ED2C /* FrameBuffer.mm in Sources */,
 				493C78531819B2FC009F9450 /* ContentGenerator.mm in Sources */,
 				49D5135B1595A24B00C0ECAF /* Sphere.cpp in Sources */,
@@ -1440,8 +1450,8 @@
 				491614F5182B15CC00B1D34E /* MaterialParams.cpp in Sources */,
 				498954DC179E6F730036F5AE /* IlluminateResult.cpp in Sources */,
 				498954E017A10EFC0036F5AE /* PointLightSource.cpp in Sources */,
-				493C785E1819E2E3009F9450 /* Shader.m in Sources */,
-				493C78641819E34F009F9450 /* ShaderProgram.m in Sources */,
+				493C785E1819E2E3009F9450 /* Shader.mm in Sources */,
+				493C78641819E34F009F9450 /* ShaderProgram.mm in Sources */,
 				498954F017D1B3DB0036F5AE /* Plane.cpp in Sources */,
 				4983B1B7181E4CB200A55922 /* PolygonMesh.cpp in Sources */,
 				498954F417D9AF750036F5AE /* Material.cpp in Sources */,

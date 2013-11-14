@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "Shader.h"
 
+#include "MaterialParams.h"
+
 /**
 *  Uniform shader parameters shared across all shaders
 *  and set on a per-frame basis.
@@ -39,6 +41,9 @@ enum ShaderUniforms
 
 @interface ShaderProgram : NSObject
 
+/**
+ * Unique identifier for the ShaderProgram
+ */
 @property (nonatomic,readonly) NSString* name;
 @property (nonatomic,readonly) Shader* vertexShader;
 @property (nonatomic,readonly) Shader* fragmentShader;
@@ -80,5 +85,11 @@ enum ShaderUniforms
  * to implement shader specific functionality.
  */
 - (void) setUniforms;
+
+/**
+ * Bind the shader parameters in the given material to the shader program.
+ */
+- (BOOL) bindMaterial:(Framework::OpenGL::Material*)material;
+
 
 @end

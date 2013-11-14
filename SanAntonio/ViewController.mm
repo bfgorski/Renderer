@@ -23,6 +23,7 @@
 #import "ShaderProgram+External.h"
 #import "OpenGLRenderer.h"
 #import "OpenGLRenderUnit.h"
+#import "OpenGLTextureResource.h"
 
 #include "Trackball.h"
 #include "BasicTypesImpl.h"
@@ -68,12 +69,6 @@ using namespace Framework;
     
     float _rotation;
     
-    //GLuint _vertexArray;
-    //GLuint _vertexBuffer;
-    
-    //GLuint _indexArray;
-    //GLuint _indexBuffer;
-    
     GLuint _tbVertexArray;
     GLuint _tbVertexBuffer;
     
@@ -96,6 +91,8 @@ using namespace Framework;
     ShaderProgram * m_shaderProgram;
     
     Framework::Box * m_box;
+    
+    OpenGL::Material * m_material;
 }
 
 @property (strong, nonatomic) EAGLContext *context;
@@ -127,10 +124,6 @@ using namespace Framework;
     
     if (!m_box) {
         m_box = new Box();
-        m_box->createGeo();
-        
-        //OpenGLRenderUnit * ru = [[OpenGLRenderUnit alloc] initWithShader:Nil polygonMesh:m_box->getPolygonMesh()];
-        //[[m_renderManager getOpenGLRenderer] addRenderUnit:ru];
     }
     
     if (!m_TextureData) {
@@ -282,6 +275,8 @@ using namespace Framework;
     [EAGLContext setCurrentContext:self.context];
     
     [self loadShaders];
+    [self loadTextures];
+    [self loadScene];
     
     self.effect = [[GLKBaseEffect alloc] init];
     self.effect.light0.enabled = GL_FALSE;
@@ -293,33 +288,7 @@ using namespace Framework;
     
     glEnable(GL_DEPTH_TEST);
     
-    if (m_box) {
-        OpenGLRenderUnit * ru = [[OpenGLRenderUnit alloc] initWithShader:Nil polygonMesh:m_box->getPolygonMesh()];
-        [[m_renderManager getOpenGLRenderer] addRenderUnit:ru];
-    }
-
-    /*glGenVertexArraysOES(1, &_vertexArray);
-    glBindVertexArrayOES(_vertexArray);
-    
-    glGenBuffers(1, &_vertexBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-    
-    glBufferData(GL_ARRAY_BUFFER, m_box->getPolygonMesh()->vertSize(), m_box->getPolygonMesh()->getRawVerts(), GL_STATIC_DRAW);
-    
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
-    glEnableVertexAttribArray(GLKVertexAttribNormal);
-    glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
-    
-    glBindVertexArrayOES(_vertexArray);
-    
-    glGenBuffers(1, &_indexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_box->getPolygonMesh()->triMemSize(), m_box->getPolygonMesh()->getTris(), GL_STATIC_DRAW);
-    */
-    
-    // TODO Create OpenGLRenderUnit object for this
-    
+    // TODO: Create OpenGLRenderUnit object for this
     glGenVertexArraysOES(1, &_tbVertexArray);
     glBindVertexArrayOES(_tbVertexArray);
     
@@ -335,23 +304,6 @@ using namespace Framework;
     
     glBindVertexArrayOES(_tbVertexArray);
     
-    glGenTextures(1, m_textures);
-    
-    /*
-     void glTexImage2D(	GLenum target,
-     GLint level,
-     GLint internalFormat,
-     GLsizei width,
-     GLsizei height,
-     GLint border,
-     GLenum format,
-     GLenum type,
-     const GLvoid * data);
-     */
-   
-    glBindTexture(GL_TEXTURE_2D, m_textures[0]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 32, 32, 0, GL_RGBA, GL_UNSIGNED_BYTE, [m_TextureData bytes]);
-   
     /*
      NSDictionary *fbData = [renderer getFrameBufferPixels:fbOptions];
      NSData *data = fbData[@"data"];
@@ -411,10 +363,12 @@ using namespace Framework;
     glDeleteBuffers(1, &_tbVertexBuffer);
     glDeleteVertexArraysOES(1, &_tbVertexArray);
     
+    [[m_renderManager getOpenGLRenderer] tearDownGL];
     //glDeleteBuffers(1, &_vertexBuffer);
     //glDeleteVertexArraysOES(1, &_vertexArray);
     
     self.effect = nil;
+    m_shaderProgram = nil;
     
     //if (_program) {
       //  glDeleteProgram(_program);
@@ -489,44 +443,18 @@ using namespace Framework;
         glDrawArrays(GL_LINE_LOOP, 0, 4);
     }
     
-    //glBindVertexArrayOES(_vertexArray);
-    
     GLfloat lightingModel[4] = {m_liveViewOptions.lightingFalloff, 0, 0, 0};
     
     [ShaderProgram setRenderingMode:m_liveViewOptions.renderingMode];
     [ShaderProgram setModelViewProjectionMatrix:&_modelViewProjectionMatrix];
     
+    // TODO: Move to OpenGLRenderer parameters
     [m_shaderProgram enable];
     [m_shaderProgram setLightingModel:lightingModel immediately:YES];
     [m_shaderProgram setNormalMatrix:&_normalMatrix immediately:YES];
     [m_shaderProgram setModelMatrix:&_modelMatrix immediately:YES];
     
-    TextureSetupParams p;
-    p.m_params[0].m_pname = GL_TEXTURE_MIN_FILTER;
-    p.m_params[0].m_type = TEXTURE_PARAM_TYPE_INT;
-    p.m_params[0].iVal = GL_LINEAR;
-    
-    p.m_params[1].m_pname = GL_TEXTURE_MAG_FILTER;
-    p.m_params[1].m_type = TEXTURE_PARAM_TYPE_INT;
-    p.m_params[1].iVal = GL_LINEAR;
-    
-    p.m_params[2].m_pname = GL_TEXTURE_WRAP_S;
-    p.m_params[2].m_type = TEXTURE_PARAM_TYPE_INT;
-    p.m_params[2].iVal = GL_REPEAT;
-    
-    p.m_params[3].m_pname = GL_TEXTURE_WRAP_T;
-    p.m_params[3].m_type = TEXTURE_PARAM_TYPE_INT;
-    p.m_params[3].iVal = GL_REPEAT;
-    
-    p.m_numParams = 4;
-    
-    [m_shaderProgram setupTexture2D:UNIFORM_DIFFUSE_TEXTURE textureResource:m_textures[0] samplerNumber:0 params:&p];
-    
-    
     [[m_renderManager getOpenGLRenderer] render];
-    
-    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-    //glDrawElements(GL_TRIANGLES, m_box->getPolygonMesh()->numTris()*3, GL_UNSIGNED_INT, (void*)0);
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation
@@ -535,9 +463,77 @@ using namespace Framework;
 {
     if (!m_shaderProgram) {
         m_shaderProgram = [[ShaderProgram alloc] initWithName:@"Simple Shader" vertexShaderPath:@"Shader" fragmentShaderPath:@"Shader"];
+        
+        [[m_renderManager getOpenGLRenderer] addShaderProgram:m_shaderProgram];
     }
     
     return m_shaderProgram.valid;
+}
+
+/**
+ * Load any textures for the current scene that are not in the OpenGLRenderManager
+ */
+- (BOOL)loadTextures {
+    NSNumber * textureId = [NSNumber numberWithUnsignedInteger:1];
+    
+    if (![[m_renderManager getOpenGLRenderer] getTextureResource:textureId optionalTextureStringId:nil]) {
+        OpenGLTextureResource * t = [[OpenGLTextureResource alloc] initWithId:textureId textureData:m_TextureData width:32 height:32 levels:0];
+        
+        [[m_renderManager getOpenGLRenderer] addTextureResource:t];
+    }
+    
+    return YES;
+}
+
+/**
+ * Create OpenGLRenderUnits for scene objects that do not have them
+ */
+- (void)loadScene {
+    if (m_box && !m_box->hasGeo()) {
+        m_box->createGeo();
+
+        // determine if box is alread in the renderer
+        
+        static char s[] = "diffuseSampler";
+        //static char shaderName[] = "Simple Shader";
+        m_material = new OpenGL::Material();
+        m_material->m_shaderProgram = strdup("Simple Shader");
+        m_material->m_numSamplers = 1;
+        m_material->m_samplers = new TextureSamplerParam[1];
+        
+        m_material->m_samplers[0].m_textureId = 1;
+        m_material->m_samplers[0].m_name = s;
+        m_material->m_samplers[0].m_handle = 0;
+        m_material->m_samplers[0].m_textureType = GL_TEXTURE_2D;
+        m_material->m_samplers[0].m_resource = 0;
+        m_material->m_samplers[0].m_samplerIndex = 0;
+        
+        TextureSetupParams &p = m_material->m_samplers[0].m_params;
+        p.m_params[0].m_pname = GL_TEXTURE_MIN_FILTER;
+        p.m_params[0].m_type = TEXTURE_PARAM_TYPE_INT;
+        p.m_params[0].iVal = GL_LINEAR;
+        
+        p.m_params[1].m_pname = GL_TEXTURE_MAG_FILTER;
+        p.m_params[1].m_type = TEXTURE_PARAM_TYPE_INT;
+        p.m_params[1].iVal = GL_LINEAR;
+        
+        p.m_params[2].m_pname = GL_TEXTURE_WRAP_S;
+        p.m_params[2].m_type = TEXTURE_PARAM_TYPE_INT;
+        p.m_params[2].iVal = GL_REPEAT;
+        
+        p.m_params[3].m_pname = GL_TEXTURE_WRAP_T;
+        p.m_params[3].m_type = TEXTURE_PARAM_TYPE_INT;
+        p.m_params[3].iVal = GL_REPEAT;
+        
+        p.m_numParams = 4;
+        
+        /**
+         * Find shader from render manager
+         */
+        
+        OpenGLRenderUnit * ru = [[OpenGLRenderUnit alloc] initWithShader:m_shaderProgram material:m_material polygonMesh:m_box->getPolygonMesh()];
+        [[m_renderManager getOpenGLRenderer] addRenderUnit:ru];
+    }
 }
 
 - (IBAction)renderViewButtonPressed:(id)sender {}

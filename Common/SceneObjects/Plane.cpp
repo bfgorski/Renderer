@@ -93,5 +93,8 @@ SOIntersectionType Plane::planeIntersect(const Ray &r, PointF &intersectionPoint
     return intersectionType;
 }
 
+void Plane::createGeo(const SOCreateGeoArgs *args) {
+    // PolygonMesh& pm = createPolygonMesh();
+}
 
 
