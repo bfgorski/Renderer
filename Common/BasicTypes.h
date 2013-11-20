@@ -14,6 +14,33 @@
 
 namespace Framework {
     
+enum AngleType {
+    RADIANS = 0,
+    DEGREES = 1,
+};
+
+enum Axes {
+    XAxis = 0,
+    X = 0,
+    YAxis = 1,
+    Y = 1,
+    ZAxis = 2,
+    Z = 2,
+    WAxis = 3,
+    W = 3
+};
+
+enum {
+    Red = 0,
+    R = 0,
+    Green = 1,
+    G = 1,
+    Blue = 2,
+    B = 2,
+    Alpha = 3,
+    A = 3
+};
+
 class vec3 {
     
 public:
@@ -48,34 +75,17 @@ public:
     
     bool isZero() const { return (0.0 == v[0] && 0.0 == v[1] && 0.0 == v[2]); }
     
-    float v[3];
-};
-
-enum AngleType {
-    RADIANS = 0,
-    DEGREES = 1,
-};
+    /**
+     * Return the Axis with with maximum absolute value
+     */
+    Axes minAbsComp() const;
     
-enum Axes {
-    XAxis = 0,
-    X = 0,
-    YAxis = 1,
-    Y = 1,
-    ZAxis = 2,
-    Z = 2,
-    WAxis = 3,
-    W = 3
-};
-
-enum {
-    Red = 0,
-    R = 0,
-    Green = 1,
-    G = 1,
-    Blue = 2,
-    B = 2,
-    Alpha = 3,
-    A = 3
+    /**
+     * Return the Axis the minimum absolute value.
+     */
+    Axes maxAbsComp() const;
+    
+    float v[3];
 };
 
 struct vec2 {
@@ -208,5 +218,8 @@ typedef struct Frame Frame;
 }
 
 extern const Framework::vec3 VZero;
- 
+extern const Framework::vec3 VXAxis;
+extern const Framework::vec3 VYAxis;
+extern const Framework::vec3 VZAxis;
+
 #endif

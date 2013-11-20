@@ -12,6 +12,7 @@
 #include "SOIntersection.h"
 #include "Sphere.h"
 #include "PointLightSource.h"
+#include "Box.h"
 
 using namespace Framework;
 
@@ -67,6 +68,12 @@ using namespace Framework;
     bool b = pl.illuminate(testPoint, normal, eye, 1.0f, so, r);
     
     STAssertEquals(true, b, @"Bad Lighting Calculation");
+}
+
+- (void) testBox {
+    // Box centered at origin
+    Frame boxFrame(PointF(0,0,0), VectorF(1,0,0), VectorF(0,1,0), VectorF(0,0,1));
+    Box * b = new Box(boxFrame,1.0,1.0,1.0);
 }
 
 - 

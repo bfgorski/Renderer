@@ -16,6 +16,8 @@
 #include "SceneObject.h"
 #include "Sphere.h"
 #include "Plane.h"
+#include "Box.h"
+
 #include "BasicTypesImpl.h"
 #include "PointLightSource.h"  
 #include "SimpleMaterial.h"
@@ -62,11 +64,17 @@ using namespace Framework;
     m_scene = new Scene();
     self.name  = n;
     
-    vec3 pos(-3,0,1);
+    vec3 pos(-3,0,2);
     Sphere * so = new Sphere(2.0f, pos);
     
-    vec3 pos1(3,0,-1);
+    vec3 pos1(3,0,-2);
     Sphere * sphere1 = new Sphere(2.0f, pos1);
+    
+    // Box centered at origin
+    Frame boxFrame(PointF(0,0,0), VectorF(1,0,0), VectorF(0,1,0), VectorF(0,0,1));
+    Box * b = new Box(boxFrame,5,5,5);
+    Material *boxMat = new SimpleMaterial(Color(0.0,0.0,0.5,1), Color(1,0,0), 50.0f, Color(0,0,0,1));
+    b->setMaterial(boxMat);
     
     PointF planePos(0, -10, 0);
     VectorF planeN(0,1,0);
@@ -98,8 +106,9 @@ using namespace Framework;
     PointLightSource* p1 = new PointLightSource(light2Pos, ambient, diffuse2, specular2, 1.0f);
     m_scene->addLight(p1);
     
-    m_scene->addSceneObject(so);
-    m_scene->addSceneObject(sphere1);
+    m_scene->addSceneObject(b);
+    //m_scene->addSceneObject(so);
+    //m_scene->addSceneObject(sphere1);
     m_scene->addSceneObject(plane);
     
     return self;
@@ -167,7 +176,18 @@ using namespace Framework;
         @"height" : [NSNumber numberWithUnsignedInt:m_fb.height]
     };
     return d;
-    
-    
 }
+
+- (Framework::Scene*) getScene:(NSString *)sceneName {
+    return m_scene;
+}
+
+
+
+
+
+
+
+
+
 @end

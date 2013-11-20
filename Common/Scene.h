@@ -21,10 +21,46 @@ class LightSource;
 class SceneObject;
 class SOIntersection;
     
-typedef std::vector<LightSource*> LightList;
-    
 class Scene {
+
+public:
+    
+    /**
+     * Iterate over all SceneObjects.
+     *
+     *  SceneIterator it(scene);
+        for( SceneIterator it(scene); it.current(); it.next()) {
+            SceneObject *so = it.current();
+        }
+     
+        SceneObject *so;
+        while(so = it.current()) {
+     
+            it.next();
+        }
+     */
+    class Iterator {
       
+    public:
+        Iterator(Scene* s);
+        ~Iterator();
+        
+        Iterator& operator=(const Iterator&);
+        
+        Iterator& operator++();
+        Iterator& next();
+        
+        SceneObject* operator*();
+        SceneObject* current();
+        
+        void reset();
+        
+    private:
+        Scene * m_scene;
+        unsigned int m_index;
+    };
+    
+    
 public :
     Scene();
     ~Scene();
@@ -57,11 +93,13 @@ public :
      */
     SceneObject* intersect(const Ray& r, SOIntersection* intersectionInfo = NULL, const unsigned int depth = 0) const;
     
-    
 private:
+    typedef std::vector<SceneObject*> SceneObjectList;
+    typedef std::vector<LightSource*> LightList;
+
     PointF m_viewPoint;
     
-    std::vector<SceneObject*> m_scene;
+    SceneObjectList m_scene;
     LightList m_lights;
 };
     

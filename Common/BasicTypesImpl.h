@@ -64,12 +64,22 @@ vec3 vec3AXPlusB(const vec3& a, const float x, const vec3& b);
  * Return component wise A*X + B*Y.
  */
 vec3 vec3AXPlusBY(const vec3& a, const float x, const vec3&b, const float y);
+ 
+/**
+ * Return component wise origin + A*X + B*Y
+ */
+vec3 vec3Offset(const PointF& origin, const vec3& a, const float x, const vec3&b, const float y);
     
 float dot3(const vec3& a, const vec3& b);
 float dot3(const vec4& a, const vec4& b);
 float dot4(const vec4& a, const vec4& b);
 
 vec3 cross(const vec3& a, const vec3& b);
+    
+/**
+ * Get two vectors to form a orthogonal coordinate frame given an initial U Axis vector.
+ */
+void createAxes(const VectorF& uAxis, VectorF& vAxis, VectorF& wAxis);
     
 /*
  * Affine Combination that interpolates a to b so t = [0,1] => [a,b]

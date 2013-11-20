@@ -8,7 +8,6 @@
 
 #include "BasicTypesImpl.h"
 
-const Framework::vec3 VZero(0,0,0);
 const float PLANE_INTERSECTION_THRESHOLD = 1e-6;
 
 namespace Framework { namespace Math {
@@ -136,6 +135,31 @@ vec3 cross(const vec3& v1, const vec3& v2) {
     vv.v[1] = - v1.v[0] * v2.v[2] + v1.v[2] * v2.v[0] ;
     vv.v[2] = v1.v[0] * v2.v[1] - v1.v[1] * v2.v[0] ;
     return vv;
+}
+    
+void createAxes(const VectorF& uAxis, VectorF& vAxis, VectorF& wAxis) {
+    // Cross uAxis with the canonical vector furthest from it
+    Axes min = uAxis.minAbsComp();
+    
+    switch (min) {
+        case XAxis:
+            vAxis = Math::cross(uAxis, VXAxis);
+            break;
+        case YAxis:
+            vAxis = Math::cross(uAxis, VYAxis);
+            break;
+        case ZAxis:
+            vAxis = Math::cross(uAxis, VZAxis);
+            break;
+        default:
+            break;
+    }
+    
+    Math::vec3Normalize(vAxis);
+    wAxis = Math::cross(vAxis, uAxis);
+    Math::vec3Normalize(wAxis);
+    
+    return;
 }
     
 vec3 affine3(const vec3& a, const vec3& b, const float t) {

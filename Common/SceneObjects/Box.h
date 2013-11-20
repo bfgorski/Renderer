@@ -31,6 +31,11 @@ namespace Framework {
         Box(const Frame& f, const float uDim, const float vDim, const float wDim);
         
         /**
+         * Is the given point inside the box
+         */
+        bool isInside(const PointF& p, const bool onIsIn = true) const;
+        
+        /**
          * Apply the transform to box's diagonal points
          */
         virtual void applyTransform(const Math::Transform& t);
@@ -55,13 +60,21 @@ namespace Framework {
         void intersectionHelper(
             const Ray& r,
             const PointF& p,
-            const VectorF& v,
+            const VectorF& n,
+            const VectorF& dir0,
+            const float size0,
+            const VectorF& dir1,
+            const float size1,
             PointF& closestIntersection,
             VectorF& closestNormal,
             float& closestDistance
         ) const;
         
-        SOIntersectionType findIntersection(const Ray& r, PointF& closestIntersection, VectorF& closestNormal) const;
+        SOIntersectionType findIntersection(
+            const Ray& r,
+            PointF& closestIntersection,
+            VectorF& closestNormal
+        ) const;
         
         void createGeoHelper(
             const PointF& faceCenter,

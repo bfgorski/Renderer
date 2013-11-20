@@ -71,6 +71,10 @@ using namespace Framework;
     return YES;
 }
 
+- (ShaderProgram*) getShaderProgram:(NSString*)programName {
+    return [m_shaders objectForKey:programName];
+}
+
 - (OpenGLTextureResource*) getTextureResource:(NSNumber *)textureId optionalTextureStringId:(NSString *)stringId {
     return [m_textureResources objectForKey:textureId];
 }

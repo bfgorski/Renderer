@@ -6,11 +6,15 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
+namespace Framework {
+    class Scene;
+}
+
 @class FrameBuffer;
 @class Camera;
 
 /**
- * The Renderer object is used to manage and render a single scene.
+ * The Renderer object is used to manage and render a scene.
  */
 @interface Renderer : NSObject
 
@@ -42,4 +46,15 @@
             }
  */
 - (NSDictionary*)getFrameBufferPixels:(NSDictionary*)options;
+
+/**
+ * Get a Scene from the Renderer.
+ *  Note that Framework::Scene is a c++ object.
+ *
+ * @param sceneName Unique identifier for the Scene
+ * 
+ * @return A pointer to the Scene or NULL
+ */
+- (Framework::Scene*) getScene:(NSString*)sceneName;
+
 @end

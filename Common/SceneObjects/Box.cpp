@@ -21,15 +21,83 @@ namespace Framework {
         m_dimensions[2] = wDim*0.5;
     }
     
+    bool Box::isInside(const PointF &p, const bool onIsIn) const {
+        // Take the dot product of the Vector from the box center to the point in question
+        // against the three vectors of the coordinate frame
+        VectorF pointToCenter = Math::vec3AMinusB(p, m_frame.origin());
+        
+        if (onIsIn) {
+            float d = fabs(Math::dot3(pointToCenter, m_frame.u()));
+            if (d > m_dimensions[0]) {
+                return false;
+            }
+            
+            d = fabs(Math::dot3(pointToCenter, m_frame.v()));
+            if (d > m_dimensions[1]) {
+                return false;
+            }
+            
+            d = fabs(Math::dot3(pointToCenter, m_frame.w()));
+            if (d > m_dimensions[2]) {
+                return false;
+            }
+        } else {
+            float d = fabs(Math::dot3(pointToCenter, m_frame.u()));
+            if (d >= m_dimensions[0]) {
+                return false;
+            }
+            
+            d = fabs(Math::dot3(pointToCenter, m_frame.v()));
+            if (d >= m_dimensions[1]) {
+                return false;
+            }
+            
+            d = fabs(Math::dot3(pointToCenter, m_frame.w()));
+            if (d >= m_dimensions[2]) {
+                return false;
+            }
+
+        }
+        return true;
+    }
+    
     void Box::applyTransform(const Math::Transform &t) {
         // Apply transform to frame and calculate new dimensions
     }
     
-    void Box::intersectionHelper(const Ray& r, const PointF& p, const VectorF& n, PointF& closestIntersection, VectorF& closestNormal, float& closestDistance) const {
+    void Box::intersectionHelper(
+                                 const Ray& r,
+                                 const PointF& p,
+                                 const VectorF& n,
+                                 const VectorF& dir0,
+                                 const float size0,
+                                 const VectorF& dir1,
+                                 const float size1,
+                                 PointF& closestIntersection,
+                                 VectorF& closestNormal,
+                                 float& closestDistance
+                                 ) const {
         
         PointF intersection;
         if (Math::planeIntersect(r, p, n, intersection)) {
-            float d = Math::vec3FastDist(r.getPos(), intersection);
+            
+            VectorF pointToCenter = Math::vec3AMinusB(intersection, p);
+            
+            // Check that the intersection is inside the box face represented by
+            // (dir0, size0) and (dir1,size1)
+            float d = fabs(Math::dot3(pointToCenter, dir0));
+            
+            if (d > size0) {
+                return;
+            }
+            
+            d = fabs(Math::dot3(pointToCenter, dir1));
+            
+            if (d > size1) {
+                return;
+            }
+            
+            d = Math::vec3FastDist(r.getPos(), intersection);
             if (d < closestDistance) {
                 closestDistance = d;
                 closestIntersection = intersection;
@@ -47,29 +115,29 @@ namespace Framework {
         PointF faceCenter = Math::vec3AXPlusB(m_frame.u(), -m_dimensions[0], m_frame.origin());
         VectorF faceNormal = Math::vec3Scale(m_frame.u(), -1);
         
-        intersectionHelper(r, faceCenter, faceNormal, closestIntersection, closestNormal, closestDistance);
+        intersectionHelper(r, faceCenter, faceNormal, m_frame.v(), m_dimensions[1], m_frame.w(), m_dimensions[2], closestIntersection, closestNormal, closestDistance);
         
         // U face
         faceCenter = Math::vec3AXPlusB(m_frame.u(), m_dimensions[0], m_frame.origin());
-        intersectionHelper(r, faceCenter, m_frame.u(), closestIntersection, closestNormal, closestDistance);
+        intersectionHelper(r, faceCenter, m_frame.u(), m_frame.v(), m_dimensions[1], m_frame.w(), m_dimensions[2], closestIntersection, closestNormal, closestDistance);
         
         // -V face
         faceCenter = Math::vec3AXPlusB(m_frame.v(), -m_dimensions[1], m_frame.origin());
         faceNormal = Math::vec3Scale(m_frame.v(), -1);
-        intersectionHelper(r, faceCenter, faceNormal, closestIntersection, closestNormal, closestDistance);
+        intersectionHelper(r, faceCenter, faceNormal, m_frame.u(), m_dimensions[0], m_frame.w(), m_dimensions[2], closestIntersection, closestNormal, closestDistance);
         
         // V face
         faceCenter = Math::vec3AXPlusB(m_frame.v(), m_dimensions[1], m_frame.origin());
-        intersectionHelper(r, faceCenter, m_frame.v(), closestIntersection, closestNormal, closestDistance);
+        intersectionHelper(r, faceCenter, m_frame.v(), m_frame.u(), m_dimensions[0], m_frame.w(), m_dimensions[2], closestIntersection, closestNormal, closestDistance);
         
         // -W face
         faceCenter = Math::vec3AXPlusB(m_frame.w(), -m_dimensions[2], m_frame.origin());
         faceNormal = Math::vec3Scale(m_frame.w(), -1);
-        intersectionHelper(r, faceCenter, faceNormal, closestIntersection, closestNormal, closestDistance);
+        intersectionHelper(r, faceCenter, faceNormal, m_frame.u(), m_dimensions[0], m_frame.v(), m_dimensions[1], closestIntersection, closestNormal, closestDistance);
         
         // W face
         faceCenter = Math::vec3AXPlusB(m_frame.w(), m_dimensions[2], m_frame.origin());
-        intersectionHelper(r, faceCenter, faceNormal, closestIntersection, closestNormal, closestDistance);
+        intersectionHelper(r, faceCenter, faceNormal, m_frame.u(), m_dimensions[0], m_frame.v(), m_dimensions[1], closestIntersection, closestNormal, closestDistance);
         
         if (1e6 != closestDistance) {
             return ((Math::dot3(r.getDir(), closestNormal) > 0) ? SOIntersectionLeaving : SOIntersectionEntering);

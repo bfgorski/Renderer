@@ -18,12 +18,49 @@ static const float SHADOW_RAY_OFFSET = 0.001f;
 
 namespace Framework {
     
-Scene::Scene() : m_viewPoint(), m_scene(), m_lights() {
-
+Scene::Iterator::Iterator(Scene *s) : m_scene(s), m_index(0) {}
+Scene::Iterator::~Iterator() {}
+    
+Scene::Iterator& Scene::Iterator::operator=(const Framework::Scene::Iterator& it) {
+    if (this == &it) {
+        return (*this);
+    }
+    
+    m_scene = it.m_scene;
+    m_index = it.m_index;
+    
+    return (*this);
+}
+    
+SceneObject* Scene::Iterator::operator*() {
+    return current();
+}
+    
+SceneObject* Scene::Iterator::current() {
+    if (m_scene->m_scene.size() >= m_index) {
+        return nullptr;
+    }
+    return m_scene->m_scene[m_index];
 }
 
-Scene::~Scene() {
+Scene::Iterator& Scene::Iterator::operator++() {
+    ++m_index;
+    return (*this);
+}
     
+Scene::Iterator& Scene::Iterator::next() {
+    ++m_index;
+    return (*this);
+}
+    
+void Scene::Iterator::reset() {
+    m_index = 0;
+}
+    
+Scene::Scene() : m_viewPoint(), m_scene(), m_lights() {}
+
+Scene::~Scene() {
+    // Delete stuff
 }
 
 void Scene::addLight(LightSource * l) {

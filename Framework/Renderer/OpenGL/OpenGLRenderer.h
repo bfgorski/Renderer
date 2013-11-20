@@ -36,6 +36,11 @@
 - (BOOL) addShaderProgram:(ShaderProgram*)shaderProgram;
 
 /**
+ * Determine if there is a shader program with the given name.
+ */
+- (ShaderProgram*) getShaderProgram:(NSString*)programName;
+
+/**
  * Find a texture resource by Id
  */
 - (OpenGLTextureResource*) getTextureResource:(NSNumber*)textureId

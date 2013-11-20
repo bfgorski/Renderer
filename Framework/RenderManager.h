@@ -35,4 +35,15 @@
  * Render a scene using OpenGL
  */
 - (OpenGLRenderer*) getOpenGLRenderer;
+
+/**
+ * Setup the current Scene in the 'Renderer' object for rendering with the 'OpenGLRenderer'.
+ */
+- (void) setupOpenGLRenderer;
+
+/**
+ * Disable OpenGL Rendering
+ */
+- (void) disableOpenGLRenderer;
+
 @end

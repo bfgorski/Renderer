@@ -217,6 +217,10 @@
 		49E8CA311830B4D600297EE4 /* OpenGLTextureResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E8CA301830B4D500297EE4 /* OpenGLTextureResource.m */; };
 		49E8CA321830B4D600297EE4 /* OpenGLTextureResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E8CA301830B4D500297EE4 /* OpenGLTextureResource.m */; };
 		49E8CA331830B4D600297EE4 /* OpenGLTextureResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E8CA301830B4D500297EE4 /* OpenGLTextureResource.m */; };
+		49E8CA37183B3C8E00297EE4 /* BasicTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E8CA36183B3C8E00297EE4 /* BasicTypes.cpp */; };
+		49E8CA38183B3C8E00297EE4 /* BasicTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E8CA36183B3C8E00297EE4 /* BasicTypes.cpp */; };
+		49E8CA39183B3C8E00297EE4 /* BasicTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E8CA36183B3C8E00297EE4 /* BasicTypes.cpp */; };
+		49E8CA3A183B3C8E00297EE4 /* BasicTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49E8CA36183B3C8E00297EE4 /* BasicTypes.cpp */; };
 		49EACA2B181D176E00AB2670 /* SOCreateGeoArgs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49EACA29181D176E00AB2670 /* SOCreateGeoArgs.cpp */; };
 		49EACA2C181D176E00AB2670 /* SOCreateGeoArgs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49EACA29181D176E00AB2670 /* SOCreateGeoArgs.cpp */; };
 		49EACA2D181D176E00AB2670 /* SOCreateGeoArgs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49EACA29181D176E00AB2670 /* SOCreateGeoArgs.cpp */; };
@@ -422,6 +426,8 @@
 		49DF965A17E851CC001C345B /* Transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Transform.h; path = Math/Transform.h; sourceTree = "<group>"; };
 		49E8CA2F1830B4D500297EE4 /* OpenGLTextureResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGLTextureResource.h; path = Renderer/OpenGL/OpenGLTextureResource.h; sourceTree = "<group>"; };
 		49E8CA301830B4D500297EE4 /* OpenGLTextureResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenGLTextureResource.m; path = Renderer/OpenGL/OpenGLTextureResource.m; sourceTree = "<group>"; };
+		49E8CA351836338A00297EE4 /* Compare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Compare.h; path = Utils/Compare.h; sourceTree = "<group>"; };
+		49E8CA36183B3C8E00297EE4 /* BasicTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicTypes.cpp; sourceTree = "<group>"; };
 		49EACA29181D176E00AB2670 /* SOCreateGeoArgs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SOCreateGeoArgs.cpp; path = SceneObjects/SOCreateGeoArgs.cpp; sourceTree = "<group>"; };
 		49EACA2A181D176E00AB2670 /* SOCreateGeoArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SOCreateGeoArgs.h; path = SceneObjects/SOCreateGeoArgs.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -869,6 +875,9 @@
 		498BCE341471078500B4ED2C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				49E8CA3C183C757700297EE4 /* Cameras */,
+				49E8CA3B183C755400297EE4 /* UnitTests */,
+				49E8CA341836335E00297EE4 /* Utils */,
 				491614D518220C2000B1D34E /* Renderer */,
 				4983B1B4181E4C2700A55922 /* Meshes */,
 				498954D9179E62130036F5AE /* Lights */,
@@ -882,6 +891,7 @@
 		498BCE351471078500B4ED2C /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				49E8CA3D183C76CA00297EE4 /* UnitTests */,
 				493C7868181A5259009F9450 /* Config */,
 				493C785B1819E288009F9450 /* Effects */,
 				493C78501819B28E009F9450 /* Generators */,
@@ -908,6 +918,7 @@
 			isa = PBXGroup;
 			children = (
 				498BCE3F1472450900B4ED2C /* BasicTypes.h */,
+				49E8CA36183B3C8E00297EE4 /* BasicTypes.cpp */,
 				498BCE461476651000B4ED2C /* BasicTypesImpl.cpp */,
 				498BCE4E14766C6100B4ED2C /* BasicTypesImpl.h */,
 				498954E217AA3B3B0036F5AE /* Rectangle.h */,
@@ -1011,6 +1022,35 @@
 				4985B2531818887600453884 /* ViewController_RenderMode.h */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		49E8CA341836335E00297EE4 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				49E8CA351836338A00297EE4 /* Compare.h */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		49E8CA3B183C755400297EE4 /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = UnitTests;
+			sourceTree = "<group>";
+		};
+		49E8CA3C183C757700297EE4 /* Cameras */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Cameras;
+			sourceTree = "<group>";
+		};
+		49E8CA3D183C76CA00297EE4 /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = UnitTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1274,6 +1314,7 @@
 				498954D4179BDBB80036F5AE /* Camera.mm in Sources */,
 				4983B1BE181FB54D00A55922 /* SimpleShaderProgram.mm in Sources */,
 				498954D8179E61F60036F5AE /* LightSource.cpp in Sources */,
+				49E8CA38183B3C8E00297EE4 /* BasicTypes.cpp in Sources */,
 				4916F04B17F2C595009EC552 /* Trackball.cpp in Sources */,
 				498954DD179E6F730036F5AE /* IlluminateResult.cpp in Sources */,
 				491614EA182226CB00B1D34E /* VertexBufferObject.cpp in Sources */,
@@ -1324,6 +1365,7 @@
 				4989553C17DB11C80036F5AE /* BasicTypes.h in Sources */,
 				4989553D17DB11C80036F5AE /* BasicTypesImpl.cpp in Sources */,
 				491614EB182226CB00B1D34E /* VertexBufferObject.cpp in Sources */,
+				49E8CA39183B3C8E00297EE4 /* BasicTypes.cpp in Sources */,
 				491614E5182225C800B1D34E /* OpenGLRenderer.mm in Sources */,
 				4989553E17DB11C80036F5AE /* BasicTypesImpl.h in Sources */,
 				4989553F17DB11C80036F5AE /* Rectangle.h in Sources */,
@@ -1365,6 +1407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49170FC317DC597B0021A10C /* LightSource.cpp in Sources */,
+				49E8CA3A183B3C8E00297EE4 /* BasicTypes.cpp in Sources */,
 				4916F05317FC1984009EC552 /* Box.cpp in Sources */,
 				49170FC517DC597B0021A10C /* IlluminateResult.cpp in Sources */,
 				4916F04D17F2C595009EC552 /* Trackball.cpp in Sources */,
@@ -1440,6 +1483,7 @@
 				498BCE451472569400B4ED2C /* Camera.mm in Sources */,
 				498BCE471476651000B4ED2C /* BasicTypesImpl.cpp in Sources */,
 				4983B1BD181FB54D00A55922 /* SimpleShaderProgram.mm in Sources */,
+				49E8CA37183B3C8E00297EE4 /* BasicTypes.cpp in Sources */,
 				498BCE4D14766B4500B4ED2C /* FrameBuffer.mm in Sources */,
 				493C78531819B2FC009F9450 /* ContentGenerator.mm in Sources */,
 				49D5135B1595A24B00C0ECAF /* Sphere.cpp in Sources */,

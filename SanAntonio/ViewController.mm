@@ -489,10 +489,14 @@ using namespace Framework;
  * Create OpenGLRenderUnits for scene objects that do not have them
  */
 - (void)loadScene {
-    if (m_box && !m_box->hasGeo()) {
+    
+    // Check that all Scene objects are ready for rendering.
+    [m_renderManager setupOpenGLRenderer];
+    
+    /*if (m_box && !m_box->hasGeo()) {
         m_box->createGeo();
 
-        // determine if box is alread in the renderer
+        // determine if box is already in the renderer
         
         static char s[] = "diffuseSampler";
         //static char shaderName[] = "Simple Shader";
@@ -526,14 +530,15 @@ using namespace Framework;
         p.m_params[3].iVal = GL_REPEAT;
         
         p.m_numParams = 4;
+     
+        ShaderProgram *shaderProgram = [[m_renderManager getOpenGLRenderer] getShaderProgram:[NSString stringWithUTF8String:m_material->m_shaderProgram] ];
         
-        /**
-         * Find shader from render manager
-         */
+        if (s) {
+            OpenGLRenderUnit * ru = [[OpenGLRenderUnit alloc] initWithShader:shaderProgram material:m_material polygonMesh:m_box->getPolygonMesh()];
+            [[m_renderManager getOpenGLRenderer] addRenderUnit:ru];
+        }
         
-        OpenGLRenderUnit * ru = [[OpenGLRenderUnit alloc] initWithShader:m_shaderProgram material:m_material polygonMesh:m_box->getPolygonMesh()];
-        [[m_renderManager getOpenGLRenderer] addRenderUnit:ru];
-    }
+    }*/
 }
 
 - (IBAction)renderViewButtonPressed:(id)sender {}
