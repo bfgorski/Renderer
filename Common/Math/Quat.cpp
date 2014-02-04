@@ -58,7 +58,7 @@ namespace Framework { namespace Math {
     
     void Quat::setRotation(const float angle, const VectorF &v, const AngleType angleType) {
         float cp, sp;
-        if (DEGREES == angle) {
+        if (DEGREES == angleType) {
             float radians = (angle * M_PI / 180.0f)*0.5f;
             cp = cos(radians);
             sp = sin(radians);

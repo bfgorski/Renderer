@@ -37,8 +37,8 @@ SceneObject* Scene::Iterator::operator*() {
 }
     
 SceneObject* Scene::Iterator::current() {
-    if (m_scene->m_scene.size() >= m_index) {
-        return nullptr;
+    if (m_index >= m_scene->m_scene.size()) {
+        return NULL;
     }
     return m_scene->m_scene[m_index];
 }
@@ -60,7 +60,9 @@ void Scene::Iterator::reset() {
 Scene::Scene() : m_viewPoint(), m_scene(), m_lights() {}
 
 Scene::~Scene() {
-    // Delete stuff
+    // Delete Lights
+    
+    // Delete objects
 }
 
 void Scene::addLight(LightSource * l) {
@@ -182,7 +184,7 @@ SceneObject *Scene::intersect(const Ray& r, SOIntersection* intersectionInfo, co
     
     float closestDistance = 1e6;
     
-    for (int i = 0; i < m_scene.size(); ++i) {
+    for (unsigned int i = 0; i < m_scene.size(); ++i) {
         SceneObject *s = m_scene[i];
         PointF intersectionPoint;
         

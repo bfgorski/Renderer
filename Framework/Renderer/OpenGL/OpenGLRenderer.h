@@ -11,8 +11,14 @@
 @class ShaderProgram;
 @class OpenGLRenderUnit;
 @class OpenGLTextureResource;
+@class Camera;
 
 @interface OpenGLRenderer : NSObject
+
+/**
+ * If set, this Camera will be used to render the scene.
+ */
+@property(strong, nonatomic) Camera* camera;
 
 - (id) init;
 
@@ -53,6 +59,9 @@
  */
 - (GLuint) getTextureResourceHandle:(unsigned int)textureId;
 
+/**
+ * Render the scene from the current camera
+ */
 - (void) render;
 
 /**

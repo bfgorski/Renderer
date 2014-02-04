@@ -18,6 +18,7 @@
 #import "ViewController_RenderMode.h"
 #import "ContentGenerator.h"
 #import "RenderManager.h"
+#import "Renderer.h"
 #import "Shader.h"
 #import "ShaderProgram.h"
 #import "ShaderProgram+External.h"
@@ -49,7 +50,7 @@ GLfloat trackBallVertexData[24] = {
 
 static GLfloat DEFAULT_FOV_IN_DEGREES = 65.0f;
 static GLfloat DEFAULT_NEAR_PLANE = 0.1;
-static GLfloat DEFAULT_FAR_PLANE = 100;
+static GLfloat DEFAULT_FAR_PLANE = 1000;
 
 using namespace Framework;
 
@@ -409,8 +410,10 @@ using namespace Framework;
         
         trackBallMatrix = GLKMatrix4MakeWithQuaternion(quaternion);
         
-        // matrix to rotate
+        // Camera matrix * trackball rotation
         lookAt = GLKMatrix4Multiply(lookAt, trackBallMatrix);
+        
+        // Update the Camera for the Renderer
     }
     
     projectionMatrix = GLKMatrix4Multiply(projectionMatrix, lookAt);
@@ -422,6 +425,12 @@ using namespace Framework;
     _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
     _modelMatrix = modelViewMatrix;
     _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+    
+    /*
+     * Update the offline renderer's camera with the current camera
+     */
+    [m_renderManager getActiveRenderer].camera.nearPlane = 5;
+    
     
     //_rotation += self.timeSinceLastUpdate * 0.5f;
 }

@@ -192,6 +192,9 @@
 		49C5E1E414C6C7B700E6D655 /* SceneParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C5E1E014C6C7B700E6D655 /* SceneParser.m */; };
 		49CA3A5517FFDC1600C6236B /* LiveViewOptions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49CA3A5417FFDC1600C6236B /* LiveViewOptions.mm */; };
 		49CA3A5A1801386700C6236B /* ConfigManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49CA3A591801386700C6236B /* ConfigManager.mm */; };
+		49D43C3B188FB3E40040B511 /* OfflineRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49D43C3A188FB3E40040B511 /* OfflineRenderer.mm */; };
+		49D43C3C188FB3E40040B511 /* OfflineRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49D43C3A188FB3E40040B511 /* OfflineRenderer.mm */; };
+		49D43C3D188FB3E40040B511 /* OfflineRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49D43C3A188FB3E40040B511 /* OfflineRenderer.mm */; };
 		49D5135B1595A24B00C0ECAF /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49D5135A1595A24B00C0ECAF /* Sphere.cpp */; };
 		49D5135C1595A24B00C0ECAF /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49D5135A1595A24B00C0ECAF /* Sphere.cpp */; };
 		49DF963E17E5AAB9001C345B /* SimpleMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DF963C17E5AAB9001C345B /* SimpleMaterial.cpp */; };
@@ -412,6 +415,8 @@
 		49CA3A571801364200C6236B /* Serializing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Serializing.h; path = Protocols/Serializing.h; sourceTree = "<group>"; };
 		49CA3A581801386700C6236B /* ConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigManager.h; path = Source/Config/ConfigManager.h; sourceTree = "<group>"; };
 		49CA3A591801386700C6236B /* ConfigManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ConfigManager.mm; path = Source/Config/ConfigManager.mm; sourceTree = "<group>"; };
+		49D43C39188FB3E40040B511 /* OfflineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OfflineRenderer.h; path = Renderer/Offline/OfflineRenderer.h; sourceTree = "<group>"; };
+		49D43C3A188FB3E40040B511 /* OfflineRenderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OfflineRenderer.mm; path = Renderer/Offline/OfflineRenderer.mm; sourceTree = "<group>"; };
 		49D513581595A23E00C0ECAF /* Sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sphere.h; sourceTree = "<group>"; };
 		49D5135A1595A24B00C0ECAF /* Sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sphere.cpp; sourceTree = "<group>"; };
 		49DF963C17E5AAB9001C345B /* SimpleMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimpleMaterial.cpp; path = Materials/SimpleMaterial.cpp; sourceTree = "<group>"; };
@@ -533,6 +538,8 @@
 				491614EE18222A0C00B1D34E /* OpenGLRenderUnit.mm */,
 				49E8CA2F1830B4D500297EE4 /* OpenGLTextureResource.h */,
 				49E8CA301830B4D500297EE4 /* OpenGLTextureResource.m */,
+				49D43C39188FB3E40040B511 /* OfflineRenderer.h */,
+				49D43C3A188FB3E40040B511 /* OfflineRenderer.mm */,
 			);
 			name = Renderer;
 			sourceTree = "<group>";
@@ -1348,6 +1355,7 @@
 				4989552F17DB11C80036F5AE /* IlluminateResult.h in Sources */,
 				4989553017DB11C80036F5AE /* PointLightSource.cpp in Sources */,
 				4989553117DB11C80036F5AE /* PointLightSource.h in Sources */,
+				49D43C3C188FB3E40040B511 /* OfflineRenderer.mm in Sources */,
 				493C78661819E34F009F9450 /* ShaderProgram.mm in Sources */,
 				4989553217DB11C80036F5AE /* SceneObject.cpp in Sources */,
 				4989553317DB11C80036F5AE /* Scene.cpp in Sources */,
@@ -1428,6 +1436,7 @@
 				49170FD417DC597B0021A10C /* BasicTypesImpl.cpp in Sources */,
 				49170FD717DC597B0021A10C /* Material.cpp in Sources */,
 				49170FDA17DC597B0021A10C /* Camera.mm in Sources */,
+				49D43C3D188FB3E40040B511 /* OfflineRenderer.mm in Sources */,
 				49170FDC17DC597B0021A10C /* FrameBuffer.mm in Sources */,
 				49EACA2E181D176E00AB2670 /* SOCreateGeoArgs.cpp in Sources */,
 				493C78561819B2FC009F9450 /* ContentGenerator.mm in Sources */,
@@ -1492,6 +1501,7 @@
 				498954CA17952ACA0036F5AE /* SOIntersection.cpp in Sources */,
 				498954D7179E61F60036F5AE /* LightSource.cpp in Sources */,
 				491614F5182B15CC00B1D34E /* MaterialParams.cpp in Sources */,
+				49D43C3B188FB3E40040B511 /* OfflineRenderer.mm in Sources */,
 				498954DC179E6F730036F5AE /* IlluminateResult.cpp in Sources */,
 				498954E017A10EFC0036F5AE /* PointLightSource.cpp in Sources */,
 				493C785E1819E2E3009F9450 /* Shader.mm in Sources */,

@@ -108,16 +108,16 @@ void Plane::createGeo(const SOCreateGeoArgs *args) {
         vSize = args->getTessFactor(CREATE_GEO_TESS_FACTOR_V);
     }
     
-    pm.init((uSize-1)*(vSize-1)*2, (uSize*vSize), PolygonMesh::PosNorm);
+    pm.init((uSize*vSize), (uSize-1)*(vSize-1)*2, PolygonMesh::PosNorm);
    
     VectorF uAxis;
     VectorF vAxis;
     
     Math::createAxes(m_normal, uAxis, vAxis);
     
-    VectorF v = Math::vec3AXPlusBY(uAxis, width/2.0f, vAxis, height/2.0f);
+    VectorF v = Math::vec3AXPlusBY(uAxis, -width/2.0f, vAxis, -height/2.0f);
     VectorF uOffset = Math::vec3Scale(uAxis, width/(uSize-1));
-    VectorF vOffset = Math::vec3Scale(vAxis, width/(vSize-1));
+    VectorF vOffset = Math::vec3Scale(vAxis, height/(vSize-1));
     
     PointF start = Math::vec3APlusB(m_point, v);
     
@@ -146,6 +146,7 @@ void Plane::createGeo(const SOCreateGeoArgs *args) {
         start.increment(vOffset);
     }
     
+    // 6 vertices for 2 triangles
     unsigned int t[6];
     
     // create triangles
@@ -153,6 +154,8 @@ void Plane::createGeo(const SOCreateGeoArgs *args) {
         unsigned int rowOffset = row*uSize;
         
         /*
+          Two triangles from these 4 vertices:
+         
           t[0] ... t[2]
           .
           .
@@ -169,8 +172,6 @@ void Plane::createGeo(const SOCreateGeoArgs *args) {
             t[5] = t[1] + 1;
             pm.addTriangles(t, 2);
         }
-        
-        start.increment(vOffset);
     }
 }
 

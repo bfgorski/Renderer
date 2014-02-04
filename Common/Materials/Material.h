@@ -57,7 +57,7 @@ public:
     const Color& getDiffuse() const { return m_diffuse; }
     const Color& getSpecular() const { return m_specular; }
     const Color& getAmbient() const { return m_ambient; }
-    const float getSpecExp() const { return m_specExp.v[0]; }
+    float getSpecExp() const { return m_specExp.v[0]; }
     
     void setNormal(const Normal& n) { m_normal = n; }
     void setDiffuse(const Color& c) { m_diffuse = c; }

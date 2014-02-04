@@ -23,8 +23,6 @@ namespace Framework { namespace OpenGL {
     }
     
     void Material::setup() const {
-        glEnable(GL_TEXTURE_2D);
-        
         for (unsigned int i = 0; i < m_numSamplers; ++i) {
             // Setup params for this sampler
             const TextureSamplerParam& sampler = m_samplers[i];

@@ -10,6 +10,7 @@
 #import "Renderer.h"
 #import "OpenGLRenderer.h"
 #import "OpenGLRenderUnit.h"
+#import "OpenGLTextureResource.h"
 
 #include "Scene.h"
 #include "SceneObject.h"
@@ -53,7 +54,6 @@
 
 - (void) setupOpenGLRenderer {
     Framework::Scene *s = [self.activeRenderer getScene:@""];
-    
     Framework::Scene::Iterator it(s);
     
     for (; it.current(); ++it) {
@@ -69,15 +69,18 @@
                 ;
             }*/
             
+            OpenGLTextureResource *t = [[self getOpenGLRenderer] getTextureResource:[NSNumber numberWithInteger:1] optionalTextureStringId:nil];
+            
             static char s[] = "diffuseSampler";
-            //static char shaderName[] = "Simple Shader";
-            openGLMaterial->m_shaderProgram = strdup("Simple Shader");
+            static char shaderName[] = "Simple Shader";
+            
+            openGLMaterial->m_shaderProgram = shaderName;
             openGLMaterial->m_numSamplers = 1;
             openGLMaterial->m_samplers = new TextureSamplerParam[1];
             
             openGLMaterial->m_samplers[0].m_textureId = 1;
             openGLMaterial->m_samplers[0].m_name = s;
-            openGLMaterial->m_samplers[0].m_handle = 0;
+            openGLMaterial->m_samplers[0].m_handle = t.handle;
             openGLMaterial->m_samplers[0].m_textureType = GL_TEXTURE_2D;
             openGLMaterial->m_samplers[0].m_resource = 0;
             openGLMaterial->m_samplers[0].m_samplerIndex = 0;
@@ -102,14 +105,15 @@
             p.m_numParams = 4;
             
             /**
-             * Find shader from render manager
+             * Find the shader program from render manager that this material references
              */
-            
             ShaderProgram *shaderProgram = [[self getOpenGLRenderer] getShaderProgram:[NSString stringWithUTF8String:openGLMaterial->m_shaderProgram] ];
             
-            if (s) {
+            if (shaderProgram) {
                 OpenGLRenderUnit * ru = [[OpenGLRenderUnit alloc] initWithShader:shaderProgram material:openGLMaterial polygonMesh:so->getPolygonMesh()];
                 [[self getOpenGLRenderer] addRenderUnit:ru];
+            } else {
+                // TODO: ASSERT that material uses an unknown shader program
             }
         }
     }

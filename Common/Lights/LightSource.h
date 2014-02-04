@@ -42,9 +42,9 @@ public:
     /**
      * Determine if the indicated Ray "sees" the light.
      */
-    virtual SOIntersectionType intersect(const Ray& r, SOIntersection* intersectionInfo) const { return SOIntersectionNone; }
+    virtual SOIntersectionType intersect(const Ray&, SOIntersection*) const { return SOIntersectionNone; }
     
-    virtual SOIntersectionType intersect(const Ray& r, PointF& intersectionPoint) const { return SOIntersectionNone; }
+    virtual SOIntersectionType intersect(const Ray&, PointF&) const { return SOIntersectionNone; }
     
     /**
      * Compute the intensity of the light.

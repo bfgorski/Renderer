@@ -34,7 +34,7 @@ namespace Framework {
     }
     
     bool PolygonMesh::addVertices(const void *data, const unsigned int count, const bool realloc) {
-        if (m_vertexCapacity <= (m_numVertices + count)) {
+        if (m_vertexCapacity >= (m_numVertices + count)) {
             unsigned int vertexSize = vertexFormatSize();
             char * vertOffset = reinterpret_cast<char*>(m_vertices);
             vertOffset += (m_numVertices*vertexSize);
@@ -46,7 +46,7 @@ namespace Framework {
     }
     
     bool PolygonMesh::addTriangles(const unsigned int *newTris, const unsigned int count, const bool realloc) {
-        if (m_triCapacity <= (m_numTris + count)) {
+        if (m_triCapacity >= (m_numTris + count)) {
             unsigned int * triOffset = m_triangles += (sizeof(unsigned int)*3*numTris());
             memcpy(reinterpret_cast<void*>(triOffset), reinterpret_cast<const void*>(newTris), count*3*sizeof(unsigned int));
             m_numTris += count;

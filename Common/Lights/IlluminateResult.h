@@ -34,8 +34,6 @@ private :
     Color m_ambient;
     Color m_diffuse;
     Color m_specular;
-    
-    void * m_data;
 };
     
 }

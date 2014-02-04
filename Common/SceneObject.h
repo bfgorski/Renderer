@@ -66,7 +66,7 @@ public:
      *
      * @param args  Optional parameters for creating geometry
      */
-    virtual void createGeo(const SOCreateGeoArgs* args = nullptr) {};
+    virtual void createGeo(const SOCreateGeoArgs* args = NULL) {};
     
     bool hasGeo() const { return (NULL != m_polygonMesh); }
     
